@@ -1,0 +1,6 @@
+@GymLeagueAPI_HostAddress = http://localhost:5019
+
+GET {{GymLeagueAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

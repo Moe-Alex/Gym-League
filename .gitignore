@@ -32,3 +32,9 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# .NET
+GymLeagueAPI/GymLeagueAPI/bin/
+GymLeagueAPI/GymLeagueAPI/obj/
+GymLeagueAPI/GymLeagueAPI/.vs/
+*.user
