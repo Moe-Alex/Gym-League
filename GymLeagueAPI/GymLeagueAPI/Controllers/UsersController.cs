@@ -24,10 +24,25 @@ namespace GymLeagueAPI.Controllers
         }
 
         // GET: api/users/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        // GET: api/users/firebase/{firebaseUid}
+        [HttpGet("firebase/{firebaseUid}")]
+        public async Task<ActionResult<User>> GetUserByFirebaseUid(string firebaseUid)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.FirebaseUid == firebaseUid);
 
             if (user == null)
             {
@@ -41,10 +56,23 @@ namespace GymLeagueAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.FirebaseUid == user.FirebaseUid);
+
+            if (existingUser != null)
+            {
+                return Conflict("A user with this Firebase UID already exists.");
+            }
+
             _context.Users.Add(user);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, user);
+            return CreatedAtAction(
+                nameof(GetUser),
+                new { id = user.UserId },
+                user
+            );
         }
     }
 }
