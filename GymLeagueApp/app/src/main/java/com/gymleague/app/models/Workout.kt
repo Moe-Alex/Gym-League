@@ -7,7 +7,18 @@ data class Workout(
     val workoutDate: String,
     val durationMinutes: Int,
     val completed: Boolean,
-    val xpEarned: Int
+    val xpEarned: Int,
+    val workoutExercises: List<WorkoutExercise> = emptyList()
+)
+
+data class WorkoutExercise(
+    val workoutExerciseId: Int = 0,
+    val workoutId: Int = 0,
+    val exerciseId: Int,
+    val sets: Int,
+    val reps: Int,
+    val weight: Double,
+    val completed: Boolean = true
 )
 
 data class CreateWorkoutRequest(
@@ -16,5 +27,6 @@ data class CreateWorkoutRequest(
     val workoutDate: String,
     val durationMinutes: Int,
     val completed: Boolean,
-    val xpEarned: Int
+    val xpEarned: Int,
+    val workoutExercises: List<WorkoutExercise>
 )

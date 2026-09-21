@@ -1,5 +1,6 @@
 package com.gymleague.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,7 +33,21 @@ class ExerciseLibraryActivity : AppCompatActivity() {
         val recyclerView =
             findViewById<RecyclerView>(R.id.rvExercises)
 
-        exerciseAdapter = ExerciseAdapter()
+        exerciseAdapter = ExerciseAdapter { exercise ->
+
+            val intent = Intent(
+                this,
+                LogExerciseActivity::class.java
+            )
+
+            intent.putExtra("exerciseId", exercise.exerciseId)
+            intent.putExtra("exerciseName", exercise.exerciseName)
+            intent.putExtra("muscleGroup", exercise.muscleGroup)
+            intent.putExtra("defaultSets", exercise.defaultSets)
+            intent.putExtra("defaultReps", exercise.defaultReps)
+
+            startActivity(intent)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter

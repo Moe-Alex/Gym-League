@@ -9,13 +9,21 @@ import com.gymleague.app.R
 import com.gymleague.app.models.Exercise
 
 class ExerciseAdapter(
-    private var exercises: List<Exercise> = emptyList()
+    private var exercises: List<Exercise> = emptyList(),
+    private val onExerciseClick: (Exercise) -> Unit
 ) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-    class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val exerciseName: TextView = itemView.findViewById(R.id.tvExerciseName)
-        val muscleGroup: TextView = itemView.findViewById(R.id.tvMuscleGroup)
-        val description: TextView = itemView.findViewById(R.id.tvExerciseDescription)
+    class ExerciseViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+
+        val exerciseName: TextView =
+            itemView.findViewById(R.id.tvExerciseName)
+
+        val muscleGroup: TextView =
+            itemView.findViewById(R.id.tvMuscleGroup)
+
+        val description: TextView =
+            itemView.findViewById(R.id.tvExerciseDescription)
     }
 
     override fun onCreateViewHolder(
@@ -39,6 +47,11 @@ class ExerciseAdapter(
         holder.muscleGroup.text = exercise.muscleGroup
         holder.description.text =
             exercise.description ?: "No description available"
+
+        // Make the whole exercise card clickable
+        holder.itemView.setOnClickListener {
+            onExerciseClick(exercise)
+        }
     }
 
     override fun getItemCount(): Int {
