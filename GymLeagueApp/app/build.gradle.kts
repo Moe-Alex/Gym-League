@@ -35,6 +35,10 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+
+    // RecyclerView for Exercise Library
+    implementation(libs.androidx.recyclerview)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     testImplementation(libs.junit)
