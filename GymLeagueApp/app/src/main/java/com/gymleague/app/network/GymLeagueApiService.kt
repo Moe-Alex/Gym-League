@@ -7,46 +7,88 @@ import retrofit2.http.*
 interface GymLeagueApiService {
 
     // --- Users ---
+
     @GET("api/users")
     suspend fun getUsers(): Response<List<User>>
 
     @GET("api/users/{id}")
-    suspend fun getUser(@Path("id") id: Int): Response<User>
+    suspend fun getUser(
+        @Path("id") id: Int
+    ): Response<User>
+
+    @GET("api/users/firebase/{firebaseUid}")
+    suspend fun getUserByFirebaseUid(
+        @Path("firebaseUid") firebaseUid: String
+    ): Response<User>
 
     @POST("api/users")
-    suspend fun createUser(@Body user: CreateUserRequest): Response<User>
+    suspend fun createUser(
+        @Body user: CreateUserRequest
+    ): Response<User>
+
 
     // --- Exercises ---
+
     @GET("api/exercises")
     suspend fun getExercises(): Response<List<Exercise>>
 
     @GET("api/exercises/{id}")
-    suspend fun getExercise(@Path("id") id: Int): Response<Exercise>
+    suspend fun getExercise(
+        @Path("id") id: Int
+    ): Response<Exercise>
 
     @GET("api/exercises/musclegroup/{muscleGroup}")
-    suspend fun getExercisesByMuscleGroup(@Path("muscleGroup") muscleGroup: String): Response<List<Exercise>>
+    suspend fun getExercisesByMuscleGroup(
+        @Path("muscleGroup") muscleGroup: String
+    ): Response<List<Exercise>>
 
     @POST("api/exercises")
-    suspend fun createExercise(@Body exercise: Exercise): Response<Exercise>
+    suspend fun createExercise(
+        @Body exercise: Exercise
+    ): Response<Exercise>
+
 
     // --- Workouts ---
+
     @GET("api/workouts/user/{userId}")
-    suspend fun getWorkoutsForUser(@Path("userId") userId: Int): Response<List<Workout>>
+    suspend fun getWorkoutsForUser(
+        @Path("userId") userId: Int
+    ): Response<List<Workout>>
 
     @GET("api/workouts/{id}")
-    suspend fun getWorkout(@Path("id") id: Int): Response<Workout>
+    suspend fun getWorkout(
+        @Path("id") id: Int
+    ): Response<Workout>
 
     @POST("api/workouts")
-    suspend fun createWorkout(@Body workout: CreateWorkoutRequest): Response<Workout>
+    suspend fun createWorkout(
+        @Body workout: CreateWorkoutRequest
+    ): Response<Workout>
+
 
     // --- Personal Records ---
+
     @GET("api/personalrecords/user/{userId}")
-    suspend fun getPersonalRecords(@Path("userId") userId: Int): Response<List<PersonalRecord>>
+    suspend fun getPersonalRecords(
+        @Path("userId") userId: Int
+    ): Response<List<PersonalRecord>>
+
 
     // --- User Settings ---
+
     @GET("api/usersettings/user/{userId}")
-    suspend fun getSettingsForUser(@Path("userId") userId: Int): Response<UserSettings>
+    suspend fun getSettingsForUser(
+        @Path("userId") userId: Int
+    ): Response<UserSettings>
 
     @POST("api/usersettings")
-    suspend fun createSettings(@Body settings: UserSettings): Response<UserSettings>
+    suspend fun createSettings(
+        @Body settings: UserSettings
+    ): Response<UserSettings>
+
+    @PUT("api/usersettings/{id}")
+    suspend fun updateSettings(
+        @Path("id") id: Int,
+        @Body settings: UserSettings
+    ): Response<Unit>
 }

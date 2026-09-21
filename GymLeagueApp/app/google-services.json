@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "409825443729",
+    "project_id": "gymleague-d82df",
+    "storage_bucket": "gymleague-d82df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409825443729:android:0eeeecb9428dc359f6e430",
+        "android_client_info": {
+          "package_name": "com.gymleague.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409825443729-is96agdjgf251eeuig387lqmiu9qgg0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymleague.app",
+            "certificate_hash": "eea1fe26058f08d7e445ba5fb5d7ac42b9629ea0"
+          }
+        },
+        {
+          "client_id": "409825443729-d4crjo0dr09cb4r2dd016migtdbo543b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9F3m42VyKkqA0B8CHDNNIZEoHUkkSPkc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409825443729-d4crjo0dr09cb4r2dd016migtdbo543b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

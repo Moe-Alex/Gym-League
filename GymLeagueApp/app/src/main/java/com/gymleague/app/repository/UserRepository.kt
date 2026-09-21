@@ -6,43 +6,146 @@ import com.gymleague.app.network.RetrofitClient
 
 class UserRepository {
 
-    private val apiService = RetrofitClient.apiService
+    private val apiService =
+        RetrofitClient.apiService
 
     suspend fun getUsers(): Result<List<User>> {
+
         return try {
-            val response = apiService.getUsers()
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+
+            val response =
+                apiService.getUsers()
+
+            if (
+                response.isSuccessful &&
+                response.body() != null
+            ) {
+
+                Result.success(
+                    response.body()!!
+                )
+
             } else {
-                Result.failure(Exception("Failed to fetch users: ${response.code()}"))
+
+                Result.failure(
+                    Exception(
+                        "Failed to fetch users: ${response.code()}"
+                    )
+                )
             }
+
         } catch (e: Exception) {
+
             Result.failure(e)
         }
     }
 
-    suspend fun getUser(userId: Int): Result<User> {
+    suspend fun getUser(
+        userId: Int
+    ): Result<User> {
+
         return try {
-            val response = apiService.getUser(userId)
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+
+            val response =
+                apiService.getUser(userId)
+
+            if (
+                response.isSuccessful &&
+                response.body() != null
+            ) {
+
+                Result.success(
+                    response.body()!!
+                )
+
             } else {
-                Result.failure(Exception("Failed to fetch user: ${response.code()}"))
+
+                Result.failure(
+                    Exception(
+                        "Failed to fetch user: ${response.code()}"
+                    )
+                )
             }
+
         } catch (e: Exception) {
+
             Result.failure(e)
         }
     }
 
-    suspend fun createUser(request: CreateUserRequest): Result<User> {
+    suspend fun getUserByFirebaseUid(
+        firebaseUid: String
+    ): Result<User?> {
+
         return try {
-            val response = apiService.createUser(request)
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
-            } else {
-                Result.failure(Exception("Failed to create user: ${response.code()}"))
+
+            val response =
+                apiService.getUserByFirebaseUid(
+                    firebaseUid
+                )
+
+            when {
+
+                response.isSuccessful &&
+                        response.body() != null -> {
+
+                    Result.success(
+                        response.body()
+                    )
+                }
+
+                response.code() == 404 -> {
+
+                    Result.success(null)
+                }
+
+                else -> {
+
+                    Result.failure(
+                        Exception(
+                            "Failed to fetch Firebase user: ${response.code()}"
+                        )
+                    )
+                }
             }
+
         } catch (e: Exception) {
+
+            Result.failure(e)
+        }
+    }
+
+    suspend fun createUser(
+        request: CreateUserRequest
+    ): Result<User> {
+
+        return try {
+
+            val response =
+                apiService.createUser(
+                    request
+                )
+
+            if (
+                response.isSuccessful &&
+                response.body() != null
+            ) {
+
+                Result.success(
+                    response.body()!!
+                )
+
+            } else {
+
+                Result.failure(
+                    Exception(
+                        "Failed to create user: ${response.code()}"
+                    )
+                )
+            }
+
+        } catch (e: Exception) {
+
             Result.failure(e)
         }
     }
