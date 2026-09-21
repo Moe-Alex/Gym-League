@@ -44,6 +44,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
             intent.putExtra("exerciseName", exercise.exerciseName)
             intent.putExtra("muscleGroup", exercise.muscleGroup)
             intent.putExtra("defaultSets", exercise.defaultSets)
+            intent.putExtra("description", exercise.description)
             intent.putExtra("defaultReps", exercise.defaultReps)
 
             startActivity(intent)
