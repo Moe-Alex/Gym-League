@@ -32,6 +32,10 @@
             android:name=".LogExerciseActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".SquadActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

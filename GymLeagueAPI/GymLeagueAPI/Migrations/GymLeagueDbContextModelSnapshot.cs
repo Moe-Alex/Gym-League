@@ -55,6 +55,58 @@ namespace GymLeagueAPI.Migrations
                     b.ToTable("Exercises");
                 });
 
+            modelBuilder.Entity("GymLeagueAPI.Models.Squad", b =>
+                {
+                    b.Property<int>("SquadId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SquadId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("SharedStreak")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SquadName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("SquadId");
+
+                    b.ToTable("Squads");
+                });
+
+            modelBuilder.Entity("GymLeagueAPI.Models.SquadMember", b =>
+                {
+                    b.Property<int>("SquadMemberId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SquadMemberId"));
+
+                    b.Property<int>("CurrentStreak")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("SquadId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SquadMemberId");
+
+                    b.HasIndex("SquadId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SquadMembers");
+                });
+
             modelBuilder.Entity("GymLeagueAPI.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -191,6 +243,25 @@ namespace GymLeagueAPI.Migrations
                     b.ToTable("WorkoutExercises");
                 });
 
+            modelBuilder.Entity("GymLeagueAPI.Models.SquadMember", b =>
+                {
+                    b.HasOne("GymLeagueAPI.Models.Squad", "Squad")
+                        .WithMany("Members")
+                        .HasForeignKey("SquadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GymLeagueAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Squad");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GymLeagueAPI.Models.UserSettings", b =>
                 {
                     b.HasOne("GymLeagueAPI.Models.User", "User")
@@ -235,6 +306,11 @@ namespace GymLeagueAPI.Migrations
             modelBuilder.Entity("GymLeagueAPI.Models.Exercise", b =>
                 {
                     b.Navigation("WorkoutExercises");
+                });
+
+            modelBuilder.Entity("GymLeagueAPI.Models.Squad", b =>
+                {
+                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("GymLeagueAPI.Models.User", b =>

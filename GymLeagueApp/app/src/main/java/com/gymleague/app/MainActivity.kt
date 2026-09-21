@@ -128,13 +128,16 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(
                 TAG,
-                "Squad selected"
+                "Squad selected - opening Squad"
             )
 
-            showPlaceholderScreen(
-                "Squad",
-                "Squad features will appear here"
-            )
+            val intent =
+                Intent(
+                    this,
+                    SquadActivity::class.java
+                )
+
+            startActivity(intent)
         }
 
         btnBattle.setOnClickListener {

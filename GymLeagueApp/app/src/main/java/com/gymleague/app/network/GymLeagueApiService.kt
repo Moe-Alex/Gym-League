@@ -91,4 +91,18 @@ interface GymLeagueApiService {
         @Path("id") id: Int,
         @Body settings: UserSettings
     ): Response<Unit>
+
+    // --- Squads ---
+    @GET("api/squads")
+    suspend fun getSquads(): Response<List<Squad>>
+
+    @GET("api/squads/{id}")
+    suspend fun getSquad(
+        @Path("id") id: Int
+    ): Response<Squad>
+
+    @POST("api/squads")
+    suspend fun createSquad(
+        @Body squad: Squad
+    ): Response<Squad>
 }
