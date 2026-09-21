@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "409825443729-v7stqt1aafj309uusach9ht6t5kdgg91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymleague.app",
+            "certificate_hash": "0bcb7afb0f915d808520f475b702e6468cf8401f"
+          }
+        },
+        {
           "client_id": "409825443729-d4crjo0dr09cb4r2dd016migtdbo543b.apps.googleusercontent.com",
           "client_type": 3
         }
