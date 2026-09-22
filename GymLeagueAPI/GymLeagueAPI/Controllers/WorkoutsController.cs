@@ -46,14 +46,49 @@ namespace GymLeagueAPI.Controllers
         }
 
         // POST: api/workouts
-        [HttpPost]
-        public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
-        {
-            _context.Workouts.Add(workout);
-            await _context.SaveChangesAsync();
+[HttpPost]
+public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
+{
+    // Check that the user exists
+    var userExists = await _context.Users
+        .AnyAsync(u => u.UserId == workout.UserId);
 
-            return CreatedAtAction(nameof(GetWorkout), new { id = workout.WorkoutId }, workout);
+    if (!userExists)
+    {
+        return BadRequest("User does not exist.");
+    }
+
+    // Check exercises before saving
+    foreach (var workoutExercise in workout.WorkoutExercises)
+    {
+        var exerciseExists = await _context.Exercises
+            .AnyAsync(e => e.ExerciseId == workoutExercise.ExerciseId);
+
+        if (!exerciseExists)
+        {
+            return BadRequest(
+                $"Exercise {workoutExercise.ExerciseId} does not exist."
+            );
         }
+
+        // EF will set WorkoutId after the workout is created
+        workoutExercise.WorkoutId = 0;
+
+        // Do not attach navigation objects from the request
+        workoutExercise.Workout = null;
+        workoutExercise.Exercise = null;
+    }
+
+    _context.Workouts.Add(workout);
+
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(
+        nameof(GetWorkout),
+        new { id = workout.WorkoutId },
+        workout
+    );
+}
 
         // GET: api/workouts/musclegroupvolume/5
         // Returns total volume (sets x reps x weight) per muscle group for a user

@@ -15,6 +15,8 @@ namespace GymLeagueAPI.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+        public DbSet<Squad> Squads { get; set; }
+        public DbSet<SquadMember> SquadMembers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +45,18 @@ namespace GymLeagueAPI.Data
                 .HasOne(we => we.Exercise)
                 .WithMany(e => e.WorkoutExercises)
                 .HasForeignKey(we => we.ExerciseId);
+
+                // Squad <-> SquadMember (one-to-many)
+                modelBuilder.Entity<SquadMember>()
+                    .HasOne(sm => sm.Squad)
+                    .WithMany(s => s.Members)
+                    .HasForeignKey(sm => sm.SquadId);
+
+                // User <-> SquadMember
+                modelBuilder.Entity<SquadMember>()
+                    .HasOne(sm => sm.User)
+                    .WithMany()
+                    .HasForeignKey(sm => sm.UserId);
         }
     }
 }

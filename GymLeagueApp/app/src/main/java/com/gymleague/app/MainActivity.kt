@@ -1,5 +1,6 @@
 package com.gymleague.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -111,26 +112,32 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(
                 TAG,
-                "Train selected"
+                "Train selected - opening Exercise Library"
             )
 
-            showPlaceholderScreen(
-                "Train",
-                "Training features will appear here"
-            )
+            val intent =
+                Intent(
+                    this,
+                    ExerciseLibraryActivity::class.java
+                )
+
+            startActivity(intent)
         }
 
         btnSquad.setOnClickListener {
 
             Log.d(
                 TAG,
-                "Squad selected"
+                "Squad selected - opening Squad"
             )
 
-            showPlaceholderScreen(
-                "Squad",
-                "Squad features will appear here"
-            )
+            val intent =
+                Intent(
+                    this,
+                    SquadActivity::class.java
+                )
+
+            startActivity(intent)
         }
 
         btnBattle.setOnClickListener {
