@@ -52,6 +52,21 @@ namespace GymLeagueAPI.Controllers
             return user;
         }
 
+        // GET: api/users/username/john123
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<User>> GetUserByUsername(string username)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username.ToLower() == username.ToLower());
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
         // POST: api/users
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)

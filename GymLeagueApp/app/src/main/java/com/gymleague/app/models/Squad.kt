@@ -16,3 +16,12 @@ data class SquadMember(
     val joinedAt: String?,
     val user: User?
 )
+
+data class CreateSquadRequest(
+    val squadName: String,
+    val sharedStreak: Int = 0
+)
+
+data class AddSquadMemberRequest(
+    val userId: Int
+)

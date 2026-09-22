@@ -21,6 +21,11 @@ interface GymLeagueApiService {
         @Path("firebaseUid") firebaseUid: String
     ): Response<User>
 
+    @GET("api/users/username/{username}")
+    suspend fun getUserByUsername(
+        @Path("username") username: String
+    ): Response<User>
+
     @POST("api/users")
     suspend fun createUser(
         @Body user: CreateUserRequest
@@ -103,6 +108,12 @@ interface GymLeagueApiService {
 
     @POST("api/squads")
     suspend fun createSquad(
-        @Body squad: Squad
+        @Body squad: CreateSquadRequest
     ): Response<Squad>
+
+    @POST("api/squads/{squadId}/members")
+    suspend fun addSquadMember(
+        @Path("squadId") squadId: Int,
+        @Body member: AddSquadMemberRequest
+    ): Response<SquadMember>
 }

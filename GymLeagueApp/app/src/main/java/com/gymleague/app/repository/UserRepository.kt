@@ -115,6 +115,48 @@ class UserRepository {
         }
     }
 
+    suspend fun getUserByUsername(
+        username: String
+    ): Result<User?> {
+
+        return try {
+
+            val response =
+                apiService.getUserByUsername(
+                    username
+                )
+
+            when {
+
+                response.isSuccessful &&
+                        response.body() != null -> {
+
+                    Result.success(
+                        response.body()
+                    )
+                }
+
+                response.code() == 404 -> {
+
+                    Result.success(null)
+                }
+
+                else -> {
+
+                    Result.failure(
+                        Exception(
+                            "Failed to search user: ${response.code()}"
+                        )
+                    )
+                }
+            }
+
+        } catch (e: Exception) {
+
+            Result.failure(e)
+        }
+    }
+
     suspend fun createUser(
         request: CreateUserRequest
     ): Result<User> {

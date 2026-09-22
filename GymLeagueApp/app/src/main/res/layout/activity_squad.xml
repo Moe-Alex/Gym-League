@@ -56,6 +56,40 @@
             android:layout_marginTop="12dp"
             android:orientation="vertical" />
 
+        <EditText
+            android:id="@+id/etCreateSquadName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="Enter a squad name"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnCreateSquad"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:text="CREATE SQUAD"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/etInviteUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Invite by username"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnInviteMember"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:text="INVITE TO SQUAD"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tvEmptySquad"
             android:layout_width="match_parent"

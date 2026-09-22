@@ -1,6 +1,9 @@
 package com.gymleague.app.repository
 
+import com.gymleague.app.models.AddSquadMemberRequest
+import com.gymleague.app.models.CreateSquadRequest
 import com.gymleague.app.models.Squad
+import com.gymleague.app.models.SquadMember
 import com.gymleague.app.network.RetrofitClient
 
 class SquadRepository {
@@ -9,7 +12,6 @@ class SquadRepository {
 
     suspend fun getSquads(): Result<List<Squad>> {
         return try {
-
             val response = apiService.getSquads()
 
             if (response.isSuccessful && response.body() != null) {
@@ -27,7 +29,6 @@ class SquadRepository {
 
     suspend fun getSquad(squadId: Int): Result<Squad> {
         return try {
-
             val response = apiService.getSquad(squadId)
 
             if (response.isSuccessful && response.body() != null) {
@@ -35,6 +36,40 @@ class SquadRepository {
             } else {
                 Result.failure(
                     Exception("Failed to load squad: ${response.code()}")
+                )
+            }
+
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun createSquad(squadName: String): Result<Squad> {
+        return try {
+            val response = apiService.createSquad(CreateSquadRequest(squadName))
+
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(
+                    Exception("Failed to create squad: ${response.code()}")
+                )
+            }
+
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun addMember(squadId: Int, userId: Int): Result<SquadMember> {
+        return try {
+            val response = apiService.addSquadMember(squadId, AddSquadMemberRequest(userId))
+
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(
+                    Exception("Failed to join squad: ${response.code()}")
                 )
             }
 
