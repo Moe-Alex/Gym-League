@@ -43,10 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
 
-            showPlaceholderScreen(
-                "Home",
-                "Welcome to GymLeague"
-            )
+            openHome()
         }
 
         Log.d(
@@ -102,10 +99,7 @@ class MainActivity : AppCompatActivity() {
                 "Home selected"
             )
 
-            showPlaceholderScreen(
-                "Home",
-                "Welcome to GymLeague"
-            )
+            openHome()
         }
 
         btnTrain.setOnClickListener {
@@ -231,6 +225,19 @@ class MainActivity : AppCompatActivity() {
                 FrameLayout.LayoutParams.MATCH_PARENT
             )
         )
+    }
+
+    private fun openHome() {
+
+        fragmentContainer.removeAllViews()
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.fragmentContainer,
+                HomeFragment()
+            )
+            .commit()
     }
 
     private fun openMore() {
