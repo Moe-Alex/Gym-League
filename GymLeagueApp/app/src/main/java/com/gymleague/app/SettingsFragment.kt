@@ -16,6 +16,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
 import com.gymleague.app.models.UserSettings
 import com.gymleague.app.repository.SettingsRepository
+import com.gymleague.app.repository.UserRepository
+import com.gymleague.app.repository.WorkoutRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -31,12 +33,19 @@ class SettingsFragment : Fragment(
     }
 
     private lateinit var settingsRepository: SettingsRepository
+    private lateinit var userRepository: UserRepository
+    private lateinit var workoutRepository: WorkoutRepository
     private lateinit var sessionManager: SessionManager
     private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
     private lateinit var tvSettingsStatus: TextView
+
+    private lateinit var tvAvatarInitial: TextView
+    private lateinit var tvProfileLevel: TextView
+    private lateinit var tvProfileXp: TextView
+    private lateinit var tvProfileWorkoutCount: TextView
 
     private lateinit var switchNotifications: SwitchMaterial
 
@@ -73,6 +82,9 @@ class SettingsFragment : Fragment(
         settingsRepository =
             SettingsRepository()
 
+        userRepository = UserRepository()
+        workoutRepository = WorkoutRepository()
+
         sessionManager =
             SessionManager(
                 requireContext()
@@ -96,6 +108,7 @@ class SettingsFragment : Fragment(
         }
 
         loadSettings()
+        loadProfileStats()
     }
 
     private fun bindViews(
@@ -116,6 +129,11 @@ class SettingsFragment : Fragment(
             view.findViewById(
                 R.id.tvSettingsStatus
             )
+
+        tvAvatarInitial = view.findViewById(R.id.tvAvatarInitial)
+        tvProfileLevel = view.findViewById(R.id.tvProfileLevel)
+        tvProfileXp = view.findViewById(R.id.tvProfileXp)
+        tvProfileWorkoutCount = view.findViewById(R.id.tvProfileWorkoutCount)
 
         switchNotifications =
             view.findViewById(
@@ -178,6 +196,44 @@ class SettingsFragment : Fragment(
 
         tvEmail.text =
             email
+
+        tvAvatarInitial.text =
+            username.firstOrNull()?.uppercase() ?: "?"
+    }
+
+    private fun loadProfileStats() {
+
+        val userId = sessionManager.getUserId()
+
+        if (userId == -1) return
+
+        fragmentScope.launch {
+            val result = userRepository.getUser(userId)
+
+            result.onSuccess { user ->
+                tvProfileLevel.text = "⚡ LVL ${user.level}"
+                tvProfileXp.text = user.xp.toString()
+            }
+
+            result.onFailure { error ->
+                Log.e(TAG, "Failed to load profile stats: ${error.message}")
+                tvProfileLevel.text = "⚡ LVL —"
+                tvProfileXp.text = "—"
+            }
+        }
+
+        fragmentScope.launch {
+            val result = workoutRepository.getWorkoutsForUser(userId)
+
+            result.onSuccess { workouts ->
+                tvProfileWorkoutCount.text = workouts.size.toString()
+            }
+
+            result.onFailure { error ->
+                Log.e(TAG, "Failed to load workout count: ${error.message}")
+                tvProfileWorkoutCount.text = "—"
+            }
+        }
     }
 
     private fun setupLanguageSpinner() {
