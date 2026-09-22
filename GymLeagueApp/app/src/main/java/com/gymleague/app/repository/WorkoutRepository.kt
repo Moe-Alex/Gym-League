@@ -40,4 +40,27 @@ class WorkoutRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun getWorkoutsForUser(userId: Int): Result<List<Workout>> {
+
+        return try {
+
+            val response = apiService.getWorkoutsForUser(userId)
+
+            if (response.isSuccessful && response.body() != null) {
+
+                Result.success(response.body()!!)
+
+            } else {
+
+                Result.failure(
+                    Exception("Failed to fetch workouts: ${response.code()}")
+                )
+            }
+
+        } catch (e: Exception) {
+
+            Result.failure(e)
+        }
+    }
 }
