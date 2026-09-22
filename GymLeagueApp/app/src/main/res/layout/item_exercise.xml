@@ -5,41 +5,79 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:background="#F2F2F2"
+    android:background="@drawable/bg_exercise_card"
     android:padding="16dp">
 
+    <!-- Muscle group tag -->
+    <TextView
+        android:id="@+id/tvMuscleGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_muscle_tag"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
+        android:text="Chest"
+        android:textColor="#25D9F5"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- XP indicator -->
+    <TextView
+        android:id="@+id/tvXpPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ XP"
+        android:textColor="#B45CFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Exercise name -->
     <TextView
         android:id="@+id/tvExerciseName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:text="Bench Press"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvMuscleGroup" />
 
-    <TextView
-        android:id="@+id/tvMuscleGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Chest"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvExerciseName" />
-
+    <!-- Exercise description -->
     <TextView
         android:id="@+id/tvExerciseDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Exercise description"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="7dp"
+        android:text="A chest exercise performed by pressing a weight upward from a lying position."
+        android:textColor="#A59DAC"
+        android:textSize="13sp"
+        android:lineSpacingExtra="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMuscleGroup" />
+        app:layout_constraintTop_toBottomOf="@id/tvExerciseName" />
+
+    <!-- Tap hint -->
+    <TextView
+        android:id="@+id/tvTapToTrain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Tap to train  →"
+        android:textColor="#25D9F5"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvExerciseDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

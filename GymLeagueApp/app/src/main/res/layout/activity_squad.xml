@@ -3,13 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#09060F">
 
     <ScrollView
+        android:id="@+id/squadScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:background="#FAF7FA"
+        android:background="#09060F"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:overScrollMode="always"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,44 +25,104 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingStart="20dp"
+            android:paddingTop="18dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="30dp">
 
+            <!-- Branding -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SQUAD"
-                android:textColor="#333333"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:text="⚡ GYMLEAGUE"
+                android:textColor="#B45CFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05" />
 
+            <!-- Main heading -->
             <TextView
-                android:id="@+id/tvSquadName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:text="Your Squad"
-                android:textColor="#333333"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvSharedStreak"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="🔥 Shared Streak: 0 days"
-                android:textColor="#6A4FB3"
-                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="MEMBERS"
-                android:textColor="#333333"
-                android:textSize="18sp"
+                android:layout_marginTop="3dp"
+                android:text="Train together, streak together, win together"
+                android:textColor="#918A9D"
+                android:textSize="13sp" />
+
+            <!-- Squad overview -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_exercise_card"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvSquadName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Squad"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="SHARED STREAK"
+                    android:textColor="#25D9F5"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08" />
+
+                <TextView
+                    android:id="@+id/tvSharedStreak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="🔥 Shared Streak: 0 days"
+                    android:textColor="#B45CFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Keep training to protect your squad streak!"
+                    android:textColor="#918A9D"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Members -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="SQUAD MEMBERS"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Your training team"
+                android:textColor="#918A9D"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:id="@+id/membersContainer"
@@ -65,76 +131,156 @@
                 android:layout_marginTop="12dp"
                 android:orientation="vertical" />
 
+            <TextView
+                android:id="@+id/tvEmptySquad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_exercise_card"
+                android:gravity="center"
+                android:padding="22dp"
+                android:text="No squad members yet.\nInvite someone to start training together."
+                android:textColor="#918A9D"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <!-- Create squad -->
+            <TextView
+                android:id="@+id/tvCreateSquadHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="CREATE YOUR SQUAD"
+                android:textColor="#B45CFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08"
+                android:visibility="gone" />
+
             <EditText
                 android:id="@+id/etCreateSquadName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_gym_search"
                 android:hint="Enter a squad name"
+                android:inputType="textCapWords"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#716B78"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnCreateSquad"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#8A2BE2"
                 android:text="CREATE SQUAD"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:visibility="gone" />
+
+            <!-- Find and invite members -->
+            <TextView
+                android:id="@+id/tvInviteHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="FIND GYMLEAGUE USERS"
+                android:textColor="#25D9F5"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvInviteDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Search for registered users to add to your squad"
+                android:textColor="#918A9D"
+                android:textSize="12sp"
                 android:visibility="gone" />
 
             <EditText
                 android:id="@+id/etInviteUsername"
                 android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_gym_search"
+                android:hint="Search username"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#716B78"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnFindUsers"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#17111F"
+                android:text="FIND USERS"
+                android:textColor="#25D9F5"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/userSearchResults"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Invite by username"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnInviteMember"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#8A2BE2"
                 android:text="INVITE TO SQUAD"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/btnLeaveSquad"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:layout_marginTop="20dp"
-                android:text="LEAVE SQUAD"
-                android:textStyle="bold"
-                android:backgroundTint="#B3261E"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tvEmptySquad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="No squad members yet."
-                android:textColor="#666666"
-                android:textSize="16sp"
-                android:visibility="gone" />
-
+            <!-- Loading -->
             <ProgressBar
                 android:id="@+id/progressSquad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
+                android:indeterminateTint="#B45CFF"
                 android:visibility="gone" />
 
+            <!-- Refresh -->
             <Button
                 android:id="@+id/btnRefreshSquad"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginTop="30dp"
-                android:text="REFRESH SQUAD"
+                android:layout_marginTop="26dp"
+                android:backgroundTint="#8A2BE2"
+                android:text="↻  REFRESH SQUAD"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
+
+            <!-- Leave squad -->
+            <Button
+                android:id="@+id/btnLeaveSquad"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#28151D"
+                android:text="LEAVE SQUAD"
+                android:textColor="#FF6B81"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.gymleague.app
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -25,6 +26,11 @@ class LogExerciseActivity : AppCompatActivity() {
 
     private val workoutRepository = WorkoutRepository()
 
+    // Workout timer
+    private var countDownTimer: CountDownTimer? = null
+    private var remainingTimeMillis: Long = 0L
+    private var timerRunning = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_exercise)
@@ -48,7 +54,7 @@ class LogExerciseActivity : AppCompatActivity() {
         val defaultReps =
             intent.getIntExtra("defaultReps", 10)
 
-        // Find views
+        // Find exercise views
         val tvExercise =
             findViewById<TextView>(R.id.tvSelectedExercise)
 
@@ -58,6 +64,7 @@ class LogExerciseActivity : AppCompatActivity() {
         val tvDescription =
             findViewById<TextView>(R.id.tvExerciseDescription)
 
+        // Find workout views
         val etWorkoutName =
             findViewById<EditText>(R.id.etWorkoutName)
 
@@ -79,17 +86,95 @@ class LogExerciseActivity : AppCompatActivity() {
         val btnClear =
             findViewById<Button>(R.id.btnClear)
 
+        // Find timer views
+        val tvTimer =
+            findViewById<TextView>(R.id.tvTimer)
+
+        val etTimerMinutes =
+            findViewById<EditText>(R.id.etTimerMinutes)
+
+        val btnStartTimer =
+            findViewById<Button>(R.id.btnStartTimer)
+
+        val btnResetTimer =
+            findViewById<Button>(R.id.btnResetTimer)
+
         // Display exercise information
         tvExercise.text = exerciseName
         tvMuscleGroup.text = muscleGroup
         tvDescription.text = description
 
-        // Default values
+        // Default workout values
         etWorkoutName.setText("$exerciseName Workout")
         etSets.setText(defaultSets.toString())
         etReps.setText(defaultReps.toString())
 
-        // Clear button
+        // -----------------------------
+        // WORKOUT TIMER
+        // -----------------------------
+
+        btnStartTimer.setOnClickListener {
+
+            // If timer is already running, pause it
+            if (timerRunning) {
+
+                countDownTimer?.cancel()
+                timerRunning = false
+                btnStartTimer.text = "RESUME"
+
+                return@setOnClickListener
+            }
+
+            // If starting a new timer, read minutes entered
+            if (remainingTimeMillis <= 0L) {
+
+                val minutes =
+                    etTimerMinutes.text
+                        .toString()
+                        .toLongOrNull()
+
+                if (minutes == null || minutes <= 0) {
+
+                    etTimerMinutes.error =
+                        "Enter valid minutes"
+
+                    return@setOnClickListener
+                }
+
+                remainingTimeMillis =
+                    minutes * 60 * 1000
+            }
+
+            startTimer(
+                remainingTimeMillis,
+                tvTimer,
+                btnStartTimer
+            )
+        }
+
+        btnResetTimer.setOnClickListener {
+
+            countDownTimer?.cancel()
+
+            timerRunning = false
+            remainingTimeMillis = 0L
+
+            tvTimer.text = "00:00"
+            btnStartTimer.text = "START"
+
+            etTimerMinutes.text.clear()
+
+            Toast.makeText(
+                this,
+                "Timer reset",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        // -----------------------------
+        // CLEAR WORKOUT FORM
+        // -----------------------------
+
         btnClear.setOnClickListener {
 
             etWorkoutName.setText("$exerciseName Workout")
@@ -105,7 +190,10 @@ class LogExerciseActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Save workout
+        // -----------------------------
+        // SAVE WORKOUT
+        // -----------------------------
+
         btnSave.setOnClickListener {
 
             val workoutName =
@@ -202,7 +290,6 @@ class LogExerciseActivity : AppCompatActivity() {
             dateFormat.timeZone =
                 TimeZone.getTimeZone("UTC")
 
-            // XP example:
             // 10 XP for each completed set
             val xpEarned = sets * 10
 
@@ -264,7 +351,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
                     btnSave.isEnabled = true
                     btnClear.isEnabled = true
-                    btnSave.text = "SAVE WORKOUT"
+                    btnSave.text = "COMPLETE WORKOUT ⚡"
 
                     Toast.makeText(
                         this@LogExerciseActivity,
@@ -274,5 +361,77 @@ class LogExerciseActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    // -----------------------------
+    // TIMER FUNCTION
+    // -----------------------------
+
+    private fun startTimer(
+        timeMillis: Long,
+        tvTimer: TextView,
+        btnStartTimer: Button
+    ) {
+
+        countDownTimer?.cancel()
+
+        countDownTimer =
+            object : CountDownTimer(
+                timeMillis,
+                1000
+            ) {
+
+                override fun onTick(
+                    millisUntilFinished: Long
+                ) {
+
+                    remainingTimeMillis =
+                        millisUntilFinished
+
+                    timerRunning = true
+
+                    val totalSeconds =
+                        millisUntilFinished / 1000
+
+                    val minutes =
+                        totalSeconds / 60
+
+                    val seconds =
+                        totalSeconds % 60
+
+                    tvTimer.text =
+                        String.format(
+                            Locale.getDefault(),
+                            "%02d:%02d",
+                            minutes,
+                            seconds
+                        )
+
+                    btnStartTimer.text =
+                        "PAUSE"
+                }
+
+                override fun onFinish() {
+
+                    remainingTimeMillis = 0L
+                    timerRunning = false
+
+                    tvTimer.text = "00:00"
+                    btnStartTimer.text = "START"
+
+                    Toast.makeText(
+                        this@LogExerciseActivity,
+                        "Time's up! Ready for your next set.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Prevent timer continuing after screen closes
+        countDownTimer?.cancel()
     }
 }

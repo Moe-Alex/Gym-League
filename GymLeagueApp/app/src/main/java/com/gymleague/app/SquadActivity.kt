@@ -41,6 +41,9 @@ class SquadActivity : AppCompatActivity() {
     private lateinit var etInviteUsername: EditText
     private lateinit var btnInviteMember: Button
     private lateinit var btnLeaveSquad: Button
+    private lateinit var btnFindUsers: Button
+    private lateinit var userSearchResults: LinearLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +63,8 @@ class SquadActivity : AppCompatActivity() {
         btnCreateSquad = findViewById(R.id.btnCreateSquad)
         etInviteUsername = findViewById(R.id.etInviteUsername)
         btnInviteMember = findViewById(R.id.btnInviteMember)
+        btnFindUsers = findViewById(R.id.btnFindUsers)
+        userSearchResults = findViewById(R.id.userSearchResults)
         btnLeaveSquad = findViewById(R.id.btnLeaveSquad)
 
         btnRefresh.setOnClickListener { loadSquads() }
@@ -80,6 +85,9 @@ class SquadActivity : AppCompatActivity() {
             } else {
                 inviteByUsername(username)
             }
+        }
+        btnFindUsers.setOnClickListener {
+            findRegisteredUsers()
         }
 
         btnLeaveSquad.setOnClickListener {
@@ -128,6 +136,7 @@ class SquadActivity : AppCompatActivity() {
         tvEmptySquad.visibility = View.GONE
 
         etInviteUsername.visibility = View.VISIBLE
+        btnFindUsers.visibility = View.VISIBLE
         btnInviteMember.visibility = View.VISIBLE
         btnLeaveSquad.visibility = View.VISIBLE
 
@@ -140,13 +149,116 @@ class SquadActivity : AppCompatActivity() {
         membersContainer.removeAllViews()
 
         for (member in mySquad.members) {
-            val memberRow = TextView(this).apply {
-                text = "${member.user?.username ?: "Unknown user"} — ${member.currentStreak} day streak"
-                textSize = 16f
-                setPadding(0, 12, 0, 12)
-                gravity = Gravity.START
+
+            val memberCard = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+
+                setPadding(
+                    32,
+                    24,
+                    32,
+                    24
+                )
+
+                background = getDrawable(
+                    R.drawable.bg_exercise_card
+                )
             }
-            membersContainer.addView(memberRow)
+
+            // Username
+            val usernameText = TextView(this).apply {
+
+                text = "⚡ ${member.user?.username ?: "Unknown user"}"
+
+                textSize = 16f
+
+                setTextColor(
+                    android.graphics.Color.WHITE
+                )
+
+                setTypeface(
+                    typeface,
+                    android.graphics.Typeface.BOLD
+                )
+            }
+
+            // Streak
+            val streakText = TextView(this).apply {
+
+                text = "🔥 ${member.currentStreak} day streak"
+
+                textSize = 13f
+
+                setTextColor(
+                    android.graphics.Color.parseColor("#B45CFF")
+                )
+
+                setPadding(
+                    0,
+                    10,
+                    0,
+                    0
+                )
+            }
+
+            memberCard.addView(usernameText)
+            memberCard.addView(streakText)
+
+            // Only show challenge for OTHER members
+            if (member.userId != sessionManager.getUserId()) {
+
+                val challengeButton = Button(this).apply {
+
+                    text = "CHALLENGE"
+
+                    textSize = 12f
+
+                    setTextColor(
+                        android.graphics.Color.parseColor("#25D9F5")
+                    )
+
+                    backgroundTintList =
+                        android.content.res.ColorStateList.valueOf(
+                            android.graphics.Color.parseColor("#21152C")
+                        )
+
+                    setOnClickListener {
+
+                        Toast.makeText(
+                            this@SquadActivity,
+                            "Challenge sent to ${member.user?.username ?: "member"}!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                val challengeParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                challengeParams.topMargin = 12
+
+                challengeButton.layoutParams =
+                    challengeParams
+
+                memberCard.addView(challengeButton)
+            }
+
+            // Space between member cards
+            val cardParams =
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+            cardParams.bottomMargin = 16
+
+            memberCard.layoutParams =
+                cardParams
+
+            membersContainer.addView(memberCard)
         }
     }
 
@@ -224,6 +336,167 @@ class SquadActivity : AppCompatActivity() {
                 Toast.makeText(this@SquadActivity, "Search failed: ${error.message}", Toast.LENGTH_LONG).show()
                 showLoading(false)
             }
+        }
+    }
+    private fun findRegisteredUsers() {
+
+        val squad = currentSquad
+
+        if (squad == null) {
+            Toast.makeText(
+                this,
+                "You need a squad first",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val searchText =
+            etInviteUsername.text.toString().trim()
+
+        showLoading(true)
+
+        lifecycleScope.launch {
+
+            val result = userRepository.getUsers()
+
+            result.onSuccess { users ->
+
+                // Current logged-in user
+                val currentUserId =
+                    sessionManager.getUserId()
+
+                // IDs of users already in this squad
+                val existingMemberIds =
+                    squad.members.map { it.userId }
+
+                // Filter registered users
+                val matchingUsers =
+                    users.filter { user ->
+
+                        val matchesSearch =
+                            searchText.isBlank() ||
+                                    user.username.contains(
+                                        searchText,
+                                        ignoreCase = true
+                                    )
+
+                        val isNotCurrentUser =
+                            user.userId != currentUserId
+
+                        val isNotAlreadyMember =
+                            user.userId !in existingMemberIds
+
+                        matchesSearch &&
+                                isNotCurrentUser &&
+                                isNotAlreadyMember
+                    }
+
+                userSearchResults.removeAllViews()
+
+                if (matchingUsers.isEmpty()) {
+
+                    val noUsersText =
+                        TextView(this@SquadActivity).apply {
+
+                            text = "No matching GymLeague users found"
+
+                            setTextColor(
+                                android.graphics.Color.parseColor(
+                                    "#918A9D"
+                                )
+                            )
+
+                            textSize = 14f
+
+                            setPadding(
+                                12,
+                                20,
+                                12,
+                                20
+                            )
+                        }
+
+                    userSearchResults.addView(noUsersText)
+
+                } else {
+
+                    for (user in matchingUsers) {
+
+                        val userButton =
+                            Button(this@SquadActivity).apply {
+
+                                text = "⚡ ${user.username}"
+
+                                setTextColor(
+                                    android.graphics.Color.WHITE
+                                )
+
+                                setBackgroundColor(
+                                    android.graphics.Color.parseColor(
+                                        "#21152C"
+                                    )
+                                )
+
+                                isAllCaps = false
+
+                                setOnClickListener {
+
+                                    // Put selected username
+                                    // into invite field
+                                    etInviteUsername.setText(
+                                        user.username
+                                    )
+
+                                    Toast.makeText(
+                                        this@SquadActivity,
+                                        "${user.username} selected",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+
+                        val params =
+                            LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            )
+
+                        params.setMargins(
+                            0,
+                            5,
+                            0,
+                            5
+                        )
+
+                        userButton.layoutParams = params
+
+                        userSearchResults.addView(
+                            userButton
+                        )
+                    }
+                }
+
+                userSearchResults.visibility =
+                    View.VISIBLE
+            }
+
+            result.onFailure { error ->
+
+                Log.e(
+                    TAG,
+                    "Failed to load registered users",
+                    error
+                )
+
+                Toast.makeText(
+                    this@SquadActivity,
+                    "Could not load users: ${error.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            showLoading(false)
         }
     }
 

@@ -4,137 +4,341 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#FAF7FA">
+    android:background="#09060F">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="22dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="30dp">
 
+        <!-- Branding -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚡ GYMLEAGUE"
+            android:textColor="#B45CFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
+
+        <!-- Page title -->
         <TextView
             android:id="@+id/tvLogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LOG EXERCISE"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="#333333" />
-
-        <TextView
-            android:id="@+id/tvSelectedExercise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Bench Press"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#333333" />
-
-        <TextView
-            android:id="@+id/tvSelectedMuscleGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Chest"
-            android:textSize="15sp"
-            android:textColor="#666666" />
-
-        <TextView
-            android:id="@+id/tvExerciseDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Exercise description"
-            android:textSize="14sp"
-            android:textColor="#666666" />
+            android:layout_marginTop="22dp"
+            android:text="Log Workout"
+            android:textColor="#FFFFFF"
+            android:textSize="27sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Workout Name"
+            android:layout_marginTop="3dp"
+            android:text="Train hard. Earn XP. Level up."
+            android:textColor="#918A9D"
+            android:textSize="13sp" />
+
+        <!-- Selected exercise card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_exercise_card"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:id="@+id/tvSelectedMuscleGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_muscle_tag"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="Chest"
+                android:textColor="#25D9F5"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSelectedExercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Bench Press"
+                android:textColor="#FFFFFF"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvExerciseDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:lineSpacingExtra="2dp"
+                android:text="Exercise description"
+                android:textColor="#A59DAC"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- Workout Details -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="WORKOUT DETAILS"
+            android:textColor="#B45CFF"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#333333" />
+            android:letterSpacing="0.08" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Workout Name"
+            android:textColor="#E7E1EB"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etWorkoutName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_gym_search"
             android:hint="e.g. Monday Strength"
             android:inputType="textCapWords"
-            android:minHeight="48dp" />
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#716B78" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Duration (minutes)"
-            android:textStyle="bold"
-            android:textColor="#333333" />
+            android:textColor="#E7E1EB"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etDuration"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_gym_search"
             android:hint="e.g. 45"
             android:inputType="number"
-            android:minHeight="48dp" />
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#716B78" />
 
+        <!-- Workout Timer -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Sets"
+            android:layout_marginTop="26dp"
+            android:text="WORKOUT TIMER"
+            android:textColor="#B45CFF"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#333333" />
+            android:letterSpacing="0.08" />
 
-        <EditText
-            android:id="@+id/etSets"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g. 3"
-            android:inputType="number"
-            android:minHeight="48dp" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_exercise_card"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="18dp">
 
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Set your workout timer"
+                android:textColor="#918A9D"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/etTimerMinutes"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_gym_search"
+                android:gravity="center"
+                android:hint="Enter minutes"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#716B78" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnStartTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#8A2BE2"
+                    android:text="START"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnResetTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#17111F"
+                    android:text="RESET"
+                    android:textColor="#25D9F5"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Set Details -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Reps"
+            android:layout_marginTop="26dp"
+            android:text="SET DETAILS"
+            android:textColor="#25D9F5"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#333333" />
+            android:letterSpacing="0.08" />
 
-        <EditText
-            android:id="@+id/etReps"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g. 10"
-            android:inputType="number"
-            android:minHeight="48dp" />
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- Sets -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sets"
+                    android:textColor="#E7E1EB"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etSets"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/bg_gym_search"
+                    android:gravity="center"
+                    android:hint="3"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#716B78"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Reps -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reps"
+                    android:textColor="#E7E1EB"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etReps"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/bg_gym_search"
+                    android:gravity="center"
+                    android:hint="10"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#716B78"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Weight (kg)"
-            android:textStyle="bold"
-            android:textColor="#333333" />
+            android:textColor="#E7E1EB"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etWeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g. 50"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_gym_search"
+            android:gravity="center"
+            android:hint="50"
             android:inputType="numberDecimal"
-            android:minHeight="48dp" />
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#716B78"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <!-- Main action -->
         <Button
             android:id="@+id/btnAddToWorkout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="58dp"
             android:layout_marginTop="30dp"
-            android:text="SAVE WORKOUT"
+            android:backgroundTint="#8A2BE2"
+            android:text="COMPLETE WORKOUT  ⚡"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <Button
@@ -142,8 +346,9 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="24dp"
+            android:backgroundTint="#17111F"
             android:text="CLEAR"
+            android:textColor="#A59DAC"
             android:textStyle="bold" />
 
     </LinearLayout>
