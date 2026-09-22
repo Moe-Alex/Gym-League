@@ -90,6 +90,16 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
+        <Button
+            android:id="@+id/btnLeaveSquad"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:text="LEAVE SQUAD"
+            android:textStyle="bold"
+            android:backgroundTint="#B3261E"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tvEmptySquad"
             android:layout_width="match_parent"

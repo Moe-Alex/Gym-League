@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gymleague.app.models.Squad
@@ -39,6 +40,7 @@ class SquadActivity : AppCompatActivity() {
     private lateinit var btnCreateSquad: Button
     private lateinit var etInviteUsername: EditText
     private lateinit var btnInviteMember: Button
+    private lateinit var btnLeaveSquad: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,7 @@ class SquadActivity : AppCompatActivity() {
         btnCreateSquad = findViewById(R.id.btnCreateSquad)
         etInviteUsername = findViewById(R.id.etInviteUsername)
         btnInviteMember = findViewById(R.id.btnInviteMember)
+        btnLeaveSquad = findViewById(R.id.btnLeaveSquad)
 
         btnRefresh.setOnClickListener { loadSquads() }
 
@@ -75,6 +78,10 @@ class SquadActivity : AppCompatActivity() {
             } else {
                 inviteByUsername(username)
             }
+        }
+
+        btnLeaveSquad.setOnClickListener {
+            confirmLeaveSquad()
         }
 
         loadSquads()
@@ -120,6 +127,7 @@ class SquadActivity : AppCompatActivity() {
 
         etInviteUsername.visibility = View.VISIBLE
         btnInviteMember.visibility = View.VISIBLE
+        btnLeaveSquad.visibility = View.VISIBLE
 
         tvSquadName.text = mySquad.squadName
         tvSquadName.visibility = View.VISIBLE
@@ -217,6 +225,40 @@ class SquadActivity : AppCompatActivity() {
         }
     }
 
+    private fun confirmLeaveSquad() {
+        val squad = currentSquad ?: return
+
+        AlertDialog.Builder(this)
+            .setTitle("Leave Squad")
+            .setMessage("Are you sure you want to leave \"${squad.squadName}\"?")
+            .setPositiveButton("Leave") { _, _ -> leaveSquad(squad.squadId) }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun leaveSquad(squadId: Int) {
+        showLoading(true)
+
+        lifecycleScope.launch {
+            val userId = sessionManager.getUserId()
+            val result = squadRepository.leaveSquad(squadId, userId)
+
+            result.onSuccess {
+                Log.d(TAG, "Left squad $squadId")
+                Toast.makeText(this@SquadActivity, "You left the squad.", Toast.LENGTH_SHORT).show()
+                currentSquad = null
+                loadSquads()
+            }
+
+            result.onFailure { error ->
+                Log.e(TAG, "Failed to leave squad: ${error.message}")
+                Toast.makeText(this@SquadActivity, "Could not leave squad: ${error.message}", Toast.LENGTH_LONG).show()
+            }
+
+            showLoading(false)
+        }
+    }
+
     private fun showEmptyState(message: String) {
         tvSquadName.visibility = View.GONE
         tvSharedStreak.visibility = View.GONE
@@ -224,6 +266,7 @@ class SquadActivity : AppCompatActivity() {
 
         etInviteUsername.visibility = View.GONE
         btnInviteMember.visibility = View.GONE
+        btnLeaveSquad.visibility = View.GONE
 
         etCreateSquadName.visibility = View.VISIBLE
         btnCreateSquad.visibility = View.VISIBLE
@@ -237,5 +280,6 @@ class SquadActivity : AppCompatActivity() {
         btnRefresh.isEnabled = !isLoading
         btnCreateSquad.isEnabled = !isLoading
         btnInviteMember.isEnabled = !isLoading
+        btnLeaveSquad.isEnabled = !isLoading
     }
 }

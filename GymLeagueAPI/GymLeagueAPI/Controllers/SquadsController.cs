@@ -106,5 +106,25 @@ namespace GymLeagueAPI.Controllers
 
             return Ok(member);
         }
+
+        // DELETE: api/squads/5/members/3
+        [HttpDelete("{squadId}/members/{userId}")]
+        public async Task<IActionResult> RemoveMember(int squadId, int userId)
+        {
+            var member = await _context.SquadMembers
+                .FirstOrDefaultAsync(sm =>
+                    sm.SquadId == squadId &&
+                    sm.UserId == userId);
+
+            if (member == null)
+            {
+                return NotFound("Membership not found.");
+            }
+
+            _context.SquadMembers.Remove(member);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

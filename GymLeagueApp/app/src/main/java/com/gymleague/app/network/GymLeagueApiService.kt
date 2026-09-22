@@ -116,4 +116,10 @@ interface GymLeagueApiService {
         @Path("squadId") squadId: Int,
         @Body member: AddSquadMemberRequest
     ): Response<SquadMember>
+
+    @DELETE("api/squads/{squadId}/members/{userId}")
+    suspend fun leaveSquad(
+        @Path("squadId") squadId: Int,
+        @Path("userId") userId: Int
+    ): Response<Unit>
 }

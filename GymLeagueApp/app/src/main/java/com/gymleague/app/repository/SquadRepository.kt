@@ -77,4 +77,21 @@ class SquadRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun leaveSquad(squadId: Int, userId: Int): Result<Unit> {
+        return try {
+            val response = apiService.leaveSquad(squadId, userId)
+
+            if (response.isSuccessful) {
+                Result.success(Unit)
+            } else {
+                Result.failure(
+                    Exception("Failed to leave squad: ${response.code()}")
+                )
+            }
+
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
