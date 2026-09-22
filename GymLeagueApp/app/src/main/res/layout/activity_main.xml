@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
     <!-- Main screen content -->
     <FrameLayout
@@ -16,82 +17,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <!-- GymLeague Navigation -->
-    <HorizontalScrollView
+    <!-- GymLeague Navigation (shared across every screen) -->
+    <include
         android:id="@+id/bottomNavigation"
+        layout="@layout/bottom_nav"
         android:layout_width="0dp"
         android:layout_height="72dp"
-        android:fillViewport="true"
-        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp">
-
-            <Button
-                android:id="@+id/btnHome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Home"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-            <Button
-                android:id="@+id/btnTrain"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Train"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-            <Button
-                android:id="@+id/btnSquad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Squad"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-            <Button
-                android:id="@+id/btnBattle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Battle"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-            <Button
-                android:id="@+id/btnRanks"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Ranks"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-            <Button
-                android:id="@+id/btnMore"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="More"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,209 +13,62 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "GymLeagueNavigation"
+        const val EXTRA_SELECTED_TAB = "selected_tab"
+        const val TAB_HOME = "home"
+        const val TAB_BATTLE = "battle"
+        const val TAB_MORE = "more"
     }
 
     private lateinit var fragmentContainer: FrameLayout
+    private lateinit var navRoot: View
 
-    private lateinit var btnHome: Button
-    private lateinit var btnTrain: Button
-    private lateinit var btnSquad: Button
-    private lateinit var btnBattle: Button
-    private lateinit var btnRanks: Button
-    private lateinit var btnMore: Button
-
-    override fun onCreate(
-        savedInstanceState: Bundle?
-    ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
         ThemePreferences.applySavedTheme(this)
 
         super.onCreate(savedInstanceState)
 
-        setContentView(
-            R.layout.activity_main
-        )
+        setContentView(R.layout.activity_main)
 
-        bindViews()
+        fragmentContainer = findViewById(R.id.fragmentContainer)
+        navRoot = findViewById(R.id.bottomNavigation)
 
-        setupNavigation()
+        handleTabFromIntent(intent)
 
-        if (savedInstanceState == null) {
-
-            openHome()
-        }
-
-        Log.d(
-            TAG,
-            "MainActivity created"
-        )
+        Log.d(TAG, "MainActivity created")
     }
 
-    private fun bindViews() {
-
-        fragmentContainer =
-            findViewById(
-                R.id.fragmentContainer
-            )
-
-        btnHome =
-            findViewById(
-                R.id.btnHome
-            )
-
-        btnTrain =
-            findViewById(
-                R.id.btnTrain
-            )
-
-        btnSquad =
-            findViewById(
-                R.id.btnSquad
-            )
-
-        btnBattle =
-            findViewById(
-                R.id.btnBattle
-            )
-
-        btnRanks =
-            findViewById(
-                R.id.btnRanks
-            )
-
-        btnMore =
-            findViewById(
-                R.id.btnMore
-            )
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleTabFromIntent(intent)
     }
 
-    private fun setupNavigation() {
-
-        btnHome.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "Home selected"
-            )
-
-            openHome()
-        }
-
-        btnTrain.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "Train selected - opening Exercise Library"
-            )
-
-            val intent =
-                Intent(
-                    this,
-                    ExerciseLibraryActivity::class.java
-                )
-
-            startActivity(intent)
-        }
-
-        btnSquad.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "Squad selected - opening Squad"
-            )
-
-            val intent =
-                Intent(
-                    this,
-                    SquadActivity::class.java
-                )
-
-            startActivity(intent)
-        }
-
-        btnBattle.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "Battle selected"
-            )
-
-            showPlaceholderScreen(
-                "Battle",
-                "Battle features will appear here"
-            )
-        }
-
-        btnRanks.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "Ranks selected - opening Personal Records"
-            )
-
-            val intent =
-                Intent(
-                    this,
-                    PersonalRecordsActivity::class.java
-                )
-
-            startActivity(intent)
-        }
-
-        btnMore.setOnClickListener {
-
-            Log.d(
-                TAG,
-                "More selected"
-            )
-
-            openMore()
+    private fun handleTabFromIntent(intent: Intent) {
+        when (intent.getStringExtra(EXTRA_SELECTED_TAB)) {
+            TAB_BATTLE -> openBattle()
+            TAB_MORE -> openMore()
+            else -> openHome()
         }
     }
 
-    private fun showPlaceholderScreen(
-        title: String,
-        message: String
-    ) {
+    private fun showPlaceholderScreen(title: String, message: String) {
 
-        val existingFragment =
-            supportFragmentManager
-                .findFragmentById(
-                    R.id.fragmentContainer
-                )
+        val existingFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
         if (existingFragment != null) {
-
-            supportFragmentManager
-                .beginTransaction()
-                .remove(existingFragment)
-                .commitNow()
+            supportFragmentManager.beginTransaction().remove(existingFragment).commitNow()
         }
 
         fragmentContainer.removeAllViews()
 
-        val textView =
-            TextView(this).apply {
-
-                text =
-                    "$title\n\n$message"
-
-                textSize =
-                    24f
-
-                gravity =
-                    Gravity.CENTER
-
-                textAlignment =
-                    View.TEXT_ALIGNMENT_CENTER
-
-                setPadding(
-                    32,
-                    32,
-                    32,
-                    32
-                )
-            }
+        val textView = TextView(this).apply {
+            text = "$title\n\n$message"
+            textSize = 24f
+            gravity = Gravity.CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+            setPadding(32, 32, 32, 32)
+        }
 
         fragmentContainer.addView(
             textView,
@@ -228,28 +80,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openHome() {
-
         fragmentContainer.removeAllViews()
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                HomeFragment()
-            )
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, HomeFragment())
             .commit()
+        BottomNavHelper.setup(this, navRoot, NavTab.HOME)
+    }
+
+    private fun openBattle() {
+        showPlaceholderScreen("Battle", "Battle features will appear here")
+        BottomNavHelper.setup(this, navRoot, NavTab.BATTLE)
     }
 
     private fun openMore() {
-
         fragmentContainer.removeAllViews()
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MoreFragment()
-            )
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, MoreFragment())
             .commit()
+        BottomNavHelper.setup(this, navRoot, NavTab.MORE)
     }
 }

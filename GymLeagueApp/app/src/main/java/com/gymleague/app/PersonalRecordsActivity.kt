@@ -30,6 +30,8 @@ class PersonalRecordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_records)
 
+        BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.RANKS)
+
         sessionManager = SessionManager(this)
 
         val userId = sessionManager.getUserId()

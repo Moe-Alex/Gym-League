@@ -32,4 +32,9 @@
     <!-- Status -->
     <color name="gym_error">#B3261E</color>
     <color name="gym_error_container">#F9DEDC</color>
+
+    <!-- Bottom Nav -->
+    <color name="gym_nav_active">#E93EE0</color>
+    <color name="gym_nav_active_bg">#33E93EE0</color>
+    <color name="gym_nav_inactive">#8A8894</color>
 </resources>

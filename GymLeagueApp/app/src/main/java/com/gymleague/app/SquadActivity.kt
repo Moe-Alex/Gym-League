@@ -46,6 +46,8 @@ class SquadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_squad)
 
+        BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.SQUAD)
+
         sessionManager = SessionManager(this)
 
         tvSquadName = findViewById(R.id.tvSquadName)

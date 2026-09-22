@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="?attr/colorSurface"
+    android:elevation="8dp">
+
+    <LinearLayout
+        android:id="@+id/btnHome"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivHome"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_home" />
+
+        <TextView
+            android:id="@+id/tvHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Home"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnTrain"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivTrain"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_train" />
+
+        <TextView
+            android:id="@+id/tvTrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Train"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnSquad"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivSquad"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_squad" />
+
+        <TextView
+            android:id="@+id/tvSquad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Squad"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnBattle"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivBattle"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_battle" />
+
+        <TextView
+            android:id="@+id/tvBattle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Battle"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnRanks"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivRanks"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_ranks" />
+
+        <TextView
+            android:id="@+id/tvRanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Ranks"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnMore"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_nav_more" />
+
+        <TextView
+            android:id="@+id/tvMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="More"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

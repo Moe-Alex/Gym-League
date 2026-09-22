@@ -29,6 +29,8 @@ class ExerciseLibraryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_library)
 
+        BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.TRAIN)
+
         // Set up RecyclerView
         val recyclerView =
             findViewById<RecyclerView>(R.id.rvExercises)
