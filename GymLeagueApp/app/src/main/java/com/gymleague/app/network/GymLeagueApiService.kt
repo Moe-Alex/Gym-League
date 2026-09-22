@@ -52,6 +52,11 @@ interface GymLeagueApiService {
         @Body exercise: Exercise
     ): Response<Exercise>
 
+    @DELETE("api/exercises/{id}")
+    suspend fun deleteExercise(
+        @Path("id") id: Int
+    ): Response<Unit>
+
 
     // --- Workouts ---
 

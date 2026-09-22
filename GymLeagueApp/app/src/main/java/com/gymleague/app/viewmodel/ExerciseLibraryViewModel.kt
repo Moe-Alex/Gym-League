@@ -147,6 +147,50 @@ class ExerciseLibraryViewModel : ViewModel() {
         }
     }
 
+    // Delete an exercise
+    fun deleteExercise(
+        exerciseId: Int,
+        onSuccess: () -> Unit
+    ) {
+        viewModelScope.launch {
+
+            _isLoading.value = true
+            _errorMessage.value = null
+
+            Log.d(
+                "ExerciseLibrary",
+                "Deleting exercise: $exerciseId"
+            )
+
+            repository.deleteExercise(exerciseId)
+                .onSuccess {
+
+                    Log.d(
+                        "ExerciseLibrary",
+                        "Exercise deleted successfully"
+                    )
+
+                    // Reload the list so it disappears from the UI
+                    loadExercises()
+
+                    onSuccess()
+                }
+                .onFailure { error ->
+
+                    _errorMessage.value =
+                        error.message ?: "Unable to delete exercise"
+
+                    Log.e(
+                        "ExerciseLibrary",
+                        "Failed to delete exercise",
+                        error
+                    )
+                }
+
+            _isLoading.value = false
+        }
+    }
+
     // Clear the current error
     fun clearError() {
         _errorMessage.value = null
