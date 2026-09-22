@@ -62,6 +62,14 @@ class ExerciseLibraryActivity : AppCompatActivity() {
             },
             onDeleteClick = { exercise ->
 
+                // Clear focus and hide keyboard so the dialog shows immediately
+                currentFocus?.let { view ->
+                    val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE)
+                            as android.view.inputmethod.InputMethodManager
+                    imm.hideSoftInputFromWindow(view.windowToken, 0)
+                    view.clearFocus()
+                }
+
                 AlertDialog.Builder(this)
                     .setTitle("Delete Exercise")
                     .setMessage("Are you sure you want to delete \"${exercise.exerciseName}\"? This cannot be undone.")
