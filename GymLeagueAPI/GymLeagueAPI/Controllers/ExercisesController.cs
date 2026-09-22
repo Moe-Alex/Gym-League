@@ -73,14 +73,27 @@ namespace GymLeagueAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/exercises/5
+        // DELETE: api/exercises/5?userId=3
+        // Base/seeded exercises (CreatedByUserId == null) can never be deleted.
+        // Custom exercises can only be deleted by the user who created them.
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExercise(int id)
+        public async Task<IActionResult> DeleteExercise(int id, [FromQuery] int userId)
         {
             var exercise = await _context.Exercises.FindAsync(id);
+
             if (exercise == null)
             {
                 return NotFound();
+            }
+
+            if (exercise.CreatedByUserId == null)
+            {
+                return Forbid();
+            }
+
+            if (exercise.CreatedByUserId != userId)
+            {
+                return Forbid();
             }
 
             _context.Exercises.Remove(exercise);

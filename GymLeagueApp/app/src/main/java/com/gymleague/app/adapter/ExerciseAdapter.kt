@@ -11,6 +11,7 @@ import com.gymleague.app.models.Exercise
 
 class ExerciseAdapter(
     private var exercises: List<Exercise> = emptyList(),
+    private val currentUserId: Int,
     private val onExerciseClick: (Exercise) -> Unit,
     private val onDeleteClick: (Exercise) -> Unit
 ) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
@@ -57,8 +58,19 @@ class ExerciseAdapter(
             onExerciseClick(exercise)
         }
 
-        holder.deleteButton.setOnClickListener {
-            onDeleteClick(exercise)
+        // Only the person who created a custom exercise can delete it.
+        // Base/seeded exercises (createdByUserId == null) are never deletable.
+        val canDelete = exercise.createdByUserId != null &&
+                exercise.createdByUserId == currentUserId
+
+        if (canDelete) {
+            holder.deleteButton.visibility = View.VISIBLE
+            holder.deleteButton.setOnClickListener {
+                onDeleteClick(exercise)
+            }
+        } else {
+            holder.deleteButton.visibility = View.GONE
+            holder.deleteButton.setOnClickListener(null)
         }
     }
 

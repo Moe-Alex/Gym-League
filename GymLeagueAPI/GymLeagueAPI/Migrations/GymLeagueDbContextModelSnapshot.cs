@@ -76,6 +76,9 @@ namespace GymLeagueAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExerciseId"));
 
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("DefaultReps")
                         .HasColumnType("integer");
 

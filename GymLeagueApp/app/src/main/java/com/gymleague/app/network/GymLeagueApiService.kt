@@ -3,6 +3,7 @@ package com.gymleague.app.network
 import com.gymleague.app.models.*
 import retrofit2.Response
 import retrofit2.http.*
+import retrofit2.http.Query
 
 interface GymLeagueApiService {
 
@@ -54,7 +55,8 @@ interface GymLeagueApiService {
 
     @DELETE("api/exercises/{id}")
     suspend fun deleteExercise(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Query("userId") userId: Int
     ): Response<Unit>
 
 

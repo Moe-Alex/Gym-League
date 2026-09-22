@@ -24,6 +24,8 @@ class ExerciseLibraryActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ExerciseLibraryViewModel
     private lateinit var exerciseAdapter: ExerciseAdapter
+    private lateinit var sessionManager: SessionManager
+    private var currentUserId: Int = -1
 
     // Keeps the current list returned by the API
     private var currentExercises: List<Exercise> = emptyList()
@@ -33,6 +35,9 @@ class ExerciseLibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exercise_library)
 
         BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.TRAIN)
+
+        sessionManager = SessionManager(this)
+        currentUserId = sessionManager.getUserId()
 
         // Add Your Own Exercise button
         findViewById<Button>(R.id.btnAddExercise).setOnClickListener {
@@ -44,6 +49,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
             findViewById<RecyclerView>(R.id.rvExercises)
 
         exerciseAdapter = ExerciseAdapter(
+            currentUserId = currentUserId,
             onExerciseClick = { exercise ->
 
                 val intent = Intent(
@@ -75,7 +81,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
                     .setMessage("Are you sure you want to delete \"${exercise.exerciseName}\"? This cannot be undone.")
                     .setPositiveButton("Delete") { _, _ ->
 
-                        viewModel.deleteExercise(exercise.exerciseId) {
+                        viewModel.deleteExercise(exercise.exerciseId, currentUserId) {
 
                             Toast.makeText(
                                 this,
@@ -298,7 +304,8 @@ class ExerciseLibraryActivity : AppCompatActivity() {
                 description = desc.ifEmpty { null },
                 videoUrl = null,
                 defaultSets = defaultSets,
-                defaultReps = defaultReps
+                defaultReps = defaultReps,
+                createdByUserId = currentUserId
             )
 
             saveButton.isEnabled = false

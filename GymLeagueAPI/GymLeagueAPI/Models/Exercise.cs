@@ -10,6 +10,11 @@
         public int DefaultSets { get; set; }
         public int DefaultReps { get; set; }
 
+        // Null = base/seeded catalog exercise, protected from deletion.
+        // Set = the UserId of whoever added this custom exercise; only
+        // that user may delete it.
+        public int? CreatedByUserId { get; set; }
+
         // Navigation property
         public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
     }

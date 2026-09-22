@@ -7,5 +7,6 @@ data class Exercise(
     val description: String?,
     val videoUrl: String?,
     val defaultSets: Int,
-    val defaultReps: Int
+    val defaultReps: Int,
+    val createdByUserId: Int? = null
 )

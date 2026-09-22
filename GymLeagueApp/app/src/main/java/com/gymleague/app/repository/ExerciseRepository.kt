@@ -93,20 +93,22 @@ class ExerciseRepository {
 
     // Delete an exercise
     suspend fun deleteExercise(
-        exerciseId: Int
+        exerciseId: Int,
+        userId: Int
     ): Result<Unit> {
+
         return try {
 
-            val response =
-                apiService.deleteExercise(exerciseId)
+            val response = apiService.deleteExercise(exerciseId, userId)
 
             if (response.isSuccessful) {
                 Result.success(Unit)
+            } else if (response.code() == 403) {
+                Result.failure(Exception("You can only delete exercises you created."))
             } else {
-                Result.failure(
-                    Exception("Failed to delete exercise: ${response.code()}")
-                )
+                Result.failure(Exception("Failed to delete exercise: ${response.code()}"))
             }
+
         } catch (e: Exception) {
             Result.failure(e)
         }
