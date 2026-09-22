@@ -54,3 +54,5 @@ This repo uses feature branches merged into `main` via pull request. GitHub Acti
 - Requires a Google account — no offline or email/password login is supported
 - Swagger UI is only enabled in local development, not on the live Render deployment
 - Scope was narrowed from the original Part 1 prototype to focus on Exercise Library/Workouts, Squad, and Personal Records
+
+Youtube Link: https://youtu.be/4vE5qfamKGI
