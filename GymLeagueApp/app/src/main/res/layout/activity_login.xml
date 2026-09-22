@@ -1,40 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp">
+    android:background="@color/background_dark"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvGymLeagueTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GymLeague"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/tvLoginSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Train. Compete. Level up."
-        android:textSize="18sp"
-        android:layout_marginBottom="48dp" />
-
-    <Button
-        android:id="@+id/btnGoogleSignIn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue with Google"
-        android:textAllCaps="false" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:visibility="gone" />
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/logo_gymleague"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvGymLeagueTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GYMLEAGUE"
+            android:textColor="@color/gym_purple"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
+
+        <TextView
+            android:id="@+id/tvLoginSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TRAIN. COMPETE. LEVEL UP."
+            android:textColor="@color/gym_blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="@color/on_surface_dark"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp" />
+
+        <Button
+            android:id="@+id/btnGoogleSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Continue with Google"
+            android:textAllCaps="false"
+            android:textColor="@color/on_surface_dark"
+            android:backgroundTint="@color/surface_dark" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:indeterminateTint="@color/gym_purple"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>
