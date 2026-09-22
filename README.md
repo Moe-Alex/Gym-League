@@ -61,7 +61,6 @@ This repo uses feature branches merged into `main` via pull request. GitHub Acti
 
 - Requires a Google account — no offline or email/password login is supported
 - Swagger UI is only enabled in local development, not on the live Render deployment
-- Scope was narrowed from the original Part 1 prototype to focus on three core features: Exercise Library/Workout Logging, Squad, and Personal Records
 - The live database is on Render's free tier and expires 30 days after creation — if testing after this window, the API may require redeployment with a fresh database
 
 Youtube Link: https://youtu.be/4vE5qfamKGI
