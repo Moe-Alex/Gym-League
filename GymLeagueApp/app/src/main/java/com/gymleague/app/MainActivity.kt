@@ -157,13 +157,16 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(
                 TAG,
-                "Ranks selected"
+                "Ranks selected - opening Personal Records"
             )
 
-            showPlaceholderScreen(
-                "Ranks",
-                "Leaderboard features will appear here"
-            )
+            val intent =
+                Intent(
+                    this,
+                    PersonalRecordsActivity::class.java
+                )
+
+            startActivity(intent)
         }
 
         btnMore.setOnClickListener {

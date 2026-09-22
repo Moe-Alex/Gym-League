@@ -38,6 +38,10 @@
         <activity
             android:name=".SquadActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".PersonalRecordsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
