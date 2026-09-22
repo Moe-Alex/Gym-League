@@ -1,11 +1,11 @@
 # GymLeague
 
-Caleb Forbes- ST10438433
-Moegammad Alexander- ST10453511
-Erin Sarjoo- ST10450571
-Keeran Perumel- ST10367702
+Caleb Forbes - ST10438433
+Moegammad Alexander - ST10453511
+Erin Sarjoo - ST10450571
+Keeran Perumel - ST10367702
 
-GymLeague is a native Android fitness tracking app with an ASP.NET Core Web API backend, built for PROG7314 (POE Part 2).
+GymLeague is a native Android fitness tracking app with an ASP.NET Core Web API backend, built for PROG7314 (POE Part 2). Train, log your workouts, compete with a squad, and track your personal records — all backed by a live REST API and cloud-hosted PostgreSQL database.
 
 ## Important — Login Requirement
 
@@ -17,6 +17,7 @@ GymLeague is a native Android fitness tracking app with an ASP.NET Core Web API 
 - **Backend API**: ASP.NET Core Web API (.NET 10), Entity Framework Core, PostgreSQL
 - **Authentication**: Firebase Authentication (Google Sign-In)
 - **Hosting**: Render (free tier), deployed via Docker
+- **Design**: Custom purple/blue branded theme applied app-wide, with a persistent bottom navigation bar shared across every screen
 
 ## Tech Stack
 
@@ -24,13 +25,20 @@ GymLeague is a native Android fitness tracking app with an ASP.NET Core Web API 
 - ASP.NET Core, EF Core, PostgreSQL
 - GitHub Actions CI (build + unit tests on every push)
 
-## Features
+## Core Features
 
-- **Google Sign-In** — secure authentication via Firebase, no separate GymLeague password required
-- **Exercise Library & Workout Logging** — browse exercises, log sets/reps/weight per workout session
-- **Squad** — connect with other users, view squad members
-- **Personal Records** — automatically calculates your estimated 1-rep max (Epley formula) per exercise from your logged workouts, ranked from strongest to weakest lift
-- **Settings** — appearance (light/dark/system), notifications, language, logout
+### Exercise Library & Workout Logging
+Browse and search a shared exercise catalog filterable by muscle group. Users can add their own custom exercises (tracked by who created them) and log a real workout session against any exercise — sets, reps, weight, and duration, with a built-in rest timer. Only the user who created a custom exercise can delete it; the base exercise catalog is protected from deletion.
+
+### Squad
+Create a squad or join one by searching for and inviting a real registered user by username. View your squad's shared streak and member list, and leave a squad you're part of at any time. All squad actions read and write directly to the live database.
+
+### Personal Records
+Automatically calculates your estimated one-rep max (Epley formula) per exercise from your logged workout history, ranked from strongest to weakest lift. Updates immediately as new workouts are logged.
+
+## Settings
+
+Accessible from the More tab — shows your live profile (level, total XP, workouts logged), and lets you manage notifications, appearance (light/dark/system), and language. Changes are saved to the backend and persist across sessions.
 
 ## Setup
 
@@ -53,6 +61,7 @@ This repo uses feature branches merged into `main` via pull request. GitHub Acti
 
 - Requires a Google account — no offline or email/password login is supported
 - Swagger UI is only enabled in local development, not on the live Render deployment
-- Scope was narrowed from the original Part 1 prototype to focus on Exercise Library/Workouts, Squad, and Personal Records
+- Scope was narrowed from the original Part 1 prototype to focus on three core features: Exercise Library/Workout Logging, Squad, and Personal Records
+- The live database is on Render's free tier and expires 30 days after creation — if testing after this window, the API may require redeployment with a fresh database
 
 Youtube Link: https://youtu.be/4vE5qfamKGI
