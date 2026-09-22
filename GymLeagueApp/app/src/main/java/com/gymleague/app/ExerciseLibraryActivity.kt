@@ -43,22 +43,43 @@ class ExerciseLibraryActivity : AppCompatActivity() {
         val recyclerView =
             findViewById<RecyclerView>(R.id.rvExercises)
 
-        exerciseAdapter = ExerciseAdapter { exercise ->
+        exerciseAdapter = ExerciseAdapter(
+            onExerciseClick = { exercise ->
 
-            val intent = Intent(
-                this,
-                LogExerciseActivity::class.java
-            )
+                val intent = Intent(
+                    this,
+                    LogExerciseActivity::class.java
+                )
 
-            intent.putExtra("exerciseId", exercise.exerciseId)
-            intent.putExtra("exerciseName", exercise.exerciseName)
-            intent.putExtra("muscleGroup", exercise.muscleGroup)
-            intent.putExtra("defaultSets", exercise.defaultSets)
-            intent.putExtra("description", exercise.description)
-            intent.putExtra("defaultReps", exercise.defaultReps)
+                intent.putExtra("exerciseId", exercise.exerciseId)
+                intent.putExtra("exerciseName", exercise.exerciseName)
+                intent.putExtra("muscleGroup", exercise.muscleGroup)
+                intent.putExtra("defaultSets", exercise.defaultSets)
+                intent.putExtra("description", exercise.description)
+                intent.putExtra("defaultReps", exercise.defaultReps)
 
-            startActivity(intent)
-        }
+                startActivity(intent)
+            },
+            onDeleteClick = { exercise ->
+
+                AlertDialog.Builder(this)
+                    .setTitle("Delete Exercise")
+                    .setMessage("Are you sure you want to delete \"${exercise.exerciseName}\"? This cannot be undone.")
+                    .setPositiveButton("Delete") { _, _ ->
+
+                        viewModel.deleteExercise(exercise.exerciseId) {
+
+                            Toast.makeText(
+                                this,
+                                "${exercise.exerciseName} deleted",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+        )
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter

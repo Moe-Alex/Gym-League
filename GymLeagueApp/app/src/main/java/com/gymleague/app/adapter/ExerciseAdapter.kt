@@ -3,6 +3,7 @@ package com.gymleague.app.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gymleague.app.R
@@ -10,7 +11,8 @@ import com.gymleague.app.models.Exercise
 
 class ExerciseAdapter(
     private var exercises: List<Exercise> = emptyList(),
-    private val onExerciseClick: (Exercise) -> Unit
+    private val onExerciseClick: (Exercise) -> Unit,
+    private val onDeleteClick: (Exercise) -> Unit
 ) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     class ExerciseViewHolder(itemView: View) :
@@ -24,6 +26,9 @@ class ExerciseAdapter(
 
         val description: TextView =
             itemView.findViewById(R.id.tvExerciseDescription)
+
+        val deleteButton: ImageButton =
+            itemView.findViewById(R.id.btnDeleteExercise)
     }
 
     override fun onCreateViewHolder(
@@ -48,9 +53,12 @@ class ExerciseAdapter(
         holder.description.text =
             exercise.description ?: "No description available"
 
-        // Make the whole exercise card clickable
         holder.itemView.setOnClickListener {
             onExerciseClick(exercise)
+        }
+
+        holder.deleteButton.setOnClickListener {
+            onDeleteClick(exercise)
         }
     }
 
