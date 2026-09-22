@@ -76,9 +76,7 @@ object BottomNavHelper {
                 putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_HOME)
             }
 
-            NavTab.BATTLE -> Intent(activity, MainActivity::class.java).apply {
-                putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_BATTLE)
-            }
+            NavTab.BATTLE -> Intent(activity, BattleActivity::class.java)
 
             NavTab.MORE -> Intent(activity, MainActivity::class.java).apply {
                 putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_MORE)

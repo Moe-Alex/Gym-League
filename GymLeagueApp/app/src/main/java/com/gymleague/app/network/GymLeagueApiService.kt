@@ -127,4 +127,25 @@ interface GymLeagueApiService {
         @Path("squadId") squadId: Int,
         @Path("userId") userId: Int
     ): Response<Unit>
+
+
+    // --- Challenges ---
+
+    @GET("api/challenges")
+    suspend fun getChallenges(): Response<List<Challenge>>
+
+    @POST("api/challenges")
+    suspend fun createChallenge(
+        @Body challenge: CreateChallengeRequest
+    ): Response<Challenge>
+
+    @POST("api/challenges/{id}/progress")
+    suspend fun logChallengeProgress(
+        @Path("id") id: Int
+    ): Response<Challenge>
+
+    @DELETE("api/challenges/{id}")
+    suspend fun deleteChallenge(
+        @Path("id") id: Int
+    ): Response<Unit>
 }

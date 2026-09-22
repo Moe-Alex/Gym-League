@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         private const val TAG = "GymLeagueNavigation"
         const val EXTRA_SELECTED_TAB = "selected_tab"
         const val TAB_HOME = "home"
-        const val TAB_BATTLE = "battle"
         const val TAB_MORE = "more"
     }
 
@@ -46,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleTabFromIntent(intent: Intent) {
         when (intent.getStringExtra(EXTRA_SELECTED_TAB)) {
-            TAB_BATTLE -> openBattle()
             TAB_MORE -> openMore()
             else -> openHome()
         }
@@ -85,11 +83,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, HomeFragment())
             .commit()
         BottomNavHelper.setup(this, navRoot, NavTab.HOME)
-    }
-
-    private fun openBattle() {
-        showPlaceholderScreen("Battle", "Battle features will appear here")
-        BottomNavHelper.setup(this, navRoot, NavTab.BATTLE)
     }
 
     private fun openMore() {

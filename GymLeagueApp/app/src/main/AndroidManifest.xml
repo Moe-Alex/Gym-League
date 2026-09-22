@@ -46,6 +46,11 @@
             android:name=".PersonalRecordsActivity"
             android:exported="false"
             android:launchMode="singleTask" />
+
+        <activity
+            android:name=".BattleActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>
