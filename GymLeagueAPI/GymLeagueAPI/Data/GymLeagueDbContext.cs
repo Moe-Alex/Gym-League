@@ -17,6 +17,7 @@ namespace GymLeagueAPI.Data
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
         public DbSet<Squad> Squads { get; set; }
         public DbSet<SquadMember> SquadMembers { get; set; }
+        public DbSet<Challenge> Challenges { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
