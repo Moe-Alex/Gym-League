@@ -1,7 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.GymLeague" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/gym_purple_light</item>
+        <item name="colorOnPrimary">@color/gym_purple_dark</item>
+        <item name="colorPrimaryContainer">@color/gym_purple_dark</item>
+        <item name="colorOnPrimaryContainer">@color/gym_purple_container</item>
+
+        <item name="colorSecondary">@color/gym_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/gym_blue_dark</item>
+        <item name="colorOnSecondaryContainer">@color/gym_blue_container</item>
+
+        <item name="colorTertiary">@color/gym_gold</item>
+
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorOnBackground">@color/on_surface_dark</item>
+
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+
+        <item name="colorError">@color/gym_error</item>
+        <item name="colorErrorContainer">@color/gym_error_container</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

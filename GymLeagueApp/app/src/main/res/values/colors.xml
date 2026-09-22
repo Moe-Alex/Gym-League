@@ -2,4 +2,34 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand — Purple -->
+    <color name="gym_purple">#6A4FB3</color>
+    <color name="gym_purple_dark">#4A3080</color>
+    <color name="gym_purple_light">#9C82D4</color>
+    <color name="gym_purple_container">#EDE6FA</color>
+
+    <!-- Brand — Blue -->
+    <color name="gym_blue">#4A6CF7</color>
+    <color name="gym_blue_dark">#2F49C4</color>
+    <color name="gym_blue_container">#E3E9FF</color>
+
+    <!-- Accent — Gold (XP / streaks / achievements) -->
+    <color name="gym_gold">#FFB300</color>
+
+    <!-- Semantic — Light theme -->
+    <color name="background_light">#FAF7FA</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="on_surface_light">#1C1B1F</color>
+    <color name="on_surface_secondary_light">#666666</color>
+
+    <!-- Semantic — Dark theme -->
+    <color name="background_dark">#1C1B2E</color>
+    <color name="surface_dark">#262440</color>
+    <color name="on_surface_dark">#EDEAF5</color>
+    <color name="on_surface_secondary_dark">#B0AAC7</color>
+
+    <!-- Status -->
+    <color name="gym_error">#B3261E</color>
+    <color name="gym_error_container">#F9DEDC</color>
 </resources>

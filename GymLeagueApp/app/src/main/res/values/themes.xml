@@ -1,8 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.GymLeague" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/gym_purple</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/gym_purple_container</item>
+        <item name="colorOnPrimaryContainer">@color/gym_purple_dark</item>
+
+        <item name="colorSecondary">@color/gym_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/gym_blue_container</item>
+        <item name="colorOnSecondaryContainer">@color/gym_blue_dark</item>
+
+        <item name="colorTertiary">@color/gym_gold</item>
+
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/on_surface_light</item>
+
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/on_surface_light</item>
+
+        <item name="colorError">@color/gym_error</item>
+        <item name="colorErrorContainer">@color/gym_error_container</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:statusBarColor">@color/gym_purple</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.GymLeague" parent="Base.Theme.GymLeague" />
