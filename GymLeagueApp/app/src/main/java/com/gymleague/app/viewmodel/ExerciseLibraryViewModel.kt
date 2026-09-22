@@ -103,6 +103,50 @@ class ExerciseLibraryViewModel : ViewModel() {
         }
     }
 
+    // Create a new custom exercise
+    fun createExercise(
+        exercise: Exercise,
+        onSuccess: (Exercise) -> Unit
+    ) {
+        viewModelScope.launch {
+
+            _isLoading.value = true
+            _errorMessage.value = null
+
+            Log.d(
+                "ExerciseLibrary",
+                "Creating exercise: ${exercise.exerciseName}"
+            )
+
+            repository.createExercise(exercise)
+                .onSuccess { createdExercise ->
+
+                    Log.d(
+                        "ExerciseLibrary",
+                        "Exercise created successfully: ${createdExercise.exerciseName}"
+                    )
+
+                    // Reload the list so the new exercise appears
+                    loadExercises()
+
+                    onSuccess(createdExercise)
+                }
+                .onFailure { error ->
+
+                    _errorMessage.value =
+                        error.message ?: "Unable to create exercise"
+
+                    Log.e(
+                        "ExerciseLibrary",
+                        "Failed to create exercise",
+                        error
+                    )
+                }
+
+            _isLoading.value = false
+        }
+    }
+
     // Clear the current error
     fun clearError() {
         _errorMessage.value = null

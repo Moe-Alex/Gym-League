@@ -46,7 +46,8 @@ class ExerciseRepository {
         muscleGroup: String
     ): Result<List<Exercise>> {
         return try {
-            val response = apiService.getExercisesByMuscleGroup(muscleGroup)
+            val response =
+                apiService.getExercisesByMuscleGroup(muscleGroup)
 
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
@@ -58,6 +59,34 @@ class ExerciseRepository {
                 )
             }
         } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Create a new custom exercise
+    suspend fun createExercise(
+        exercise: Exercise
+    ): Result<Exercise> {
+        return try {
+
+            val response =
+                apiService.createExercise(exercise)
+
+            if (response.isSuccessful && response.body() != null) {
+
+                Result.success(response.body()!!)
+
+            } else {
+
+                Result.failure(
+                    Exception(
+                        "Failed to create exercise: ${response.code()}"
+                    )
+                )
+            }
+
+        } catch (e: Exception) {
+
             Result.failure(e)
         }
     }

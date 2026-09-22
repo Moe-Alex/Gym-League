@@ -1,5 +1,8 @@
 package com.gymleague.app
 
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.appcompat.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -30,6 +33,11 @@ class ExerciseLibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exercise_library)
 
         BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.TRAIN)
+
+        // Add Your Own Exercise button
+        findViewById<Button>(R.id.btnAddExercise).setOnClickListener {
+            showAddExerciseDialog()
+        }
 
         // Set up RecyclerView
         val recyclerView =
@@ -170,4 +178,125 @@ class ExerciseLibraryActivity : AppCompatActivity() {
             }
         }
     }
+    private fun showAddExerciseDialog() {
+
+        val dialogView = layoutInflater.inflate(
+            R.layout.dialog_add_exercise,
+            null
+        )
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        val exerciseName =
+            dialogView.findViewById<EditText>(R.id.etCustomExerciseName)
+
+        val muscleGroupSpinner =
+            dialogView.findViewById<Spinner>(R.id.spinnerCustomMuscleGroup)
+
+        val muscleGroups = listOf(
+            "Chest",
+            "Back",
+            "Legs",
+            "Shoulders",
+            "Arms"
+        )
+
+        val muscleGroupAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            muscleGroups
+        )
+
+        muscleGroupAdapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
+
+        muscleGroupSpinner.adapter = muscleGroupAdapter
+        val description =
+            dialogView.findViewById<EditText>(R.id.etCustomDescription)
+
+        val sets =
+            dialogView.findViewById<EditText>(R.id.etCustomSets)
+
+        val reps =
+            dialogView.findViewById<EditText>(R.id.etCustomReps)
+
+        val saveButton =
+            dialogView.findViewById<Button>(R.id.btnSaveCustomExercise)
+
+        val cancelButton =
+            dialogView.findViewById<Button>(R.id.btnCancelCustomExercise)
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        saveButton.setOnClickListener {
+
+            val name = exerciseName.text.toString().trim()
+            val muscle = muscleGroupSpinner.selectedItem.toString()
+            val desc = description.text.toString().trim()
+
+            val defaultSets =
+                sets.text.toString().toIntOrNull()
+
+            val defaultReps =
+                reps.text.toString().toIntOrNull()
+
+            // Validation
+            if (name.isEmpty()) {
+                exerciseName.error = "Enter an exercise name"
+                return@setOnClickListener
+            }
+
+
+            if (defaultSets == null || defaultSets <= 0) {
+                sets.error = "Enter valid sets"
+                return@setOnClickListener
+            }
+
+            if (defaultReps == null || defaultReps <= 0) {
+                reps.error = "Enter valid reps"
+                return@setOnClickListener
+            }
+
+            val newExercise = Exercise(
+                exerciseId = 0,
+                exerciseName = name,
+                muscleGroup = muscle,
+                description = desc.ifEmpty { null },
+                videoUrl = null,
+                defaultSets = defaultSets,
+                defaultReps = defaultReps
+            )
+
+            saveButton.isEnabled = false
+            saveButton.text = "SAVING..."
+
+            viewModel.createExercise(newExercise) { createdExercise ->
+
+                runOnUiThread {
+
+                    Toast.makeText(
+                        this,
+                        "${createdExercise.exerciseName} added!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    dialog.dismiss()
+                }
+            }
+        }
+
+        dialog.setOnShowListener {
+            dialog.window?.setBackgroundDrawableResource(
+                android.R.color.transparent
+            )
+        }
+
+        dialog.show()
+    }
+
 }
