@@ -1,5 +1,6 @@
 package com.gymleague.app
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import com.gymleague.app.viewmodel.BattleEvent
 import com.gymleague.app.viewmodel.ChallengeViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZoneOffset
 
 /**
@@ -206,6 +208,30 @@ class BattleActivity : AppCompatActivity() {
         )
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerType.adapter = typeAdapter
+
+        // The end date is picked from a calendar, so it can never be typed in the wrong format
+        etEndDate.setOnClickListener {
+            val todayUtc = LocalDate.now(ZoneOffset.UTC)
+            val current = ChallengeHelper.parseDate(etEndDate.text.toString().trim())
+                ?: todayUtc.plusDays(7)
+
+            val picker = DatePickerDialog(
+                this,
+                { _, year, month, day ->
+                    // month is 0-based here; LocalDate.toString() gives YYYY-MM-DD
+                    etEndDate.setText(LocalDate.of(year, month + 1, day).toString())
+                    etEndDate.error = null
+                },
+                current.year,
+                current.monthValue - 1,
+                current.dayOfMonth
+            )
+
+            // Today is the earliest allowed end date (the API works in UTC)
+            picker.datePicker.minDate =
+                todayUtc.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+            picker.show()
+        }
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
