@@ -1,5 +1,6 @@
 package com.gymleague.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -224,11 +225,19 @@ class SquadActivity : AppCompatActivity() {
 
                     setOnClickListener {
 
-                        Toast.makeText(
+                        // Open the Battle Arena's new-challenge form, aimed at this member
+                        val battleIntent = Intent(
                             this@SquadActivity,
-                            "Challenge sent to ${member.user?.username ?: "member"}!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            BattleActivity::class.java
+                        ).apply {
+                            putExtra(BattleActivity.EXTRA_OPPONENT_ID, member.userId)
+                            putExtra(
+                                BattleActivity.EXTRA_OPPONENT_NAME,
+                                member.user?.username ?: ""
+                            )
+                        }
+
+                        startActivity(battleIntent)
                     }
                 }
 
