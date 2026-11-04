@@ -131,23 +131,61 @@ interface GymLeagueApiService {
     ): Response<Unit>
 
 
-    // --- Challenges ---
+    // --- Challenges (Battle Arena) ---
 
+    // Returns this user's challenges plus open challenges they could accept
     @GET("api/challenges")
-    suspend fun getChallenges(): Response<List<Challenge>>
+    suspend fun getChallenges(
+        @Query("userId") userId: Int
+    ): Response<List<Challenge>>
 
     @POST("api/challenges")
     suspend fun createChallenge(
         @Body challenge: CreateChallengeRequest
     ): Response<Challenge>
 
+    @POST("api/challenges/{id}/accept")
+    suspend fun acceptChallenge(
+        @Path("id") id: Int,
+        @Query("userId") userId: Int
+    ): Response<Challenge>
+
+    @POST("api/challenges/{id}/decline")
+    suspend fun declineChallenge(
+        @Path("id") id: Int,
+        @Query("userId") userId: Int
+    ): Response<Challenge>
+
     @POST("api/challenges/{id}/progress")
     suspend fun logChallengeProgress(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Query("userId") userId: Int
     ): Response<Challenge>
 
     @DELETE("api/challenges/{id}")
     suspend fun deleteChallenge(
         @Path("id") id: Int
+    ): Response<Unit>
+
+
+    // --- Muscle Group Volume ---
+
+    // Total volume (sets x reps x weight) per muscle group for a user
+    @GET("api/workouts/musclegroupvolume/{userId}")
+    suspend fun getMuscleGroupVolume(
+        @Path("userId") userId: Int
+    ): Response<Map<String, Double>>
+
+
+    // --- Push notification device tokens ---
+
+    @POST("api/devicetokens")
+    suspend fun registerDeviceToken(
+        @Body request: RegisterDeviceTokenRequest
+    ): Response<Unit>
+
+    @DELETE("api/devicetokens")
+    suspend fun unregisterDeviceToken(
+        @Query("token") token: String
     ): Response<Unit>
 }

@@ -6,12 +6,29 @@ import androidx.lifecycle.viewModelScope
 import com.gymleague.app.models.Challenge
 import com.gymleague.app.models.CreateChallengeRequest
 import com.gymleague.app.repository.ChallengeRepository
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/** One-off things the Battle Arena screen should tell the user about. */
+sealed interface BattleEvent {
+    data object Launched : BattleEvent
+    data class Sent(val opponentName: String) : BattleEvent
+    data object Accepted : BattleEvent
+    data object Declined : BattleEvent
+    data class Won(val xp: Int) : BattleEvent
+    data class Failed(val message: String?) : BattleEvent
+}
+
 class ChallengeViewModel : ViewModel() {
+
+    private companion object {
+        const val TAG = "Battle"
+    }
 
     private val repository = ChallengeRepository()
 
@@ -24,25 +41,23 @@ class ChallengeViewModel : ViewModel() {
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
 
-    init {
-        loadChallenges()
-    }
+    private val _events = MutableSharedFlow<BattleEvent>(extraBufferCapacity = 8)
+    val events: SharedFlow<BattleEvent> = _events.asSharedFlow()
 
-    fun loadChallenges() {
+    fun loadChallenges(userId: Int) {
         viewModelScope.launch {
 
             _isLoading.value = true
             _errorMessage.value = null
 
-            repository.getChallenges()
+            repository.getChallenges(userId)
                 .onSuccess { list ->
                     _challenges.value = list
+                    Log.d(TAG, "Loaded ${list.size} challenges")
                 }
                 .onFailure { error ->
-                    _errorMessage.value =
-                        error.message ?: "Unable to load challenges"
-
-                    Log.e("Battle", "Failed to load challenges", error)
+                    _errorMessage.value = error.message ?: "Unable to load challenges"
+                    Log.e(TAG, "Failed to load challenges", error)
                 }
 
             _isLoading.value = false
@@ -51,42 +66,85 @@ class ChallengeViewModel : ViewModel() {
 
     fun createChallenge(
         request: CreateChallengeRequest,
-        onSuccess: () -> Unit
+        opponentName: String?,
+        userId: Int,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
     ) {
         viewModelScope.launch {
 
-            _isLoading.value = true
-            _errorMessage.value = null
-
             repository.createChallenge(request)
                 .onSuccess {
-                    loadChallenges()
+                    Log.d(TAG, "Challenge created: ${it.challengeId}")
+                    _events.tryEmit(
+                        if (request.opponentUserId != null) {
+                            BattleEvent.Sent(opponentName ?: "")
+                        } else {
+                            BattleEvent.Launched
+                        }
+                    )
                     onSuccess()
+                    loadChallenges(userId)
                 }
                 .onFailure { error ->
-                    _errorMessage.value =
-                        error.message ?: "Unable to create challenge"
-
-                    Log.e("Battle", "Failed to create challenge", error)
+                    Log.e(TAG, "Failed to create challenge", error)
+                    _events.tryEmit(BattleEvent.Failed(error.message))
+                    onFailure()
                 }
-
-            _isLoading.value = false
         }
     }
 
-    fun logProgress(challengeId: Int) {
+    fun acceptChallenge(challengeId: Int, userId: Int) {
         viewModelScope.launch {
 
-            repository.logProgress(challengeId)
+            repository.acceptChallenge(challengeId, userId)
                 .onSuccess {
-                    loadChallenges()
+                    Log.d(TAG, "Accepted challenge $challengeId")
+                    _events.tryEmit(BattleEvent.Accepted)
                 }
                 .onFailure { error ->
-                    _errorMessage.value =
-                        error.message ?: "Unable to log progress"
-
-                    Log.e("Battle", "Failed to log progress", error)
+                    Log.e(TAG, "Failed to accept challenge", error)
+                    _events.tryEmit(BattleEvent.Failed(error.message))
                 }
+
+            loadChallenges(userId)
+        }
+    }
+
+    fun declineChallenge(challengeId: Int, userId: Int) {
+        viewModelScope.launch {
+
+            repository.declineChallenge(challengeId, userId)
+                .onSuccess {
+                    Log.d(TAG, "Declined challenge $challengeId")
+                    _events.tryEmit(BattleEvent.Declined)
+                }
+                .onFailure { error ->
+                    Log.e(TAG, "Failed to decline challenge", error)
+                    _events.tryEmit(BattleEvent.Failed(error.message))
+                }
+
+            loadChallenges(userId)
+        }
+    }
+
+    fun logProgress(challengeId: Int, userId: Int) {
+        viewModelScope.launch {
+
+            repository.logProgress(challengeId, userId)
+                .onSuccess { updated ->
+                    Log.d(TAG, "Progress logged on challenge $challengeId")
+
+                    if (updated.completed && updated.winnerUserId == userId) {
+                        _events.tryEmit(BattleEvent.Won(updated.xpReward))
+                    }
+                }
+                .onFailure { error ->
+                    Log.e(TAG, "Failed to log progress", error)
+                    _events.tryEmit(BattleEvent.Failed(error.message))
+                }
+
+            loadChallenges(userId)
         }
     }
 }

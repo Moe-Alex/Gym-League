@@ -1,3 +1,71 @@
 <resources>
     <string name="app_name">GymLeague</string>
+
+    <!-- Battle Arena: badges -->
+    <string name="battle_badge_open">OPEN</string>
+    <string name="battle_badge_invited">INVITE</string>
+    <string name="battle_badge_pending">PENDING</string>
+    <string name="battle_badge_live">LIVE</string>
+    <string name="battle_badge_won">WON</string>
+    <string name="battle_badge_lost">LOST</string>
+    <string name="battle_badge_ended">ENDED</string>
+    <string name="battle_badge_declined">DECLINED</string>
+
+    <!-- Battle Arena: challenge cards -->
+    <string name="battle_btn_log_progress">LOG PROGRESS (+1)</string>
+    <string name="battle_btn_accept">ACCEPT CHALLENGE</string>
+    <string name="battle_btn_decline">DECLINE</string>
+    <string name="battle_label_you">You</string>
+    <string name="battle_label_opponent">Opponent</string>
+    <string name="battle_versus">%1$s vs %2$s</string>
+    <string name="battle_open_to_all">Open to anyone · by %1$s</string>
+    <string name="battle_meta">+%1$d XP · Ends %2$s</string>
+    <string name="battle_progress_count">%1$d/%2$d</string>
+    <string name="battle_waiting_opponent">Waiting for someone to accept your challenge</string>
+    <string name="battle_waiting_named">Waiting for %1$s to accept</string>
+    <string name="battle_result_won">🏆 You won! +%1$d XP</string>
+    <string name="battle_result_lost">%1$s won this battle</string>
+    <string name="battle_result_ended">This challenge ended without a winner</string>
+    <string name="battle_result_declined">This challenge was declined</string>
+    <string name="battle_type_most_workouts">Most Workouts</string>
+    <string name="battle_type_longest_streak">Longest Streak</string>
+    <string name="battle_type_most_xp">Most XP</string>
+    <string name="battle_type_most_reps">Most Reps</string>
+
+    <!-- Battle Arena: messages -->
+    <string name="battle_toast_launched">Challenge launched!</string>
+    <string name="battle_toast_sent">Challenge sent to %1$s!</string>
+    <string name="battle_toast_accepted">Challenge accepted. Game on!</string>
+    <string name="battle_toast_declined">Challenge declined.</string>
+    <string name="battle_toast_won">You won! +%1$d XP</string>
+    <string name="battle_toast_load_failed">Unable to load challenges</string>
+    <string name="battle_toast_action_failed">That did not work. Please try again.</string>
+
+    <!-- Battle Arena: new challenge form -->
+    <string name="battle_dialog_vs">Challenging %1$s</string>
+    <string name="battle_launch">LAUNCH CHALLENGE</string>
+    <string name="battle_launching">LAUNCHING...</string>
+    <string name="battle_error_title">Enter a title</string>
+    <string name="battle_error_target">Enter a valid target</string>
+    <string name="battle_error_xp">Enter an XP reward from 1 to 500</string>
+    <string name="battle_error_date_empty">Enter an end date</string>
+    <string name="battle_error_date_format">Use the format YYYY-MM-DD</string>
+    <string name="battle_error_date_past">The end date must be today or later</string>
+    <string name="battle_error_session">User session not found</string>
+
+    <!-- Muscle Group Volume -->
+    <string name="muscle_volume_title">Muscle Volume</string>
+    <string name="muscle_volume_tagline">Where your training volume goes.</string>
+    <string name="muscle_volume_total_label">Total volume</string>
+    <string name="muscle_volume_top_label">Top muscle group</string>
+    <string name="muscle_volume_row_detail">%1$s · %2$d%%</string>
+    <string name="muscle_volume_empty">No volume yet. Log a workout in Train to see your muscle group breakdown here.</string>
+    <string name="muscle_volume_error">Unable to load your muscle volume</string>
+    <string name="muscle_volume_retry">TRY AGAIN</string>
+    <string name="muscle_volume_back">BACK</string>
+    <string name="more_muscle_volume">Muscle Volume</string>
+
+    <!-- Push notifications -->
+    <string name="notification_channel_name">Battle Arena</string>
+    <string name="notification_channel_description">Challenges, accepted battles and results</string>
 </resources>

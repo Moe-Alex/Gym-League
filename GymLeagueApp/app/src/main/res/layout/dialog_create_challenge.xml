@@ -29,6 +29,17 @@
             android:textSize="13sp" />
 
         <TextView
+            android:id="@+id/tvChallengeOpponent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Challenging Caleb"
+            android:textColor="#25D9F5"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TITLE"
