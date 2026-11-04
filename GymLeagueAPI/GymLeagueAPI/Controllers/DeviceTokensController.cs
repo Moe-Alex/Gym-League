@@ -56,7 +56,29 @@ namespace GymLeagueAPI.Controllers
                 existing.UpdatedAt = DateTime.UtcNow;
             }
 
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException) when (existing == null)
+            {
+                // The app can send the same brand new token twice at once (when it opens and when
+                // Firebase announces the token). The second insert breaks the unique Token index,
+                // so keep the row the first request created and just point it at this user.
+                _context.ChangeTracker.Clear();
+
+                var winner = await _context.DeviceTokens
+                    .FirstOrDefaultAsync(t => t.Token == request.Token);
+
+                if (winner == null)
+                {
+                    throw;
+                }
+
+                winner.UserId = request.UserId;
+                winner.UpdatedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+            }
 
             _logger.LogInformation("Device token registered for user {UserId}.", request.UserId);
 

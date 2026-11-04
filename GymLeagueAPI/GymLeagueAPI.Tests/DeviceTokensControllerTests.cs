@@ -55,6 +55,31 @@ namespace GymLeagueAPI.Tests
         }
 
         [Fact]
+        public async Task Register_TwoRequestsRaceWithTheSameNewToken_BothSucceed()
+        {
+            // Both contexts share one in-memory database, like two requests share one real database
+            var databaseName = Guid.NewGuid().ToString();
+            var options = new DbContextOptionsBuilder<GymLeagueAPI.Data.GymLeagueDbContext>()
+                .UseInMemoryDatabase(databaseName)
+                .Options;
+
+            using var setup = new GymLeagueAPI.Data.GymLeagueDbContext(options);
+            var user = TestSupport.AddUser(setup, "moe");
+
+            using var racing = new RacingContext(options, userId: user.UserId, token: "token-race");
+
+            var result = await CreateController(racing)
+                .Register(new RegisterDeviceTokenRequest { UserId = user.UserId, Token = "token-race" });
+
+            Assert.IsType<NoContentResult>(result);
+
+            using var check = new GymLeagueAPI.Data.GymLeagueDbContext(options);
+            var saved = await check.DeviceTokens.SingleAsync();
+            Assert.Equal("token-race", saved.Token);
+            Assert.Equal(user.UserId, saved.UserId);
+        }
+
+        [Fact]
         public async Task Register_ForUnknownUser_IsRejected()
         {
             using var context = TestSupport.CreateContext();
@@ -89,5 +114,48 @@ namespace GymLeagueAPI.Tests
 
             Assert.Empty(context.DeviceTokens);
         }
+
+    /// <summary>
+    /// Pretends a second request saved the same token first: on its first save it inserts the token
+    /// through another context and then fails the way a unique index violation would.
+    /// </summary>
+    internal class RacingContext : GymLeagueAPI.Data.GymLeagueDbContext
+    {
+        private readonly DbContextOptions<GymLeagueAPI.Data.GymLeagueDbContext> _options;
+        private readonly int _userId;
+        private readonly string _token;
+        private bool _raced;
+
+        public RacingContext(
+            DbContextOptions<GymLeagueAPI.Data.GymLeagueDbContext> options,
+            int userId,
+            string token) : base(options)
+        {
+            _options = options;
+            _userId = userId;
+            _token = token;
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            if (!_raced)
+            {
+                _raced = true;
+
+                using var other = new GymLeagueAPI.Data.GymLeagueDbContext(_options);
+                other.DeviceTokens.Add(new GymLeagueAPI.Models.DeviceToken
+                {
+                    UserId = _userId,
+                    Token = _token,
+                    UpdatedAt = DateTime.UtcNow
+                });
+                await other.SaveChangesAsync(cancellationToken);
+
+                throw new DbUpdateException("Duplicate token (simulated unique index violation).");
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
     }
+}
 }

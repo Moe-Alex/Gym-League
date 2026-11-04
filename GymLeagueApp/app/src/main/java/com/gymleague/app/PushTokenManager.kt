@@ -21,6 +21,11 @@ object PushTokenManager {
     // Lives as long as the app process, so a request is not cancelled when a screen closes
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
+    // The user/token pair we last sent (or are sending). The app learns about a new token in two
+    // places at once, so this stops the same registration being sent twice.
+    @Volatile
+    private var lastSent: String? = null
+
     // Fetch this phone's Firebase token and give it to the API (called when the app opens)
     fun registerCurrentToken(context: Context) {
         val appContext = context.applicationContext
@@ -38,6 +43,16 @@ object PushTokenManager {
             return
         }
 
+        val key = "$userId:$token"
+
+        synchronized(this) {
+            if (lastSent == key) {
+                Log.d(TAG, "Device token already registered for user $userId, skipping")
+                return
+            }
+            lastSent = key
+        }
+
         scope.launch {
             try {
                 val response = RetrofitClient.apiService.registerDeviceToken(
@@ -48,15 +63,19 @@ object PushTokenManager {
                     Log.d(TAG, "Device token registered for user $userId")
                 } else {
                     Log.w(TAG, "Device token registration failed: ${response.code()}")
+                    lastSent = null
                 }
             } catch (e: Exception) {
                 Log.w(TAG, "Device token registration error", e)
+                lastSent = null
             }
         }
     }
 
     // Called when the user logs out, so this phone stops receiving their notifications
     fun unregisterCurrentToken() {
+        lastSent = null
+
         FirebaseMessaging.getInstance().token
             .addOnSuccessListener { token ->
                 scope.launch {
