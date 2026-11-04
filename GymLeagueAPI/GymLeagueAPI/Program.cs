@@ -25,21 +25,34 @@ builder.Services.AddDbContext<GymLeagueDbContext>(options =>
 // FIREBASE_CREDENTIALS_JSON (the raw JSON). With neither set, notifications are skipped.
 var firebaseJson = builder.Configuration["FIREBASE_CREDENTIALS_JSON"];
 var firebaseBase64 = builder.Configuration["FIREBASE_CREDENTIALS_BASE64"];
+var pushEnabled = false;
+string? pushProblem = null;
 
-if (string.IsNullOrWhiteSpace(firebaseJson) && !string.IsNullOrWhiteSpace(firebaseBase64))
+try
 {
-    firebaseJson = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(firebaseBase64));
-}
+    if (string.IsNullOrWhiteSpace(firebaseJson) && !string.IsNullOrWhiteSpace(firebaseBase64))
+    {
+        firebaseJson = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(firebaseBase64));
+    }
 
-var pushEnabled = !string.IsNullOrWhiteSpace(firebaseJson);
+    if (!string.IsNullOrWhiteSpace(firebaseJson))
+    {
+        FirebaseApp.Create(new AppOptions
+        {
+            Credential = GoogleCredential.FromJson(firebaseJson)
+        });
+
+        pushEnabled = true;
+    }
+}
+catch (Exception ex)
+{
+    // A bad key must never stop the whole API from starting: carry on without push.
+    pushProblem = ex.Message;
+}
 
 if (pushEnabled)
 {
-    FirebaseApp.Create(new AppOptions
-    {
-        Credential = GoogleCredential.FromJson(firebaseJson)
-    });
-
     builder.Services.AddScoped<IPushNotificationService, FcmPushNotificationService>();
 }
 else
@@ -49,9 +62,17 @@ else
 
 var app = builder.Build();
 
-app.Logger.LogInformation(
-    "Push notifications are {State}.",
-    pushEnabled ? "ENABLED (Firebase Cloud Messaging)" : "DISABLED (no Firebase credentials found)");
+if (pushProblem != null)
+{
+    app.Logger.LogError(
+        "Firebase credentials could not be loaded, push notifications are DISABLED: {Problem}", pushProblem);
+}
+else
+{
+    app.Logger.LogInformation(
+        "Push notifications are {State}.",
+        pushEnabled ? "ENABLED (Firebase Cloud Messaging)" : "DISABLED (no Firebase credentials found)");
+}
 
 if (app.Environment.IsDevelopment())
 {
