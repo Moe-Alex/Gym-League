@@ -1,5 +1,6 @@
 package com.gymleague.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +21,7 @@ class MoreFragment : Fragment(
     private lateinit var tvMoreUsername: TextView
     private lateinit var tvMoreEmail: TextView
     private lateinit var btnOpenSettings: Button
+    private lateinit var btnOpenMuscleVolume: Button
 
     override fun onViewCreated(
         view: View,
@@ -48,6 +50,21 @@ class MoreFragment : Fragment(
 
             openSettings()
         }
+
+        btnOpenMuscleVolume.setOnClickListener {
+
+            Log.d(
+                TAG,
+                "Muscle Volume selected"
+            )
+
+            startActivity(
+                Intent(
+                    requireContext(),
+                    MuscleVolumeActivity::class.java
+                )
+            )
+        }
     }
 
     private fun bindViews(
@@ -67,6 +84,11 @@ class MoreFragment : Fragment(
         btnOpenSettings =
             view.findViewById(
                 R.id.btnOpenSettings
+            )
+
+        btnOpenMuscleVolume =
+            view.findViewById(
+                R.id.btnOpenMuscleVolume
             )
     }
 
