@@ -60,6 +60,15 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), SquadActivity::class.java))
         }
 
+        // Settings sits in the top-right corner of the home screen
+        view.findViewById<View>(R.id.btnHomeSettings).setOnClickListener {
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, SettingsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         loadUserStats()
         loadWorkoutCount()
         loadSquad()

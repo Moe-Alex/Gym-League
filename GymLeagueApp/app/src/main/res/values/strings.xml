@@ -64,7 +64,8 @@
     <string name="muscle_volume_error">Unable to load your muscle volume</string>
     <string name="muscle_volume_retry">TRY AGAIN</string>
     <string name="muscle_volume_back">BACK</string>
-    <string name="more_muscle_volume">Muscle Volume</string>
+    <string name="nav_volume">Volume</string>
+    <string name="home_settings_description">Settings</string>
 
     <!-- Push notifications -->
     <string name="notification_channel_name">Battle Arena</string>

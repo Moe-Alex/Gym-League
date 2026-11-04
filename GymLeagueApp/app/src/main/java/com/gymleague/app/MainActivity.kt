@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         private const val TAG = "GymLeagueNavigation"
         const val EXTRA_SELECTED_TAB = "selected_tab"
         const val TAB_HOME = "home"
-        const val TAB_MORE = "more"
     }
 
     private lateinit var fragmentContainer: FrameLayout
@@ -71,10 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleTabFromIntent(intent: Intent) {
-        when (intent.getStringExtra(EXTRA_SELECTED_TAB)) {
-            TAB_MORE -> openMore()
-            else -> openHome()
-        }
+        openHome()
     }
 
     private fun showPlaceholderScreen(title: String, message: String) {
@@ -110,13 +106,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, HomeFragment())
             .commit()
         BottomNavHelper.setup(this, navRoot, NavTab.HOME)
-    }
-
-    private fun openMore() {
-        fragmentContainer.removeAllViews()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, MoreFragment())
-            .commit()
-        BottomNavHelper.setup(this, navRoot, NavTab.MORE)
     }
 }

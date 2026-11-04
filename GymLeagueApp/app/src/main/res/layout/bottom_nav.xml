@@ -143,7 +143,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/btnMore"
+        android:id="@+id/btnVolume"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_weight="1"
@@ -154,17 +154,17 @@
         android:focusable="true">
 
         <ImageView
-            android:id="@+id/ivMore"
+            android:id="@+id/ivVolume"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@drawable/ic_nav_more" />
+            android:src="@drawable/ic_nav_volume" />
 
         <TextView
-            android:id="@+id/tvMore"
+            android:id="@+id/tvVolume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="More"
+            android:text="@string/nav_volume"
             android:textSize="10sp" />
 
     </LinearLayout>

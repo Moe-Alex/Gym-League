@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 
 enum class NavTab {
-    HOME, TRAIN, SQUAD, BATTLE, RANKS, MORE
+    HOME, TRAIN, SQUAD, BATTLE, RANKS, VOLUME
 }
 
 object BottomNavHelper {
@@ -35,7 +35,7 @@ object BottomNavHelper {
             NavItem(NavTab.SQUAD, navRoot.findViewById(R.id.btnSquad), navRoot.findViewById(R.id.ivSquad), navRoot.findViewById(R.id.tvSquad)),
             NavItem(NavTab.BATTLE, navRoot.findViewById(R.id.btnBattle), navRoot.findViewById(R.id.ivBattle), navRoot.findViewById(R.id.tvBattle)),
             NavItem(NavTab.RANKS, navRoot.findViewById(R.id.btnRanks), navRoot.findViewById(R.id.ivRanks), navRoot.findViewById(R.id.tvRanks)),
-            NavItem(NavTab.MORE, navRoot.findViewById(R.id.btnMore), navRoot.findViewById(R.id.ivMore), navRoot.findViewById(R.id.tvMore))
+            NavItem(NavTab.VOLUME, navRoot.findViewById(R.id.btnVolume), navRoot.findViewById(R.id.ivVolume), navRoot.findViewById(R.id.tvVolume))
         )
 
         val activeColor = ContextCompat.getColor(activity, R.color.gym_nav_active)
@@ -78,9 +78,7 @@ object BottomNavHelper {
 
             NavTab.BATTLE -> Intent(activity, BattleActivity::class.java)
 
-            NavTab.MORE -> Intent(activity, MainActivity::class.java).apply {
-                putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_MORE)
-            }
+            NavTab.VOLUME -> Intent(activity, MuscleVolumeActivity::class.java)
 
             NavTab.TRAIN -> Intent(activity, ExerciseLibraryActivity::class.java)
 

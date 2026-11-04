@@ -44,8 +44,8 @@ class MuscleVolumeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_muscle_volume)
 
-        // This screen is opened from the More tab, so More stays highlighted
-        BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.MORE)
+        // Muscle Volume has its own tab in the bottom navigation
+        BottomNavHelper.setup(this, findViewById(R.id.bottomNavigation), NavTab.VOLUME)
 
         userId = SessionManager(this).getUserId()
 
