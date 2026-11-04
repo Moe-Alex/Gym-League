@@ -48,8 +48,9 @@
     <string name="battle_error_title">Enter a title</string>
     <string name="battle_error_target">Enter a valid target</string>
     <string name="battle_error_xp">Enter an XP reward from 1 to 500</string>
-    <string name="battle_error_date_empty">Enter an end date</string>
-    <string name="battle_error_date_format">Use the format YYYY-MM-DD</string>
+    <string name="battle_end_date_hint">Tap to choose a date</string>
+    <string name="battle_error_date_empty">Choose an end date</string>
+    <string name="battle_error_date_format">Choose a valid end date</string>
     <string name="battle_error_date_past">The end date must be today or later</string>
     <string name="battle_error_session">User session not found</string>
 
