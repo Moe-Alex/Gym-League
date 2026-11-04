@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using GymLeagueAPI.Models;
 
 namespace GymLeagueAPI.Data
@@ -18,6 +18,7 @@ namespace GymLeagueAPI.Data
         public DbSet<Squad> Squads { get; set; }
         public DbSet<SquadMember> SquadMembers { get; set; }
         public DbSet<Challenge> Challenges { get; set; }
+        public DbSet<DeviceToken> DeviceTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,6 +59,16 @@ namespace GymLeagueAPI.Data
                     .HasOne(sm => sm.User)
                     .WithMany()
                     .HasForeignKey(sm => sm.UserId);
+
+            // A challenge starts out open to everyone
+            modelBuilder.Entity<Challenge>()
+                .Property(c => c.Status)
+                .HasDefaultValue(ChallengeStatus.Open);
+
+            // Each Firebase token is stored once; it belongs to whichever user last registered it
+            modelBuilder.Entity<DeviceToken>()
+                .HasIndex(t => t.Token)
+                .IsUnique();
         }
     }
 }
