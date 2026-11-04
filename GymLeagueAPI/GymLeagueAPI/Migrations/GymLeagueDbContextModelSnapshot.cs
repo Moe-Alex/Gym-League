@@ -49,6 +49,18 @@ namespace GymLeagueAPI.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("OpponentProgress")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("OpponentUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Open");
+
                     b.Property<int>("Target")
                         .HasColumnType("integer");
 
@@ -60,12 +72,41 @@ namespace GymLeagueAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("WinnerUserId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("XpReward")
                         .HasColumnType("integer");
 
                     b.HasKey("ChallengeId");
 
                     b.ToTable("Challenges");
+                });
+
+            modelBuilder.Entity("GymLeagueAPI.Models.DeviceToken", b =>
+                {
+                    b.Property<int>("DeviceTokenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DeviceTokenId"));
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("DeviceTokenId");
+
+                    b.HasIndex("Token")
+                        .IsUnique();
+
+                    b.ToTable("DeviceTokens");
                 });
 
             modelBuilder.Entity("GymLeagueAPI.Models.Exercise", b =>
