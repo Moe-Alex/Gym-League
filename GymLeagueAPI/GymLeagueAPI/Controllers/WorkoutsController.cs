@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GymLeagueAPI.Data;
 using GymLeagueAPI.Models;
+using GymLeagueAPI.Services;
 
 namespace GymLeagueAPI.Controllers
 {
@@ -50,10 +51,10 @@ namespace GymLeagueAPI.Controllers
 public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
 {
     // Check that the user exists
-    var userExists = await _context.Users
-        .AnyAsync(u => u.UserId == workout.UserId);
+    var user = await _context.Users
+        .FirstOrDefaultAsync(u => u.UserId == workout.UserId);
 
-    if (!userExists)
+    if (user == null)
     {
         return BadRequest("User does not exist.");
     }
@@ -79,6 +80,12 @@ public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
         workoutExercise.Exercise = null;
     }
 
+    // Add the XP from this workout to the user's total and recalculate their level.
+    // The workout and the user are saved together in one SaveChanges call.
+    workout.XPEarned = Math.Max(0, workout.XPEarned);
+    user.XP += workout.XPEarned;
+    user.Level = LevelCalculator.LevelForXp(user.XP);
+
     _context.Workouts.Add(workout);
 
     await _context.SaveChangesAsync();
@@ -98,7 +105,7 @@ public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
             var workoutExercises = await _context.WorkoutExercises
                 .Include(we => we.Exercise)
                 .Include(we => we.Workout)
-                .Where(we => we.Workout.UserId == userId && we.Completed)
+                .Where(we => we.Workout!.UserId == userId && we.Completed)
                 .ToListAsync();
 
             var volumeByMuscleGroup = workoutExercises
