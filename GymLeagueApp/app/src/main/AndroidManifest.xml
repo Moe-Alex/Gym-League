@@ -3,6 +3,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Needed on Android 13+ to show push notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -51,6 +54,30 @@
             android:name=".BattleActivity"
             android:exported="false"
             android:launchMode="singleTask" />
+
+        <activity
+            android:name=".MuscleVolumeActivity"
+            android:exported="false" />
+
+        <!-- Receives push notifications from Firebase Cloud Messaging -->
+        <service
+            android:name=".GymLeagueMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- How notifications that Firebase shows by itself (app closed) look -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_gymleague" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/gym_purple" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="challenges" />
     </application>
 
 </manifest>

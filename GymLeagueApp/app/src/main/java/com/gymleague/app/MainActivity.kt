@@ -1,13 +1,18 @@
 package com.gymleague.app
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fragmentContainer: FrameLayout
     private lateinit var navRoot: View
+
+    // Asks for permission to show notifications (needed on Android 13 and newer)
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            Log.d(TAG, "Notification permission granted: $granted")
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,7 +45,23 @@ class MainActivity : AppCompatActivity() {
 
         handleTabFromIntent(intent)
 
+        setUpPushNotifications()
+
         Log.d(TAG, "MainActivity created")
+    }
+
+    // Create the notification channel, ask for permission and tell the API about this phone
+    private fun setUpPushNotifications() {
+        NotificationHelper.createChannel(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        PushTokenManager.registerCurrentToken(this)
     }
 
     override fun onNewIntent(intent: Intent) {

@@ -608,6 +608,9 @@ class SettingsFragment : Fragment(
             "Logging user out"
         )
 
+        // Stop this phone receiving the user's push notifications
+        PushTokenManager.unregisterCurrentToken()
+
         firebaseAuth.signOut()
 
         sessionManager.clearSession()
