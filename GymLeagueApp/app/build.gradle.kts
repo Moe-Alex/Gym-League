@@ -102,6 +102,11 @@ dependencies {
         "com.google.firebase:firebase-auth"
     )
 
+    // Firebase Cloud Messaging (push notifications)
+    implementation(
+        "com.google.firebase:firebase-messaging"
+    )
+
     implementation(
         "androidx.credentials:credentials:1.3.0"
     )
