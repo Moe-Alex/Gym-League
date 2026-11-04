@@ -38,3 +38,10 @@ GymLeagueAPI/GymLeagueAPI/bin/
 GymLeagueAPI/GymLeagueAPI/obj/
 GymLeagueAPI/GymLeagueAPI/.vs/
 *.user
+# API test project
+GymLeagueAPI/GymLeagueAPI.Tests/bin/
+GymLeagueAPI/GymLeagueAPI.Tests/obj/
+GymLeagueAPI/GymLeagueAPI.Tests/TestResults/
+
+# Firebase service account keys must never be committed
+*firebase-adminsdk*.json
