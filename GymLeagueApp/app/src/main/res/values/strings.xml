@@ -70,7 +70,7 @@
     <!-- Push notifications -->
     <string name="notification_channel_name">Battle Arena</string>
     <string name="notification_channel_description">Challenges, accepted battles and results</string>
-    
+
     <!-- Offline mode -->
     <string name="offline_banner_offline">You\'re offline. Showing saved data.</string>
     <plurals name="offline_banner_pending">
