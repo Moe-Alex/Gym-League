@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Lets the app know when the phone goes offline or comes back online -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Needed on Android 13+ to show push notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".GymLeagueApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
