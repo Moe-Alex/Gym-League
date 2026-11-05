@@ -1,6 +1,11 @@
 package com.gymleague.app
 
 import android.content.Context
+import android.util.Log
+import com.gymleague.app.database.GymLeagueDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SessionManager(context: Context) {
 
@@ -12,6 +17,9 @@ class SessionManager(context: Context) {
         private const val KEY_USERNAME = "username"
         private const val KEY_EMAIL = "email"
     }
+
+    // Needed to reach the Room database when the user logs out
+    private val appContext = context.applicationContext
 
     private val preferences =
         context.getSharedPreferences(
@@ -70,5 +78,15 @@ class SessionManager(context: Context) {
         preferences.edit()
             .clear()
             .apply()
+
+        // Also clear the copy of the user's data saved on the phone.
+        // Workouts still waiting to sync are kept so they are not lost.
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                GymLeagueDatabase.getInstance(appContext).clearUserCache()
+            } catch (e: Exception) {
+                Log.w("GymLeagueOffline", "Could not clear saved data: ${e.javaClass.simpleName}")
+            }
+        }
     }
 }

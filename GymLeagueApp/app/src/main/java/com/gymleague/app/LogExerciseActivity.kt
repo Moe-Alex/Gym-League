@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.gymleague.app.models.CreateWorkoutRequest
 import com.gymleague.app.models.WorkoutExercise
 import com.gymleague.app.repository.WorkoutRepository
+import com.gymleague.app.util.OfflineRules
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -332,9 +333,17 @@ class LogExerciseActivity : AppCompatActivity() {
                                 "WorkoutId=${savedWorkout.workoutId}"
                     )
 
+                    // A negative id means it is saved on the phone and still waiting to sync
+                    val savedOffline =
+                        OfflineRules.isPendingWorkoutId(savedWorkout.workoutId)
+
                     Toast.makeText(
                         this@LogExerciseActivity,
-                        "Workout saved! +$xpEarned XP",
+                        if (savedOffline) {
+                            getString(R.string.workout_saved_offline)
+                        } else {
+                            "Workout saved! +$xpEarned XP"
+                        },
                         Toast.LENGTH_LONG
                     ).show()
 

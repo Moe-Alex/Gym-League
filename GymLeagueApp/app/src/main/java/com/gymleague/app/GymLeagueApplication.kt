@@ -9,7 +9,6 @@ import com.gymleague.app.util.OfflineRules
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -29,9 +28,10 @@ class GymLeagueApplication : Application() {
         NetworkMonitor.start(this)
         OfflineBanner.install(this, appScope)
 
-        // Runs when the app opens and every time the connection comes back
+        // Runs when the app opens and every time the connection comes back.
+        // A StateFlow only sends a value when it changes, so no extra filtering is needed.
         appScope.launch {
-            NetworkMonitor.isOnline.distinctUntilChanged().collect { online ->
+            NetworkMonitor.isOnline.collect { online ->
                 if (online) {
                     val waiting = database.workoutDao().getPending(OfflineRules.MAX_SYNC_ATTEMPTS)
                     if (waiting.isNotEmpty()) {
