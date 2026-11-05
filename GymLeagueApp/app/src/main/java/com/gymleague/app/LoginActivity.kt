@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
 
         Log.d(
             TAG,
-            "LoginActivity created"
+            "Login screen created"
         )
     }
 
@@ -104,9 +104,13 @@ class LoginActivity : AppCompatActivity() {
 
         if (currentUser != null) {
 
+            /*
+             * Do not log Firebase UID, email address,
+             * display name or any other personal data.
+             */
             Log.d(
                 TAG,
-                "Existing Firebase user found: ${currentUser.uid}"
+                "Existing Firebase session detected"
             )
 
             showLoading(true)
@@ -166,13 +170,14 @@ class LoginActivity : AppCompatActivity() {
 
                 Log.e(
                     TAG,
-                    "Google sign-in request failed",
-                    e
+                    "Google sign-in request failed: ${e.javaClass.simpleName}"
                 )
 
                 Toast.makeText(
                     this@LoginActivity,
-                    getString(R.string.login_google_failed),
+                    getString(
+                        R.string.login_google_failed
+                    ),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -200,7 +205,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Log.d(
                     TAG,
-                    "Google ID token received"
+                    "Google credential received"
                 )
 
                 authenticateWithFirebase(
@@ -215,13 +220,14 @@ class LoginActivity : AppCompatActivity() {
 
                 Log.e(
                     TAG,
-                    "Google ID token could not be parsed",
-                    e
+                    "Google credential could not be processed: ${e.javaClass.simpleName}"
                 )
 
                 Toast.makeText(
                     this,
-                    getString(R.string.login_google_process),
+                    getString(
+                        R.string.login_google_process
+                    ),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -232,12 +238,14 @@ class LoginActivity : AppCompatActivity() {
 
             Log.e(
                 TAG,
-                "Returned credential was not a Google ID token"
+                "Unexpected Google credential type"
             )
 
             Toast.makeText(
                 this,
-                getString(R.string.login_google_invalid),
+                getString(
+                    R.string.login_google_invalid
+                ),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -264,24 +272,14 @@ class LoginActivity : AppCompatActivity() {
                     val firebaseUser =
                         firebaseAuth.currentUser
 
+                    /*
+                     * Keep authentication logging generic.
+                     * Never print UID, email, display name,
+                     * Google ID token or Firebase token.
+                     */
                     Log.d(
                         TAG,
                         "Firebase authentication successful"
-                    )
-
-                    Log.d(
-                        TAG,
-                        "Firebase UID: ${firebaseUser?.uid}"
-                    )
-
-                    Log.d(
-                        TAG,
-                        "Email: ${firebaseUser?.email}"
-                    )
-
-                    Log.d(
-                        TAG,
-                        "Display name: ${firebaseUser?.displayName}"
                     )
 
                     if (firebaseUser != null) {
@@ -294,9 +292,16 @@ class LoginActivity : AppCompatActivity() {
 
                         showLoading(false)
 
+                        Log.e(
+                            TAG,
+                            "Firebase authentication completed without a user"
+                        )
+
                         Toast.makeText(
                             this,
-                            getString(R.string.login_firebase_user),
+                            getString(
+                                R.string.login_firebase_user
+                            ),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -305,15 +310,22 @@ class LoginActivity : AppCompatActivity() {
 
                     showLoading(false)
 
+                    val errorName =
+                        task.exception
+                            ?.javaClass
+                            ?.simpleName
+                            ?: "Unknown"
+
                     Log.e(
                         TAG,
-                        "Firebase authentication failed",
-                        task.exception
+                        "Firebase authentication failed: $errorName"
                     )
 
                     Toast.makeText(
                         this,
-                        getString(R.string.login_auth_failed),
+                        getString(
+                            R.string.login_auth_failed
+                        ),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -326,9 +338,13 @@ class LoginActivity : AppCompatActivity() {
 
         activityScope.launch {
 
+            /*
+             * The Firebase UID is used for the API lookup,
+             * but is deliberately not written to Logcat.
+             */
             Log.d(
                 TAG,
-                "Checking GymLeague API for Firebase UID"
+                "Checking GymLeague account"
             )
 
             val lookupResult =
@@ -344,7 +360,7 @@ class LoginActivity : AppCompatActivity() {
 
                         Log.d(
                             TAG,
-                            "Existing GymLeague user found. UserId: ${existingUser.userId}"
+                            "Existing GymLeague account found"
                         )
 
                         saveUserAndContinue(
@@ -355,7 +371,7 @@ class LoginActivity : AppCompatActivity() {
 
                         Log.d(
                             TAG,
-                            "No GymLeague user found. Creating new user."
+                            "No GymLeague account found. Creating account."
                         )
 
                         createGymLeagueUser(
@@ -369,13 +385,14 @@ class LoginActivity : AppCompatActivity() {
 
                     Log.e(
                         TAG,
-                        "Failed to check GymLeague user",
-                        error
+                        "GymLeague account lookup failed: ${error.javaClass.simpleName}"
                     )
 
                     Toast.makeText(
                         this@LoginActivity,
-                        getString(R.string.login_connect_failed),
+                        getString(
+                            R.string.login_connect_failed
+                        ),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -387,7 +404,8 @@ class LoginActivity : AppCompatActivity() {
     ) {
 
         val email =
-            firebaseUser.email ?: ""
+            firebaseUser.email
+                ?: ""
 
         val username =
             firebaseUser.displayName
@@ -397,7 +415,9 @@ class LoginActivity : AppCompatActivity() {
                 ?: email
                     .substringBefore("@")
                     .ifBlank {
-                        getString(R.string.generic_user)
+                        getString(
+                            R.string.generic_user
+                        )
                     }
 
         val request =
@@ -428,9 +448,12 @@ class LoginActivity : AppCompatActivity() {
         createResult
             .onSuccess { newUser ->
 
+                /*
+                 * Do not log the user's internal database ID.
+                 */
                 Log.d(
                     TAG,
-                    "New GymLeague user created. UserId: ${newUser.userId}"
+                    "GymLeague account created successfully"
                 )
 
                 createDefaultSettingsForNewUser(
@@ -443,13 +466,14 @@ class LoginActivity : AppCompatActivity() {
 
                 Log.e(
                     TAG,
-                    "Failed to create GymLeague user",
-                    error
+                    "GymLeague account creation failed: ${error.javaClass.simpleName}"
                 )
 
                 Toast.makeText(
                     this,
-                    getString(R.string.login_create_failed),
+                    getString(
+                        R.string.login_create_failed
+                    ),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -461,7 +485,7 @@ class LoginActivity : AppCompatActivity() {
 
         Log.d(
             TAG,
-            "Creating default settings for UserId: ${newUser.userId}"
+            "Creating default account settings"
         )
 
         val defaultSettings =
@@ -474,9 +498,10 @@ class LoginActivity : AppCompatActivity() {
             )
 
         val settingsResult =
-            settingsRepository.createSettings(
-                defaultSettings
-            )
+            settingsRepository
+                .createSettings(
+                    defaultSettings
+                )
 
         settingsResult
             .onSuccess {
@@ -492,17 +517,15 @@ class LoginActivity : AppCompatActivity() {
             }
             .onFailure { error ->
 
-                Log.e(
+                /*
+                 * SettingsFragment can create missing settings later,
+                 * so failure here should not block login.
+                 */
+                Log.w(
                     TAG,
-                    "Default settings could not be created",
-                    error
+                    "Default settings creation failed: ${error.javaClass.simpleName}"
                 )
 
-                /*
-                 * We still allow the user into the app.
-                 * SettingsFragment can create missing
-                 * settings later if necessary.
-                 */
                 saveUserAndContinue(
                     newUser
                 )
@@ -513,30 +536,38 @@ class LoginActivity : AppCompatActivity() {
         user: User
     ) {
 
-        sessionManager.saveUserSession(
-            userId =
-                user.userId,
+        sessionManager
+            .saveUserSession(
+                userId =
+                    user.userId,
 
-            firebaseUid =
-                user.firebaseUid,
+                firebaseUid =
+                    user.firebaseUid,
 
-            username =
-                user.username,
+                username =
+                    user.username,
 
-            email =
-                user.email
-        )
+                email =
+                    user.email
+            )
 
+        /*
+         * Session success is useful for debugging,
+         * but the actual user ID is not logged.
+         */
         Log.d(
             TAG,
-            "GymLeague session saved. UserId: ${user.userId}"
+            "GymLeague session saved successfully"
         )
 
         showLoading(false)
 
         Toast.makeText(
             this,
-            getString(R.string.login_welcome, user.username),
+            getString(
+                R.string.login_welcome,
+                user.username
+            ),
             Toast.LENGTH_SHORT
         ).show()
 
