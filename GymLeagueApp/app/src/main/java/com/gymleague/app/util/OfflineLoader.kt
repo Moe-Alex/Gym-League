@@ -1,6 +1,7 @@
 package com.gymleague.app.util
 
 import android.util.Log
+import com.gymleague.app.R
 import com.gymleague.app.database.CacheMetaEntity
 import com.gymleague.app.database.GymLeagueDatabase
 import kotlinx.coroutines.CancellationException
@@ -69,7 +70,22 @@ object OfflineLoader {
 
         Log.d(TAG, "No network and nothing saved for $label yet")
         return Result.failure(
-            OfflineException("You're offline and $label haven't been saved on this phone yet. Connect once to load them.")
+            OfflineException(AppText.get(R.string.offline_not_saved, localisedLabel(label)))
         )
+    }
+
+    // The repositories name each list in English for the log. The message the user sees is translated.
+    private fun localisedLabel(label: String): String {
+        val id = when (label) {
+            "exercises" -> R.string.offline_label_exercises
+            "squads" -> R.string.offline_label_squads
+            "workouts" -> R.string.offline_label_workouts
+            "user stats" -> R.string.offline_label_user_stats
+            "challenges" -> R.string.offline_label_challenges
+            "personal records" -> R.string.offline_label_records
+            "muscle volume rows" -> R.string.offline_label_muscle_volume
+            else -> return label
+        }
+        return AppText.get(id)
     }
 }

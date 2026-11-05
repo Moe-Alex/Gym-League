@@ -62,10 +62,10 @@ class PersonalRecordAdapter(
             OneRepMaxUtils.formatOneRepMax(record.estimatedOneRepMax)
 
         holder.bestSet.text =
-            "Best set: ${OneRepMaxUtils.formatWeight(record.heaviestWeight)} x ${record.repsAtHeaviestWeight} reps"
+            holder.itemView.context.getString(R.string.record_best_set, OneRepMaxUtils.formatWeight(record.heaviestWeight), record.repsAtHeaviestWeight)
 
         holder.dateAchieved.text =
-            "Achieved: ${record.dateAchieved.take(10)}"
+            holder.itemView.context.getString(R.string.record_achieved, record.dateAchieved.take(10))
     }
 
     override fun getItemCount(): Int {

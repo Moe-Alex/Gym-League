@@ -40,7 +40,7 @@ class LogExerciseActivity : AppCompatActivity() {
         val exerciseId = intent.getIntExtra("exerciseId", 0)
 
         val exerciseName =
-            intent.getStringExtra("exerciseName") ?: "Exercise"
+            intent.getStringExtra("exerciseName") ?: getString(R.string.workout_default_exercise)
 
         val muscleGroup =
             intent.getStringExtra("muscleGroup") ?: ""
@@ -106,7 +106,7 @@ class LogExerciseActivity : AppCompatActivity() {
         tvDescription.text = description
 
         // Default workout values
-        etWorkoutName.setText("$exerciseName Workout")
+        etWorkoutName.setText(getString(R.string.workout_default_name, exerciseName))
         etSets.setText(defaultSets.toString())
         etReps.setText(defaultReps.toString())
 
@@ -121,7 +121,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
                 countDownTimer?.cancel()
                 timerRunning = false
-                btnStartTimer.text = "RESUME"
+                btnStartTimer.text = getString(R.string.timer_resume)
 
                 return@setOnClickListener
             }
@@ -161,7 +161,7 @@ class LogExerciseActivity : AppCompatActivity() {
             remainingTimeMillis = 0L
 
             tvTimer.text = "00:00"
-            btnStartTimer.text = "START"
+            btnStartTimer.text = getString(R.string.i18n_start)
 
             etTimerMinutes.text.clear()
 
@@ -178,7 +178,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
         btnClear.setOnClickListener {
 
-            etWorkoutName.setText("$exerciseName Workout")
+            etWorkoutName.setText(getString(R.string.workout_default_name, exerciseName))
             etDuration.text.clear()
             etSets.setText(defaultSets.toString())
             etReps.setText(defaultReps.toString())
@@ -318,7 +318,7 @@ class LogExerciseActivity : AppCompatActivity() {
             // Prevent duplicate submissions
             btnSave.isEnabled = false
             btnClear.isEnabled = false
-            btnSave.text = "SAVING..."
+            btnSave.text = getString(R.string.workout_saving)
 
             lifecycleScope.launch {
 
@@ -360,11 +360,11 @@ class LogExerciseActivity : AppCompatActivity() {
 
                     btnSave.isEnabled = true
                     btnClear.isEnabled = true
-                    btnSave.text = "COMPLETE WORKOUT ⚡"
+                    btnSave.text = getString(R.string.i18n_complete_workout)
 
                     Toast.makeText(
                         this@LogExerciseActivity,
-                        "Could not save workout: ${error.message}",
+                        getString(R.string.workout_save_failed, error.message ?: ""),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -417,7 +417,7 @@ class LogExerciseActivity : AppCompatActivity() {
                         )
 
                     btnStartTimer.text =
-                        "PAUSE"
+                        getString(R.string.timer_pause)
                 }
 
                 override fun onFinish() {
@@ -426,7 +426,7 @@ class LogExerciseActivity : AppCompatActivity() {
                     timerRunning = false
 
                     tvTimer.text = "00:00"
-                    btnStartTimer.text = "START"
+                    btnStartTimer.text = getString(R.string.i18n_start)
 
                     Toast.makeText(
                         this@LogExerciseActivity,

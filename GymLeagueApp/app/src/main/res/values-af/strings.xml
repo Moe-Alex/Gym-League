@@ -259,5 +259,48 @@
     <string name="squad_left">Jy het die span verlaat.</string>
     <string name="exercise_delete_title">Skrap oefening</string>
     <string name="exercise_name_error">Voer ’n oefeningnaam in</string>
+
+    <!-- Remaining text moved out of the Kotlin code -->
+    <string name="workout_default_name">%1$s-oefensessie</string>
+    <string name="workout_default_exercise">Oefening</string>
+    <string name="timer_resume">HERVAT</string>
+    <string name="timer_pause">PAUSEER</string>
+    <string name="workout_saving">STOOR TANS...</string>
+    <string name="workout_save_failed">Kon nie oefensessie stoor nie: %1$s</string>
+    <string name="action_cancel">Kanselleer</string>
+    <string name="action_delete">Skrap</string>
+    <string name="exercise_delete_message">Is jy seker jy wil \"%1$s\" skrap? Dit kan nie ongedaan gemaak word nie.</string>
+    <string name="exercise_deleted">%1$s geskrap</string>
+    <string name="home_unknown_member">Onbekend</string>
+    <string name="login_welcome">Welkom %1$s</string>
+    <string name="squad_unknown_user">Onbekende gebruiker</string>
+    <string name="squad_join_failed">Span geskep, maar kon nie daarby aansluit nie: %1$s</string>
+    <string name="squad_create_failed">Kon nie span skep nie: %1$s</string>
+    <string name="squad_user_not_found">Geen gebruiker met gebruikersnaam \"%1$s\" gevind nie</string>
+    <string name="squad_member_added">%1$s by die span gevoeg!</string>
+    <string name="squad_add_failed">Kon nie lid byvoeg nie: %1$s</string>
+    <string name="squad_search_failed">Soektog het misluk: %1$s</string>
+    <string name="squad_leave_message">Is jy seker jy wil \"%1$s\" verlaat?</string>
+    <string name="squad_leave_confirm">Verlaat</string>
+    <string name="squad_leave_failed">Kon nie span verlaat nie: %1$s</string>
+    <string name="squad_no_members">Nog geen spanlede nie.\nNooi iemand om saam te begin oefen.</string>
+    <string name="record_best_set">Beste stel: %1$s x %2$d herhalings</string>
+    <string name="record_achieved">Behaal: %1$s</string>
+    <string name="error_load_exercises">Kan nie oefeninge laai nie</string>
+    <string name="error_create_exercise">Kan nie oefening skep nie</string>
+    <string name="error_load_records">Kan nie persoonlike rekords laai nie</string>
+    <string name="offline_action_message">Jy is vanlyn. Koppel aan die internet en probeer weer.</string>
+    <string name="offline_not_saved">Jy is vanlyn en %1$s is nog nie op hierdie foon gestoor nie. Koppel een keer om dit te laai.</string>
+    <string name="offline_label_exercises">oefeninge</string>
+    <string name="offline_label_squads">spanne</string>
+    <string name="offline_label_workouts">oefensessies</string>
+    <string name="offline_label_user_stats">jou statistiek</string>
+    <string name="offline_label_challenges">uitdagings</string>
+    <string name="offline_label_records">persoonlike rekords</string>
+    <string name="offline_label_muscle_volume">spiervolume-data</string>
+    <string name="exercise_added">%1$s bygevoeg!</string>
+    <string name="squad_user_selected">%1$s gekies</string>
+    <string name="squad_load_users_failed">Kon nie gebruikers laai nie: %1$s</string>
+    <string name="error_delete_exercise">Kan nie oefening skrap nie</string>
 </resources>
 

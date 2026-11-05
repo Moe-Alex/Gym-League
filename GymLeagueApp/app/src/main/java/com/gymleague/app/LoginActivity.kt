@@ -397,7 +397,7 @@ class LoginActivity : AppCompatActivity() {
                 ?: email
                     .substringBefore("@")
                     .ifBlank {
-                        "GymLeague User"
+                        getString(R.string.generic_user)
                     }
 
         val request =
@@ -536,7 +536,7 @@ class LoginActivity : AppCompatActivity() {
 
         Toast.makeText(
             this,
-            "Welcome ${user.username}",
+            getString(R.string.login_welcome, user.username),
             Toast.LENGTH_SHORT
         ).show()
 

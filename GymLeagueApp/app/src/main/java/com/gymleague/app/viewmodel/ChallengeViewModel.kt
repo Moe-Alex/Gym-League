@@ -1,5 +1,9 @@
 package com.gymleague.app.viewmodel
 
+import com.gymleague.app.util.AppText
+
+import com.gymleague.app.R
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -56,7 +60,7 @@ class ChallengeViewModel : ViewModel() {
                     Log.d(TAG, "Loaded ${list.size} challenges")
                 }
                 .onFailure { error ->
-                    _errorMessage.value = error.message ?: "Unable to load challenges"
+                    _errorMessage.value = error.message ?: AppText.get(R.string.i18n_unable_to_load_challenges)
                     Log.e(TAG, "Failed to load challenges", error)
                 }
 

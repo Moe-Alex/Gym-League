@@ -260,4 +260,47 @@
     <string name="squad_left">You left the squad.</string>
     <string name="exercise_delete_title">Delete Exercise</string>
     <string name="exercise_name_error">Enter an exercise name</string>
+
+    <!-- Remaining text moved out of the Kotlin code -->
+    <string name="workout_default_name">%1$s Workout</string>
+    <string name="workout_default_exercise">Exercise</string>
+    <string name="timer_resume">RESUME</string>
+    <string name="timer_pause">PAUSE</string>
+    <string name="workout_saving">SAVING...</string>
+    <string name="workout_save_failed">Could not save workout: %1$s</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="exercise_delete_message">Are you sure you want to delete \"%1$s\"? This cannot be undone.</string>
+    <string name="exercise_deleted">%1$s deleted</string>
+    <string name="home_unknown_member">Unknown</string>
+    <string name="login_welcome">Welcome %1$s</string>
+    <string name="squad_unknown_user">Unknown user</string>
+    <string name="squad_join_failed">Squad created, but couldn\'t join it: %1$s</string>
+    <string name="squad_create_failed">Could not create squad: %1$s</string>
+    <string name="squad_user_not_found">No user found with username \"%1$s\"</string>
+    <string name="squad_member_added">%1$s added to squad!</string>
+    <string name="squad_add_failed">Could not add member: %1$s</string>
+    <string name="squad_search_failed">Search failed: %1$s</string>
+    <string name="squad_leave_message">Are you sure you want to leave \"%1$s\"?</string>
+    <string name="squad_leave_confirm">Leave</string>
+    <string name="squad_leave_failed">Could not leave squad: %1$s</string>
+    <string name="squad_no_members">No squad members yet.\nInvite someone to start training together.</string>
+    <string name="record_best_set">Best set: %1$s x %2$d reps</string>
+    <string name="record_achieved">Achieved: %1$s</string>
+    <string name="error_load_exercises">Unable to load exercises</string>
+    <string name="error_create_exercise">Unable to create exercise</string>
+    <string name="error_load_records">Unable to load personal records</string>
+    <string name="offline_action_message">You\'re offline. Connect to the internet and try again.</string>
+    <string name="offline_not_saved">You\'re offline and %1$s haven\'t been saved on this phone yet. Connect once to load them.</string>
+    <string name="offline_label_exercises">exercises</string>
+    <string name="offline_label_squads">squads</string>
+    <string name="offline_label_workouts">workouts</string>
+    <string name="offline_label_user_stats">your stats</string>
+    <string name="offline_label_challenges">challenges</string>
+    <string name="offline_label_records">personal records</string>
+    <string name="offline_label_muscle_volume">muscle volume data</string>
+    <string name="exercise_added">%1$s added!</string>
+    <string name="squad_user_selected">%1$s selected</string>
+    <string name="squad_load_users_failed">Could not load users: %1$s</string>
+    <string name="error_delete_exercise">Unable to delete exercise</string>
 </resources>

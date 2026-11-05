@@ -144,7 +144,7 @@ class SquadActivity : AppCompatActivity() {
         tvSquadName.text = mySquad.squadName
         tvSquadName.visibility = View.VISIBLE
 
-        tvSharedStreak.text = "\uD83D\uDD25 Shared Streak: ${mySquad.sharedStreak} days"
+        tvSharedStreak.text = getString(R.string.home_shared_streak, mySquad.sharedStreak)
         tvSharedStreak.visibility = View.VISIBLE
 
         membersContainer.removeAllViews()
@@ -169,7 +169,7 @@ class SquadActivity : AppCompatActivity() {
             // Username
             val usernameText = TextView(this).apply {
 
-                text = "⚡ ${member.user?.username ?: "Unknown user"}"
+                text = "⚡ ${member.user?.username ?: getString(R.string.squad_unknown_user)}"
 
                 textSize = 16f
 
@@ -291,13 +291,13 @@ class SquadActivity : AppCompatActivity() {
 
                 joinResult.onFailure { error ->
                     Log.e(TAG, "Failed to join own squad: ${error.message}")
-                    Toast.makeText(this@SquadActivity, "Squad created, but couldn't join it: ${error.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SquadActivity, getString(R.string.squad_join_failed, error.message ?: ""), Toast.LENGTH_LONG).show()
                 }
             }
 
             createResult.onFailure { error ->
                 Log.e(TAG, "Failed to create squad: ${error.message}")
-                Toast.makeText(this@SquadActivity, "Could not create squad: ${error.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SquadActivity, getString(R.string.squad_create_failed, error.message ?: ""), Toast.LENGTH_LONG).show()
             }
 
             showLoading(false)
@@ -318,7 +318,7 @@ class SquadActivity : AppCompatActivity() {
 
             searchResult.onSuccess { foundUser ->
                 if (foundUser == null) {
-                    Toast.makeText(this@SquadActivity, "No user found with username \"$username\"", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SquadActivity, getString(R.string.squad_user_not_found, username), Toast.LENGTH_LONG).show()
                     showLoading(false)
                     return@onSuccess
                 }
@@ -327,14 +327,14 @@ class SquadActivity : AppCompatActivity() {
 
                 addResult.onSuccess {
                     Log.d(TAG, "Added ${foundUser.username} to squad ${squad.squadId}")
-                    Toast.makeText(this@SquadActivity, "${foundUser.username} added to squad!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SquadActivity, getString(R.string.squad_member_added, foundUser.username), Toast.LENGTH_SHORT).show()
                     etInviteUsername.text.clear()
                     loadSquads()
                 }
 
                 addResult.onFailure { error ->
                     Log.e(TAG, "Failed to add member: ${error.message}")
-                    Toast.makeText(this@SquadActivity, "Could not add member: ${error.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SquadActivity, getString(R.string.squad_add_failed, error.message ?: ""), Toast.LENGTH_LONG).show()
                 }
 
                 showLoading(false)
@@ -342,7 +342,7 @@ class SquadActivity : AppCompatActivity() {
 
             searchResult.onFailure { error ->
                 Log.e(TAG, "Username search failed: ${error.message}")
-                Toast.makeText(this@SquadActivity, "Search failed: ${error.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SquadActivity, getString(R.string.squad_search_failed, error.message ?: ""), Toast.LENGTH_LONG).show()
                 showLoading(false)
             }
         }
@@ -354,7 +354,7 @@ class SquadActivity : AppCompatActivity() {
         if (squad == null) {
             Toast.makeText(
                 this,
-                "You need a squad first",
+                getString(R.string.squad_required),
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -459,7 +459,7 @@ class SquadActivity : AppCompatActivity() {
 
                                     Toast.makeText(
                                         this@SquadActivity,
-                                        "${user.username} selected",
+                                        getString(R.string.squad_user_selected, user.username),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -500,7 +500,7 @@ class SquadActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this@SquadActivity,
-                    "Could not load users: ${error.message}",
+                    getString(R.string.squad_load_users_failed, error.message ?: ""),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -514,9 +514,9 @@ class SquadActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.squad_leave_title))
-            .setMessage("Are you sure you want to leave \"${squad.squadName}\"?")
-            .setPositiveButton("Leave") { _, _ -> leaveSquad(squad.squadId) }
-            .setNegativeButton("Cancel", null)
+            .setMessage(getString(R.string.squad_leave_message, squad.squadName))
+            .setPositiveButton(getString(R.string.squad_leave_confirm)) { _, _ -> leaveSquad(squad.squadId) }
+            .setNegativeButton(getString(R.string.action_cancel), null)
             .show()
     }
 
@@ -536,7 +536,7 @@ class SquadActivity : AppCompatActivity() {
 
             result.onFailure { error ->
                 Log.e(TAG, "Failed to leave squad: ${error.message}")
-                Toast.makeText(this@SquadActivity, "Could not leave squad: ${error.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SquadActivity, getString(R.string.squad_leave_failed, error.message ?: ""), Toast.LENGTH_LONG).show()
             }
 
             showLoading(false)

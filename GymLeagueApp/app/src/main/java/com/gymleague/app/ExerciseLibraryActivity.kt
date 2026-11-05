@@ -78,19 +78,19 @@ class ExerciseLibraryActivity : AppCompatActivity() {
 
                 AlertDialog.Builder(this)
                     .setTitle(getString(R.string.exercise_delete_title))
-                    .setMessage("Are you sure you want to delete \"${exercise.exerciseName}\"? This cannot be undone.")
-                    .setPositiveButton("Delete") { _, _ ->
+                    .setMessage(getString(R.string.exercise_delete_message, exercise.exerciseName))
+                    .setPositiveButton(getString(R.string.action_delete)) { _, _ ->
 
                         viewModel.deleteExercise(exercise.exerciseId, currentUserId) {
 
                             Toast.makeText(
                                 this,
-                                "${exercise.exerciseName} deleted",
+                                getString(R.string.exercise_deleted, exercise.exerciseName),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton(getString(R.string.action_cancel), null)
                     .show()
             }
         )
@@ -309,7 +309,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
             )
 
             saveButton.isEnabled = false
-            saveButton.text = "SAVING..."
+            saveButton.text = getString(R.string.workout_saving)
 
             viewModel.createExercise(newExercise) { createdExercise ->
 
@@ -317,7 +317,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this,
-                        "${createdExercise.exerciseName} added!",
+                        getString(R.string.exercise_added, createdExercise.exerciseName),
                         Toast.LENGTH_SHORT
                     ).show()
 

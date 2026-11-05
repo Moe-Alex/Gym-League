@@ -1,9 +1,9 @@
 package com.gymleague.app.util
 
+import com.gymleague.app.R
 import retrofit2.Response
 import java.io.IOException
 
-const val OFFLINE_MESSAGE = "You're offline. Connect to the internet and try again."
 
 /**
  * Turns a Retrofit response into a Result without ever using !!.
@@ -25,7 +25,7 @@ fun <T> Response<T>.toApiResult(fallback: String): Result<T> {
  */
 fun <T> Exception.toFailure(): Result<T> {
     return if (this is IOException) {
-        Result.failure(OfflineException(OFFLINE_MESSAGE))
+        Result.failure(OfflineException(AppText.get(R.string.offline_action_message)))
     } else {
         Result.failure(this)
     }

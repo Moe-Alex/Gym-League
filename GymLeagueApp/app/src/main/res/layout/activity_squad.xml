@@ -139,7 +139,7 @@
                 android:background="@drawable/bg_exercise_card"
                 android:gravity="center"
                 android:padding="22dp"
-                android:text="No squad members yet.\nInvite someone to start training together."
+                android:text="@string/squad_no_members"
                 android:textColor="#918A9D"
                 android:textSize="14sp"
                 android:visibility="gone" />

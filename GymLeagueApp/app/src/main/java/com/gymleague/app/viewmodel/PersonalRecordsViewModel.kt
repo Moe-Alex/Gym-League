@@ -1,5 +1,9 @@
 package com.gymleague.app.viewmodel
 
+import com.gymleague.app.util.AppText
+
+import com.gymleague.app.R
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,7 +51,7 @@ class PersonalRecordsViewModel : ViewModel() {
                 .onFailure { error ->
 
                     _errorMessage.value =
-                        error.message ?: "Unable to load personal records"
+                        error.message ?: AppText.get(R.string.error_load_records)
 
                     Log.e(TAG, "Failed to load personal records", error)
                 }

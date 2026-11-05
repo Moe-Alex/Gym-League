@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         tvWorkoutCount = view.findViewById(R.id.tvWorkoutCount)
         squadSection = view.findViewById(R.id.squadSection)
 
-        tvWelcome.text = sessionManager.getUsername() ?: "Athlete"
+        tvWelcome.text = sessionManager.getUsername() ?: getString(R.string.home_athlete)
 
         view.findViewById<TextView>(R.id.tvSquadView).setOnClickListener {
             startActivity(Intent(requireContext(), SquadActivity::class.java))
@@ -181,7 +181,7 @@ class HomeFragment : Fragment() {
 
         for (member in members.take(3)) {
             val memberRow = TextView(requireContext()).apply {
-                text = "${member.user?.username ?: "Unknown"} — 🔥${member.currentStreak}"
+                text = "${member.user?.username ?: getString(R.string.home_unknown_member)} — 🔥${member.currentStreak}"
                 textSize = 13f
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_secondary_dark))
                 setPadding(0, 4, 0, 0)

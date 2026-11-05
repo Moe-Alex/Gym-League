@@ -52,7 +52,7 @@ class ExerciseAdapter(
         holder.exerciseName.text = exercise.exerciseName
         holder.muscleGroup.text = exercise.muscleGroup
         holder.description.text =
-            exercise.description ?: "No description available"
+            exercise.description ?: holder.itemView.context.getString(R.string.workout_no_description)
 
         holder.itemView.setOnClickListener {
             onExerciseClick(exercise)

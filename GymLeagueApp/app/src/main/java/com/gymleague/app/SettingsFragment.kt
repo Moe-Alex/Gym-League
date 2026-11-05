@@ -188,11 +188,11 @@ class SettingsFragment : Fragment(
 
         val username =
             sessionManager.getUsername()
-                ?: "GymLeague User"
+                ?: getString(R.string.generic_user)
 
         val email =
             sessionManager.getEmail()
-                ?: "No email available"
+                ?: getString(R.string.no_email)
 
         tvUsername.text =
             username
@@ -214,13 +214,13 @@ class SettingsFragment : Fragment(
             val result = userRepository.getUser(userId)
 
             result.onSuccess { user ->
-                tvProfileLevel.text = "⚡ LVL ${user.level}"
+                tvProfileLevel.text = getString(R.string.level_dynamic, user.level)
                 tvProfileXp.text = user.xp.toString()
             }
 
             result.onFailure { error ->
                 Log.e(TAG, "Failed to load profile stats: ${error.message}")
-                tvProfileLevel.text = "⚡ LVL —"
+                tvProfileLevel.text = getString(R.string.level_unknown)
                 tvProfileXp.text = "—"
             }
         }
@@ -369,7 +369,7 @@ class SettingsFragment : Fragment(
                     )
 
                     showStatus(
-                        "Unable to load settings."
+                        getString(R.string.settings_load_error)
                     )
                 }
         }
@@ -428,7 +428,7 @@ class SettingsFragment : Fragment(
                 )
 
                 showStatus(
-                    "Unable to create default settings."
+                    getString(R.string.settings_create_error)
                 )
             }
     }
@@ -494,7 +494,7 @@ class SettingsFragment : Fragment(
         if (userId == -1) {
 
             showStatus(
-                "User session not found."
+                getString(R.string.session_missing)
             )
 
             return
@@ -530,7 +530,7 @@ class SettingsFragment : Fragment(
         if (existingSettings == null) {
 
             showStatus(
-                "Settings are still loading."
+                getString(R.string.settings_loading)
             )
 
             return
@@ -566,7 +566,7 @@ class SettingsFragment : Fragment(
                     showLoading(false)
 
                     showStatus(
-                        "Settings saved successfully."
+                        getString(R.string.settings_saved)
                     )
 
                     Log.d(
@@ -594,7 +594,7 @@ class SettingsFragment : Fragment(
                     )
 
                     showStatus(
-                        "Unable to save settings."
+                        getString(R.string.settings_save_error)
                     )
                 }
         }

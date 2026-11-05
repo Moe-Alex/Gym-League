@@ -1,5 +1,9 @@
 package com.gymleague.app.viewmodel
 
+import com.gymleague.app.util.AppText
+
+import com.gymleague.app.R
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -52,7 +56,7 @@ class ExerciseLibraryViewModel : ViewModel() {
                 .onFailure { error ->
 
                     _errorMessage.value =
-                        error.message ?: "Unable to load exercises"
+                        error.message ?: AppText.get(R.string.error_load_exercises)
 
                     Log.e(
                         "ExerciseLibrary",
@@ -90,7 +94,7 @@ class ExerciseLibraryViewModel : ViewModel() {
                 .onFailure { error ->
 
                     _errorMessage.value =
-                        error.message ?: "Unable to load exercises"
+                        error.message ?: AppText.get(R.string.error_load_exercises)
 
                     Log.e(
                         "ExerciseLibrary",
@@ -134,7 +138,7 @@ class ExerciseLibraryViewModel : ViewModel() {
                 .onFailure { error ->
 
                     _errorMessage.value =
-                        error.message ?: "Unable to create exercise"
+                        error.message ?: AppText.get(R.string.error_create_exercise)
 
                     Log.e(
                         "ExerciseLibrary",
@@ -167,7 +171,7 @@ class ExerciseLibraryViewModel : ViewModel() {
                     onSuccess()
                 }
                 .onFailure { error ->
-                    _errorMessage.value = error.message ?: "Unable to delete exercise"
+                    _errorMessage.value = error.message ?: AppText.get(R.string.error_delete_exercise)
                     Log.e("ExerciseLibrary", "Failed to delete exercise", error)
                 }
 

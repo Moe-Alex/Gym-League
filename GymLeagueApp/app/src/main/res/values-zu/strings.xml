@@ -257,4 +257,47 @@
     <string name="squad_left">Usulishiyile iqembu.</string>
     <string name="exercise_delete_title">Susa ukuzivocavoca</string>
     <string name="exercise_name_error">Faka igama lokuzivocavoca</string>
+
+    <!-- Remaining text moved out of the Kotlin code -->
+    <string name="workout_default_name">Ukujima: %1$s</string>
+    <string name="workout_default_exercise">Ukuzivocavoca</string>
+    <string name="timer_resume">QHUBEKA</string>
+    <string name="timer_pause">MISA</string>
+    <string name="workout_saving">KULONDOLOZWA...</string>
+    <string name="workout_save_failed">Ayikwazanga ukulondoloza ukujima: %1$s</string>
+    <string name="action_cancel">Khansela</string>
+    <string name="action_delete">Susa</string>
+    <string name="exercise_delete_message">Uqinisekile yini ukuthi ufuna ukususa \"%1$s\"? Lokhu akunakubuyiselwa emuva.</string>
+    <string name="exercise_deleted">%1$s isusiwe</string>
+    <string name="home_unknown_member">Akwaziwa</string>
+    <string name="login_welcome">Siyakwamukela %1$s</string>
+    <string name="squad_unknown_user">Umsebenzisi ongaziwa</string>
+    <string name="squad_join_failed">Iqembu lidaliwe, kodwa ayikwazanga ukujoyina: %1$s</string>
+    <string name="squad_create_failed">Ayikwazanga ukudala iqembu: %1$s</string>
+    <string name="squad_user_not_found">Akutholakalanga msebenzisi onegama lomsebenzisi elithi \"%1$s\"</string>
+    <string name="squad_member_added">%1$s wengeziwe eqenjini!</string>
+    <string name="squad_add_failed">Ayikwazanga ukwengeza ilungu: %1$s</string>
+    <string name="squad_search_failed">Ukusesha kwehlulekile: %1$s</string>
+    <string name="squad_leave_message">Uqinisekile yini ukuthi ufuna ukushiya \"%1$s\"?</string>
+    <string name="squad_leave_confirm">Shiya</string>
+    <string name="squad_leave_failed">Ayikwazanga ukushiya iqembu: %1$s</string>
+    <string name="squad_no_members">Awekho amalungu eqembu okwamanje.\nMema othile ukuze nijime ndawonye.</string>
+    <string name="record_best_set">Isethi engcono: %1$s x %2$d ukuphinda</string>
+    <string name="record_achieved">Kuzuzwe: %1$s</string>
+    <string name="error_load_exercises">Ayikwazi ukulayisha ukuzivocavoca</string>
+    <string name="error_create_exercise">Ayikwazi ukudala ukuzivocavoca</string>
+    <string name="error_load_records">Ayikwazi ukulayisha amarekhodi akho siqu</string>
+    <string name="offline_action_message">Awuxhunyiwe ku-inthanethi. Xhuma ku-inthanethi uphinde uzame futhi.</string>
+    <string name="offline_not_saved">Awuxhunyiwe ku-inthanethi futhi %1$s akukagcinwa kule foni. Xhuma kanye ukuze ukulayishe.</string>
+    <string name="offline_label_exercises">ukuzivocavoca</string>
+    <string name="offline_label_squads">amaqembu</string>
+    <string name="offline_label_workouts">ukujima</string>
+    <string name="offline_label_user_stats">izibalo zakho</string>
+    <string name="offline_label_challenges">izinselelo</string>
+    <string name="offline_label_records">amarekhodi akho siqu</string>
+    <string name="offline_label_muscle_volume">idatha yomthamo wemisipha</string>
+    <string name="exercise_added">%1$s yengeziwe!</string>
+    <string name="squad_user_selected">%1$s ukhethiwe</string>
+    <string name="squad_load_users_failed">Ayikwazanga ukulayisha abasebenzisi: %1$s</string>
+    <string name="error_delete_exercise">Ayikwazi ukususa ukuzivocavoca</string>
 </resources>
