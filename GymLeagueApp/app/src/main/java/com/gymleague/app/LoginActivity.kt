@@ -172,7 +172,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this@LoginActivity,
-                    "Google sign-in failed. Please try again.",
+                    getString(R.string.login_google_failed),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -221,7 +221,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    "Unable to process Google sign-in.",
+                    getString(R.string.login_google_process),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -237,7 +237,7 @@ class LoginActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Invalid Google sign-in credential.",
+                getString(R.string.login_google_invalid),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -296,7 +296,7 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(
                             this,
-                            "Unable to access Firebase user.",
+                            getString(R.string.login_firebase_user),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -313,7 +313,7 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this,
-                        "Firebase authentication failed.",
+                        getString(R.string.login_auth_failed),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -375,7 +375,7 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this@LoginActivity,
-                        "Unable to connect to GymLeague.",
+                        getString(R.string.login_connect_failed),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -449,7 +449,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    "Unable to create GymLeague account.",
+                    getString(R.string.login_create_failed),
                     Toast.LENGTH_LONG
                 ).show()
             }

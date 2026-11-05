@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">GymLeague</string>
+
+    <!-- Battle Arena: badges -->
+    <string name="battle_badge_open">OOP</string>
+    <string name="battle_badge_invited">UITNODIGING</string>
+    <string name="battle_badge_pending">HANGENDE</string>
+    <string name="battle_badge_live">AKTIEF</string>
+    <string name="battle_badge_won">GEWEN</string>
+    <string name="battle_badge_lost">VERLOOR</string>
+    <string name="battle_badge_ended">BEËINDIG</string>
+    <string name="battle_badge_declined">AFGEWYS</string>
+
+    <!-- Battle Arena: challenge cards -->
+    <string name="battle_btn_log_progress">TEKEN VORDERING AAN (+1)</string>
+    <string name="battle_btn_accept">AANVAAR UITDAGING</string>
+    <string name="battle_btn_decline">WYS AF</string>
+    <string name="battle_label_you">Jy</string>
+    <string name="battle_label_opponent">Teenstander</string>
+    <string name="battle_versus">%1$s teen %2$s</string>
+    <string name="battle_open_to_all">Oop vir almal · deur %1$s</string>
+    <string name="battle_meta">+%1$d XP · Eindig %2$s</string>
+    <string name="battle_progress_count">%1$d/%2$d</string>
+    <string name="battle_waiting_opponent">Wag vir iemand om jou uitdaging te aanvaar</string>
+    <string name="battle_waiting_named">Wag vir %1$s om te aanvaar</string>
+    <string name="battle_result_won">🏆 Jy het gewen! +%1$d XP</string>
+    <string name="battle_result_lost">%1$s het hierdie stryd gewen</string>
+    <string name="battle_result_ended">Hierdie uitdaging het sonder ’n wenner geëindig</string>
+    <string name="battle_result_declined">Hierdie uitdaging is afgewys</string>
+    <string name="battle_type_most_workouts">Meeste oefensessies</string>
+    <string name="battle_type_longest_streak">Langste reeks</string>
+    <string name="battle_type_most_xp">Meeste XP</string>
+    <string name="battle_type_most_reps">Meeste herhalings</string>
+
+    <!-- Battle Arena: messages -->
+    <string name="battle_toast_launched">Uitdaging begin!</string>
+    <string name="battle_toast_sent">Uitdaging aan %1$s gestuur!</string>
+    <string name="battle_toast_accepted">Uitdaging aanvaar. Die stryd begin!</string>
+    <string name="battle_toast_declined">Uitdaging afgewys.</string>
+    <string name="battle_toast_won">Jy het gewen! +%1$d XP</string>
+    <string name="battle_toast_load_failed">Kan nie uitdagings laai nie</string>
+    <string name="battle_toast_action_failed">Dit het nie gewerk nie. Probeer asseblief weer.</string>
+
+    <!-- Battle Arena: new challenge form -->
+    <string name="battle_dialog_vs">Jy daag %1$s uit</string>
+    <string name="battle_launch">BEGIN UITDAGING</string>
+    <string name="battle_launching">BEGIN...</string>
+    <string name="battle_error_title">Voer ’n titel in</string>
+    <string name="battle_error_target">Voer ’n geldige teiken in</string>
+    <string name="battle_error_xp">Voer ’n XP-beloning van 1 tot 500 in</string>
+    <string name="battle_end_date_hint">Tik om ’n datum te kies</string>
+    <string name="battle_error_date_empty">Kies ’n einddatum</string>
+    <string name="battle_error_date_format">Kies ’n geldige einddatum</string>
+    <string name="battle_error_date_past">Die einddatum moet vandag of later wees</string>
+    <string name="battle_error_session">Gebruikersessie nie gevind nie</string>
+
+    <!-- Muscle Group Volume -->
+    <string name="muscle_volume_title">Spiervolume</string>
+    <string name="muscle_volume_tagline">Waarheen jou oefenvolume gaan.</string>
+    <string name="muscle_volume_total_label">Totale volume</string>
+    <string name="muscle_volume_top_label">Topspiergroep</string>
+    <string name="muscle_volume_row_detail">%1$s · %2$d%%</string>
+    <string name="muscle_volume_empty">Nog geen volume nie. Teken ’n oefensessie onder Oefen aan om jou spiergroepverdeling hier te sien.</string>
+    <string name="muscle_volume_error">Kan nie jou spiervolume laai nie</string>
+    <string name="muscle_volume_retry">PROBEER WEER</string>
+    <string name="muscle_volume_back">TERUG</string>
+    <string name="nav_volume">Volume</string>
+    <string name="home_settings_description">Instellings</string>
+
+    <!-- Push notifications -->
+    <string name="notification_channel_name">Uitdagingsarena</string>
+    <string name="notification_channel_description">Uitdagings, aanvaarde wedstryde en uitslae</string>
+
+    <!-- Offline mode -->
+    <string name="offline_banner_offline">Jy is vanlyn. Gestoorde data word gewys.</string>
+    <plurals name="offline_banner_pending">
+        <item quantity="one">Jy is vanlyn. %d oefensessie wag om gesinkroniseer te word.</item>
+        <item quantity="other">Jy is vanlyn. %d oefensessies wag om gesinkroniseer te word.</item>
+    </plurals>
+    <plurals name="offline_banner_syncing">
+        <item quantity="one">%d oefensessie word gesinkroniseer…</item>
+        <item quantity="other">%d oefensessies word gesinkroniseer…</item>
+    </plurals>
+    <string name="workout_saved_offline">Oefensessie op jou foon gestoor. Dit sal sinkroniseer wanneer jy weer aanlyn is.</string>
+
+
+    <!-- Settings: Afrikaans -->
+    <string name="settings_title">INSTELLINGS</string>
+    <string name="settings_total_xp">⚡ Totale XP</string>
+    <string name="settings_workouts_logged">🏋 Oefensessies aangeteken</string>
+    <string name="settings_notifications">🔔 Kennisgewings</string>
+    <string name="settings_enable_notifications">Aktiveer kennisgewings</string>
+    <string name="settings_appearance">🌓 Voorkoms</string>
+    <string name="settings_device_mode">Gebruik toestelinstelling</string>
+    <string name="settings_light_mode">Ligte modus</string>
+    <string name="settings_dark_mode">Donker modus</string>
+    <string name="settings_language">🌐 Taal</string>
+    <string name="settings_save">Stoor instellings</string>
+    <string name="settings_logout">⏻ Meld af</string>
+
+
+    <!-- Home Screen -->
+    <string name="home_welcome_back">Welkom terug,</string>
+    <string name="home_athlete">Atleet</string>
+    <string name="home_your_squad">JOU SPAN</string>
+    <string name="home_view">Bekyk ›</string>
+
+
+    <!-- Whole-app localization additions -->
+    <string name="i18n_train_compete_level_up">OEFEN. KOMPETEER. VLAK OP.</string>
+    <string name="i18n_welcome_back">Welkom terug</string>
+    <string name="i18n_continue_with_google">Gaan voort met Google</string>
+    <string name="i18n_username">Gebruikersnaam</string>
+    <string name="i18n_email">E-pos</string>
+    <string name="i18n_lvl">⚡ VLAK —</string>
+    <string name="i18n_home">Tuis</string>
+    <string name="i18n_train">Oefen</string>
+    <string name="i18n_squad">Span</string>
+    <string name="i18n_battle">Stryd</string>
+    <string name="i18n_ranks">Ranglys</string>
+    <string name="i18n_battle_arena">Uitdagingsarena</string>
+    <string name="i18n_create_and_conquer_challenges">Skep en oorwin uitdagings</string>
+    <string name="i18n_new_challenge">+  NUWE UITDAGING</string>
+    <string name="i18n_unable_to_load_challenges">Kan nie uitdagings laai nie</string>
+    <string name="i18n_no_challenges_yet_start_one">Nog geen uitdagings nie. Begin een!</string>
+    <string name="i18n_create_and_conquer_a_challenge">Skep en oorwin ’n uitdaging.</string>
+    <string name="i18n_challenging_caleb">Daag Caleb uit</string>
+    <string name="i18n_title">TITEL</string>
+    <string name="i18n_e_g_7_day_showdown">bv. Sewe-dae-uitdaging</string>
+    <string name="i18n_description">BESKRYWING</string>
+    <string name="i18n_most_workouts_wins">Meeste oefensessies wen</string>
+    <string name="i18n_type">TIPE</string>
+    <string name="i18n_target">TEIKEN</string>
+    <string name="i18n_e_g_5">bv. 5</string>
+    <string name="i18n_xp_reward">XP-BELONING</string>
+    <string name="i18n_e_g_150">bv. 150</string>
+    <string name="i18n_end_date_yyyy_mm_dd">EINDDATUM (JJJJ-MM-DD)</string>
+    <string name="i18n_launch_challenge">BEGIN UITDAGING</string>
+    <string name="i18n_cancel">KANSELLEER</string>
+    <string name="i18n_7_day_showdown">Sewe-dae-uitdaging</string>
+    <string name="i18n_live">AKTIEF</string>
+    <string name="i18n_you_vs_caleb">Jy teen Caleb</string>
+    <string name="i18n_most_workouts_in_a_week_wins">Meeste oefensessies in ’n week wen</string>
+    <string name="i18n_you">Jy</string>
+    <string name="i18n_waiting_for_caleb_to_accept">Wag vir Caleb om te aanvaar</string>
+    <string name="i18n_log_progress_1">TEKEN VORDERING AAN (+1)</string>
+    <string name="i18n_decline">WYS AF</string>
+    <string name="i18n_bench_press">Bankdruk</string>
+    <string name="i18n_est_1rm_96_3_kg">Geskatte 1RM: 96.3 kg</string>
+    <string name="i18n_best_set_82_5_kg_x_5_reps">Beste stel: 82.5 kg x 5 herhalings</string>
+    <string name="i18n_achieved_2026_09_20">Behaal: 2026-09-20</string>
+    <string name="i18n_add_your_own_exercise">⚡ VOEG JOU EIE OEFENING BY</string>
+    <string name="i18n_create_a_custom_exercise_for_the_training_are">Skep jou eie oefening vir die oefenarena.</string>
+    <string name="i18n_exercise_name">OEFENINGNAAM</string>
+    <string name="i18n_e_g_dumbbell_fly">bv. Haltervlieg</string>
+    <string name="i18n_muscle_group">SPIERGROEP</string>
+    <string name="i18n_describe_the_exercise">Beskryf die oefening...</string>
+    <string name="i18n_default_sets">VERSTEKSTELLE</string>
+    <string name="i18n_e_g_3">bv. 3</string>
+    <string name="i18n_default_reps">VERSTEKHERHALINGS</string>
+    <string name="i18n_e_g_10">bv. 10</string>
+    <string name="i18n_save_exercise">STOOR OEFENING</string>
+    <string name="i18n_log_workout">Teken oefensessie aan</string>
+    <string name="i18n_train_hard_earn_xp_level_up">Oefen hard. Verdien XP. Styg in vlak.</string>
+    <string name="i18n_chest">Bors</string>
+    <string name="i18n_exercise_description">Oefeningbeskrywing</string>
+    <string name="i18n_workout_details">OEFENSESSIEBESONDERHEDE</string>
+    <string name="i18n_workout_name">Oefensessienaam</string>
+    <string name="i18n_e_g_monday_strength">bv. Maandagkrag</string>
+    <string name="i18n_duration_minutes">Tydsduur (minute)</string>
+    <string name="i18n_e_g_45">bv. 45</string>
+    <string name="i18n_workout_timer">OEFENTYDHOUER</string>
+    <string name="i18n_set_your_workout_timer">Stel jou oefentydhouer</string>
+    <string name="i18n_enter_minutes">Voer minute in</string>
+    <string name="i18n_start">BEGIN</string>
+    <string name="i18n_reset">HERSTEL</string>
+    <string name="i18n_set_details">STELBESONDERHEDE</string>
+    <string name="i18n_sets">Stelle</string>
+    <string name="i18n_reps">Herhalings</string>
+    <string name="i18n_weight_kg">Gewig (kg)</string>
+    <string name="i18n_complete_workout">VOLTOOI OEFENSESSIE  ⚡</string>
+    <string name="i18n_clear">MAAK SKOON</string>
+    <string name="i18n_your_squad">Jou span</string>
+    <string name="i18n_train_together_streak_together_win_together">Oefen saam, bou ’n reeks saam, wen saam</string>
+    <string name="i18n_shared_streak">GEDEELDE REEKS</string>
+    <string name="i18n_shared_streak_0_days">🔥 Gedeelde reeks: 0 dae</string>
+    <string name="i18n_keep_training_to_protect_your_squad_streak">Hou aan oefen om jou span se reeks te behou!</string>
+    <string name="i18n_squad_members">SPANLEDE</string>
+    <string name="i18n_your_training_team">Jou oefenspan</string>
+    <string name="i18n_create_your_squad">SKEP JOU SPAN</string>
+    <string name="i18n_enter_a_squad_name">Voer ’n spannaam in</string>
+    <string name="i18n_create_squad">SKEP SPAN</string>
+    <string name="i18n_find_gymleague_users">SOEK GYMLEAGUE-GEBRUIKERS</string>
+    <string name="i18n_search_for_registered_users_to_add_to_your_sq">Soek geregistreerde gebruikers om by jou span te voeg</string>
+    <string name="i18n_search_username">Soek gebruikersnaam</string>
+    <string name="i18n_find_users">SOEK GEBRUIKERS</string>
+    <string name="i18n_invite_to_squad">NOOI NA SPAN</string>
+    <string name="i18n_refresh_squad">↻  VERFRIS SPAN</string>
+    <string name="i18n_leave_squad">VERLAAT SPAN</string>
+    <string name="i18n_personal_records">Persoonlike rekords</string>
+    <string name="i18n_every_rep_tells_your_story">Elke herhaling vertel jou storie.</string>
+    <string name="i18n_total_prs">Totale persoonlike rekords</string>
+    <string name="i18n_top_estimated_1rm">Hoogste geskatte 1RM</string>
+    <string name="i18n_unable_to_load_personal_records">Kan nie persoonlike rekords laai nie</string>
+    <string name="i18n_no_personal_records_yet_log_a_workout_in_trai">Nog geen persoonlike rekords nie. Teken ’n oefensessie onder Oefen aan om jou beraamde maksimum hier te sien.</string>
+    <string name="i18n_training_arena">Oefenarena</string>
+    <string name="i18n_pick_your_battle_and_earn_xp">Kies jou uitdaging en verdien XP</string>
+    <string name="i18n_search_exercises">Soek oefeninge...</string>
+    <string name="i18n_all">Alles</string>
+    <string name="i18n_back">Rug</string>
+    <string name="i18n_legs">Bene</string>
+    <string name="i18n_shoulders">Skouers</string>
+    <string name="i18n_arms">Arms</string>
+    <string name="i18n_unable_to_load_exercises">Kan nie oefeninge laai nie</string>
+    <string name="i18n_a_chest_exercise_performed_by_pressing_a_weig">’n Borsoefening waar ’n gewig opwaarts gedruk word terwyl jy lê.</string>
+    <string name="i18n_tap_to_train">Tik om te oefen  →</string>
+    <string name="i18n_delete_exercise">Skrap oefening</string>
+    <!-- Kotlin UI messages -->
+    <string name="home_no_squad">Jy het nog nie by ’n span aangesluit nie.</string>
+    <string name="home_shared_streak">🔥 Gedeelde reeks: %1$d dae</string>
+    <string name="level_dynamic">⚡ VLAK %1$d</string>
+    <string name="level_unknown">⚡ VLAK —</string>
+    <string name="generic_user">GymLeague-gebruiker</string>
+    <string name="no_email">Geen e-pos beskikbaar nie</string>
+    <string name="settings_load_error">Kan nie instellings laai nie.</string>
+    <string name="settings_create_error">Kan nie verstekinstellings skep nie.</string>
+    <string name="session_missing">Gebruikersessie nie gevind nie.</string>
+    <string name="settings_loading">Instellings laai nog.</string>
+    <string name="settings_saved">Instellings suksesvol gestoor.</string>
+    <string name="settings_save_error">Kan nie instellings stoor nie.</string>
+    <string name="login_google_failed">Google-aanmelding het misluk. Probeer weer.</string>
+    <string name="login_google_process">Kan nie Google-aanmelding verwerk nie.</string>
+    <string name="login_google_invalid">Ongeldige Google-aanmeldbewys.</string>
+    <string name="login_firebase_user">Kan nie Firebase-gebruiker bereik nie.</string>
+    <string name="login_auth_failed">Firebase-verifikasie het misluk.</string>
+    <string name="login_connect_failed">Kan nie met GymLeague verbind nie.</string>
+    <string name="login_create_failed">Kan nie GymLeague-rekening skep nie.</string>
+    <string name="workout_no_description">Geen beskrywing beskikbaar nie</string>
+    <string name="workout_minutes_error">Voer geldige minute in</string>
+    <string name="workout_timer_reset">Tydhouer herstel</string>
+    <string name="workout_form_cleared">Oefenvorm skoongemaak</string>
+    <string name="workout_name_error">Voer ’n oefensessienaam in</string>
+    <string name="workout_duration_error">Voer ’n geldige tydsduur in</string>
+    <string name="workout_sets_error">Voer geldige stelle in</string>
+    <string name="workout_reps_error">Voer geldige herhalings in</string>
+    <string name="workout_weight_error">Voer ’n geldige gewig in</string>
+    <string name="workout_session_error">Gebruikersessie nie gevind nie</string>
+    <string name="workout_saved_xp">Oefensessie gestoor! +%1$d XP</string>
+    <string name="workout_time_up">Tyd is verby! Gereed vir jou volgende stel.</string>
+    <string name="squad_name_error">Voer eers ’n spannaam in</string>
+    <string name="squad_username_error">Voer eers ’n gebruikersnaam in</string>
+    <string name="squad_load_error">Kan nie spandata laai nie. Tik Verfris om weer te probeer.</string>
+    <string name="squad_not_member">Jy is nog nie deel van ’n span nie.</string>
+    <string name="squad_created">Span geskep!</string>
+    <string name="squad_required">Jy het eers ’n span nodig</string>
+    <string name="squad_no_users">Geen ooreenstemmende GymLeague-gebruikers gevind nie</string>
+    <string name="squad_leave_title">Verlaat span</string>
+    <string name="squad_left">Jy het die span verlaat.</string>
+    <string name="exercise_delete_title">Skrap oefening</string>
+    <string name="exercise_name_error">Voer ’n oefeningnaam in</string>
+</resources>
+

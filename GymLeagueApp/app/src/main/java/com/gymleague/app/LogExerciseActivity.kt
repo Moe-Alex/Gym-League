@@ -47,7 +47,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
         val description =
             intent.getStringExtra("description")
-                ?: "No description available"
+                ?: getString(R.string.workout_no_description)
 
         val defaultSets =
             intent.getIntExtra("defaultSets", 3)
@@ -137,7 +137,7 @@ class LogExerciseActivity : AppCompatActivity() {
                 if (minutes == null || minutes <= 0) {
 
                     etTimerMinutes.error =
-                        "Enter valid minutes"
+                        getString(R.string.workout_minutes_error)
 
                     return@setOnClickListener
                 }
@@ -167,7 +167,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Timer reset",
+                getString(R.string.workout_timer_reset),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -186,7 +186,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Workout form cleared",
+                getString(R.string.workout_form_cleared),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -216,7 +216,7 @@ class LogExerciseActivity : AppCompatActivity() {
             if (workoutName.isBlank()) {
 
                 etWorkoutName.error =
-                    "Enter a workout name"
+                    getString(R.string.workout_name_error)
 
                 return@setOnClickListener
             }
@@ -224,7 +224,7 @@ class LogExerciseActivity : AppCompatActivity() {
             if (duration == null || duration <= 0) {
 
                 etDuration.error =
-                    "Enter a valid duration"
+                    getString(R.string.workout_duration_error)
 
                 return@setOnClickListener
             }
@@ -232,7 +232,7 @@ class LogExerciseActivity : AppCompatActivity() {
             if (sets == null || sets <= 0) {
 
                 etSets.error =
-                    "Enter valid sets"
+                    getString(R.string.workout_sets_error)
 
                 return@setOnClickListener
             }
@@ -240,7 +240,7 @@ class LogExerciseActivity : AppCompatActivity() {
             if (reps == null || reps <= 0) {
 
                 etReps.error =
-                    "Enter valid reps"
+                    getString(R.string.workout_reps_error)
 
                 return@setOnClickListener
             }
@@ -248,7 +248,7 @@ class LogExerciseActivity : AppCompatActivity() {
             if (weight == null || weight < 0) {
 
                 etWeight.error =
-                    "Enter a valid weight"
+                    getString(R.string.workout_weight_error)
 
                 return@setOnClickListener
             }
@@ -264,7 +264,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    "User session not found",
+                    getString(R.string.workout_session_error),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -342,7 +342,7 @@ class LogExerciseActivity : AppCompatActivity() {
                         if (savedOffline) {
                             getString(R.string.workout_saved_offline)
                         } else {
-                            "Workout saved! +$xpEarned XP"
+                            getString(R.string.workout_saved_xp , xpEarned)
                         },
                         Toast.LENGTH_LONG
                     ).show()
@@ -430,7 +430,7 @@ class LogExerciseActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this@LogExerciseActivity,
-                        "Time's up! Ready for your next set.",
+                        getString(R.string.workout_time_up),
                         Toast.LENGTH_LONG
                     ).show()
                 }

@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome back,"
+                    android:text="@string/home_welcome_back"
                     android:textColor="#D9FFFFFF"
                     android:textSize="14sp" />
 
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Athlete"
+                    android:text="@string/home_athlete"
                     android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -53,12 +53,12 @@
                 android:background="@drawable/bg_level_pill"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
-                android:text="⚡ LVL 1"
+                android:text="@string/home_level_placeholder"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
-            <!-- Settings: top-right corner of the home screen -->
+            <!-- Settings button -->
             <ImageView
                 android:id="@+id/btnHomeSettings"
                 android:layout_width="40dp"
@@ -72,13 +72,14 @@
 
         </LinearLayout>
 
-        <!-- Stats row -->
+        <!-- Stats Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
+            <!-- Total XP -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -91,7 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚡ Total XP"
+                    android:text="@string/settings_total_xp"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="12sp" />
 
@@ -100,13 +101,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="—"
+                    android:text="@string/home_stat_placeholder"
                     android:textColor="@color/on_surface_dark"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
+            <!-- Workouts Logged -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -119,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏋 Workouts Logged"
+                    android:text="@string/settings_workouts_logged"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="12sp" />
 
@@ -128,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="—"
+                    android:text="@string/home_stat_placeholder"
                     android:textColor="@color/on_surface_dark"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -137,7 +139,7 @@
 
         </LinearLayout>
 
-        <!-- Your Squad -->
+        <!-- Your Squad Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="YOUR SQUAD"
+                android:text="@string/home_your_squad"
                 android:textColor="@color/on_surface_dark"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -157,12 +159,13 @@
                 android:id="@+id/tvSquadView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="View ›"
+                android:text="@string/home_view"
                 android:textColor="@color/gym_blue"
                 android:textSize="13sp" />
 
         </LinearLayout>
 
+        <!-- Squad Content -->
         <LinearLayout
             android:id="@+id/squadSection"
             android:layout_width="match_parent"

@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Your Squad"
+                android:text="@string/i18n_your_squad"
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Train together, streak together, win together"
+                android:text="@string/i18n_train_together_streak_together_win_together"
                 android:textColor="#918A9D"
                 android:textSize="13sp" />
 
@@ -71,7 +71,7 @@
                     android:id="@+id/tvSquadName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Your Squad"
+                    android:text="@string/i18n_your_squad"
                     android:textColor="#FFFFFF"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="SHARED STREAK"
+                    android:text="@string/i18n_shared_streak"
                     android:textColor="#25D9F5"
                     android:textSize="11sp"
                     android:textStyle="bold"
@@ -91,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="🔥 Shared Streak: 0 days"
+                    android:text="@string/i18n_shared_streak_0_days"
                     android:textColor="#B45CFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Keep training to protect your squad streak!"
+                    android:text="@string/i18n_keep_training_to_protect_your_squad_streak"
                     android:textColor="#918A9D"
                     android:textSize="12sp" />
 
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="SQUAD MEMBERS"
+                android:text="@string/i18n_squad_members"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Your training team"
+                android:text="@string/i18n_your_training_team"
                 android:textColor="#918A9D"
                 android:textSize="12sp" />
 
@@ -150,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="CREATE YOUR SQUAD"
+                android:text="@string/i18n_create_your_squad"
                 android:textColor="#B45CFF"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -163,7 +163,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_gym_search"
-                android:hint="Enter a squad name"
+                android:hint="@string/i18n_enter_a_squad_name"
                 android:inputType="textCapWords"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
@@ -177,7 +177,7 @@
                 android:layout_height="54dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#8A2BE2"
-                android:text="CREATE SQUAD"
+                android:text="@string/i18n_create_squad"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -188,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="FIND GYMLEAGUE USERS"
+                android:text="@string/i18n_find_gymleague_users"
                 android:textColor="#25D9F5"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Search for registered users to add to your squad"
+                android:text="@string/i18n_search_for_registered_users_to_add_to_your_sq"
                 android:textColor="#918A9D"
                 android:textSize="12sp"
                 android:visibility="gone" />
@@ -211,7 +211,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_gym_search"
-                android:hint="Search username"
+                android:hint="@string/i18n_search_username"
                 android:inputType="text"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
@@ -225,7 +225,7 @@
                 android:layout_height="54dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#17111F"
-                android:text="FIND USERS"
+                android:text="@string/i18n_find_users"
                 android:textColor="#25D9F5"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -244,7 +244,7 @@
                 android:layout_height="54dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#8A2BE2"
-                android:text="INVITE TO SQUAD"
+                android:text="@string/i18n_invite_to_squad"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -266,7 +266,7 @@
                 android:layout_height="54dp"
                 android:layout_marginTop="26dp"
                 android:backgroundTint="#8A2BE2"
-                android:text="↻  REFRESH SQUAD"
+                android:text="@string/i18n_refresh_squad"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -277,7 +277,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#28151D"
-                android:text="LEAVE SQUAD"
+                android:text="@string/i18n_leave_squad"
                 android:textColor="#FF6B81"
                 android:textStyle="bold"
                 android:visibility="gone" />

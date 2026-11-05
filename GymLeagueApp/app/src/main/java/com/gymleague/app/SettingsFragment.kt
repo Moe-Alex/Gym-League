@@ -23,6 +23,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import android.view.ViewGroup
 
 class SettingsFragment : Fragment(
     R.layout.fragment_settings
@@ -236,28 +239,66 @@ class SettingsFragment : Fragment(
         }
     }
 
+
+
     private fun setupLanguageSpinner() {
+        val languages = listOf(
+            "English",
+            "Afrikaans",
+            "isiZulu"
+        )
 
-        val languages =
-            listOf(
-                "English",
-                "Afrikaans"
-            )
+        val adapter = object : ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            languages
+        ) {
+            override fun getView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
+                val view = super.getView(position, convertView, parent)
 
-        val adapter =
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                languages
-            )
+                val textView = view as TextView
+                textView.setTextColor(
+                    android.graphics.Color.WHITE
+                )
+
+                return view
+            }
+
+            override fun getDropDownView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
+                val view = super.getDropDownView(
+                    position,
+                    convertView,
+                    parent
+                )
+
+                val textView = view as TextView
+                textView.setTextColor(
+                    android.graphics.Color.WHITE
+                )
+                textView.setBackgroundColor(
+                    android.graphics.Color.rgb(38, 35, 65)
+                )
+
+                return view
+            }
+        }
 
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item
         )
 
-        spinnerLanguage.adapter =
-            adapter
+        spinnerLanguage.adapter = adapter
     }
+
+
 
     private fun loadSettings() {
 
@@ -536,6 +577,11 @@ class SettingsFragment : Fragment(
                     applyAppearance(
                         appearanceMode
                     )
+
+                    applyLanguage(
+                        language
+                    )
+
                 }
                 .onFailure { error ->
 
@@ -553,6 +599,29 @@ class SettingsFragment : Fragment(
                 }
         }
     }
+
+
+    private fun applyLanguage(language: String) {
+
+        val languageCode = when (language) {
+            "Afrikaans" -> "af"
+            "isiZulu" -> "zu"
+            else -> "en"
+        }
+
+        val currentCode = AppCompatDelegate
+            .getApplicationLocales()
+            .toLanguageTags()
+
+        if (currentCode != languageCode) {
+            AppCompatDelegate.setApplicationLocales(
+                LocaleListCompat.forLanguageTags(languageCode)
+            )
+        }
+
+        Log.d(TAG, "Language changed to: $language")
+    }
+
 
     private fun applyAppearance(
         appearanceMode: String

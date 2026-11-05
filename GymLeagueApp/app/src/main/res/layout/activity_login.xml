@@ -33,7 +33,7 @@
             android:id="@+id/tvLoginSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TRAIN. COMPETE. LEVEL UP."
+            android:text="@string/i18n_train_compete_level_up"
             android:textColor="@color/gym_blue"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back"
+            android:text="@string/i18n_welcome_back"
             android:textColor="@color/on_surface_dark"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -54,7 +54,7 @@
             android:id="@+id/btnGoogleSignIn"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Continue with Google"
+            android:text="@string/i18n_continue_with_google"
             android:textAllCaps="false"
             android:textColor="@color/on_surface_dark"
             android:backgroundTint="@color/surface_dark" />

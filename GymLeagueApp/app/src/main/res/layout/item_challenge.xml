@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="7-Day Showdown"
+            android:text="@string/i18n_7_day_showdown"
             android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -35,7 +35,7 @@
             android:paddingTop="4dp"
             android:paddingEnd="10dp"
             android:paddingBottom="4dp"
-            android:text="LIVE"
+            android:text="@string/i18n_live"
             android:textColor="#B98CFF"
             android:textSize="10sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="You vs Caleb"
+        android:text="@string/i18n_you_vs_caleb"
         android:textColor="#25D9F5"
         android:textSize="13sp"
         android:textStyle="bold" />
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Most workouts in a week wins"
+        android:text="@string/i18n_most_workouts_in_a_week_wins"
         android:textColor="#918A9D"
         android:textSize="13sp" />
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="You"
+                android:text="@string/i18n_you"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Waiting for Caleb to accept"
+        android:text="@string/i18n_waiting_for_caleb_to_accept"
         android:textColor="#FFB300"
         android:textSize="13sp"
         android:textStyle="bold"
@@ -175,7 +175,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#8A2BE2"
-        android:text="LOG PROGRESS (+1)"
+        android:text="@string/i18n_log_progress_1"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         android:textStyle="bold" />
@@ -186,7 +186,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#292231"
-        android:text="DECLINE"
+        android:text="@string/i18n_decline"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         android:textStyle="bold"

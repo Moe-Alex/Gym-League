@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Personal Records"
+            android:text="@string/i18n_personal_records"
             android:textColor="@color/on_surface_dark"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Every rep tells your story."
+            android:text="@string/i18n_every_rep_tells_your_story"
             android:textColor="@color/on_surface_secondary_dark"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total PRs"
+                    android:text="@string/i18n_total_prs"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="13sp" />
 
@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Top Estimated 1RM"
+                    android:text="@string/i18n_top_estimated_1rm"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="13sp" />
 
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Unable to load personal records"
+            android:text="@string/i18n_unable_to_load_personal_records"
             android:textColor="@color/gym_error"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="No personal records yet. Log a workout in Train to see your 1-rep max estimates here."
+            android:text="@string/i18n_no_personal_records_yet_log_a_workout_in_trai"
             android:textColor="@color/on_surface_secondary_dark"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

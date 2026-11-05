@@ -77,7 +77,7 @@ class ExerciseLibraryActivity : AppCompatActivity() {
                 }
 
                 AlertDialog.Builder(this)
-                    .setTitle("Delete Exercise")
+                    .setTitle(getString(R.string.exercise_delete_title))
                     .setMessage("Are you sure you want to delete \"${exercise.exerciseName}\"? This cannot be undone.")
                     .setPositiveButton("Delete") { _, _ ->
 
@@ -282,18 +282,18 @@ class ExerciseLibraryActivity : AppCompatActivity() {
 
             // Validation
             if (name.isEmpty()) {
-                exerciseName.error = "Enter an exercise name"
+                exerciseName.error = getString(R.string.exercise_name_error)
                 return@setOnClickListener
             }
 
 
             if (defaultSets == null || defaultSets <= 0) {
-                sets.error = "Enter valid sets"
+                sets.error = getString(R.string.workout_sets_error)
                 return@setOnClickListener
             }
 
             if (defaultReps == null || defaultReps <= 0) {
-                reps.error = "Enter valid reps"
+                reps.error = getString(R.string.workout_reps_error)
                 return@setOnClickListener
             }
 

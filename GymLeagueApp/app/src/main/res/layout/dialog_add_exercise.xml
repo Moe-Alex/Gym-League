@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="⚡ ADD YOUR OWN EXERCISE"
+            android:text="@string/i18n_add_your_own_exercise"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="20dp"
-            android:text="Create a custom exercise for the Training Arena."
+            android:text="@string/i18n_create_a_custom_exercise_for_the_training_are"
             android:textColor="#AFA8B8"
             android:textSize="13sp" />
 
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="EXERCISE NAME"
+            android:text="@string/i18n_exercise_name"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. Dumbbell Fly"
+            android:hint="@string/i18n_e_g_dumbbell_fly"
             android:inputType="textCapWords"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="MUSCLE GROUP"
+            android:text="@string/i18n_muscle_group"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="DESCRIPTION"
+            android:text="@string/i18n_description"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -89,7 +89,7 @@
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
             android:gravity="top"
-            android:hint="Describe the exercise..."
+            android:hint="@string/i18n_describe_the_exercise"
             android:inputType="textMultiLine"
             android:padding="12dp"
             android:textColor="#FFFFFF"
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="DEFAULT SETS"
+            android:text="@string/i18n_default_sets"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -111,7 +111,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. 3"
+            android:hint="@string/i18n_e_g_3"
             android:inputType="number"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="DEFAULT REPS"
+            android:text="@string/i18n_default_reps"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -134,7 +134,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. 10"
+            android:hint="@string/i18n_e_g_10"
             android:inputType="number"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -148,7 +148,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="#8A2BE2"
-            android:text="SAVE EXERCISE"
+            android:text="@string/i18n_save_exercise"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -159,7 +159,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="#292231"
-            android:text="CANCEL"
+            android:text="@string/i18n_cancel"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 

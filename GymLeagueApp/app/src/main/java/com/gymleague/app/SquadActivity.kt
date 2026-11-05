@@ -73,7 +73,7 @@ class SquadActivity : AppCompatActivity() {
         btnCreateSquad.setOnClickListener {
             val name = etCreateSquadName.text.toString().trim()
             if (name.isEmpty()) {
-                Toast.makeText(this, "Enter a squad name first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.squad_name_error), Toast.LENGTH_SHORT).show()
             } else {
                 createAndJoinSquad(name)
             }
@@ -82,7 +82,7 @@ class SquadActivity : AppCompatActivity() {
         btnInviteMember.setOnClickListener {
             val username = etInviteUsername.text.toString().trim()
             if (username.isEmpty()) {
-                Toast.makeText(this, "Enter a username first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.squad_username_error), Toast.LENGTH_SHORT).show()
             } else {
                 inviteByUsername(username)
             }
@@ -111,7 +111,7 @@ class SquadActivity : AppCompatActivity() {
 
             result.onFailure { error ->
                 Log.e(TAG, "Failed to load squads: ${error.message}")
-                showEmptyState("Could not load squad data. Tap refresh to try again.")
+                showEmptyState(getString(R.string.squad_load_error))
             }
 
             showLoading(false)
@@ -128,7 +128,7 @@ class SquadActivity : AppCompatActivity() {
         currentSquad = mySquad
 
         if (mySquad == null) {
-            showEmptyState("You're not part of a squad yet.")
+            showEmptyState(getString(R.string.squad_not_member))
             return
         }
 
@@ -284,7 +284,7 @@ class SquadActivity : AppCompatActivity() {
                 val joinResult = squadRepository.addMember(squad.squadId, userId)
 
                 joinResult.onSuccess {
-                    Toast.makeText(this@SquadActivity, "Squad created!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SquadActivity, getString(R.string.squad_created), Toast.LENGTH_SHORT).show()
                     etCreateSquadName.text.clear()
                     loadSquads()
                 }
@@ -307,7 +307,7 @@ class SquadActivity : AppCompatActivity() {
     private fun inviteByUsername(username: String) {
         val squad = currentSquad
         if (squad == null) {
-            Toast.makeText(this, "You need a squad first", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.squad_required), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -408,7 +408,7 @@ class SquadActivity : AppCompatActivity() {
                     val noUsersText =
                         TextView(this@SquadActivity).apply {
 
-                            text = "No matching GymLeague users found"
+                            text = getString(R.string.squad_no_users)
 
                             setTextColor(
                                 android.graphics.Color.parseColor(
@@ -513,7 +513,7 @@ class SquadActivity : AppCompatActivity() {
         val squad = currentSquad ?: return
 
         AlertDialog.Builder(this)
-            .setTitle("Leave Squad")
+            .setTitle(getString(R.string.squad_leave_title))
             .setMessage("Are you sure you want to leave \"${squad.squadName}\"?")
             .setPositiveButton("Leave") { _, _ -> leaveSquad(squad.squadId) }
             .setNegativeButton("Cancel", null)
@@ -529,7 +529,7 @@ class SquadActivity : AppCompatActivity() {
 
             result.onSuccess {
                 Log.d(TAG, "Left squad $squadId")
-                Toast.makeText(this@SquadActivity, "You left the squad.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SquadActivity, getString(R.string.squad_left), Toast.LENGTH_SHORT).show()
                 currentSquad = null
                 loadSquads()
             }

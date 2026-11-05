@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="Training Arena"
+            android:text="@string/i18n_training_arena"
             android:textColor="#FFFFFF"
             android:textSize="27sp"
             android:textStyle="bold"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Pick your battle and earn XP"
+            android:text="@string/i18n_pick_your_battle_and_earn_xp"
             android:textColor="#918A9D"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#8A2BE2"
-            android:text="+  ADD YOUR OWN EXERCISE"
+            android:text="@string/i18n_add_your_own_exercise"
             android:textColor="#FFFFFF"
             android:textSize="13sp"
             android:textStyle="bold"
@@ -81,7 +81,7 @@
             android:background="@drawable/bg_gym_search"
             android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="10dp"
-            android:hint="Search exercises..."
+            android:hint="@string/i18n_search_exercises"
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -118,7 +118,7 @@
                     android:layout_marginEnd="7dp"
                     android:backgroundTint="#8A2BE2"
                     android:minWidth="64dp"
-                    android:text="All"
+                    android:text="@string/i18n_all"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
@@ -129,7 +129,7 @@
                     android:layout_height="44dp"
                     android:layout_marginEnd="7dp"
                     android:backgroundTint="#1A1423"
-                    android:text="Chest"
+                    android:text="@string/i18n_chest"
                     android:textAllCaps="false"
                     android:textColor="#D8D2DF" />
 
@@ -139,7 +139,7 @@
                     android:layout_height="44dp"
                     android:layout_marginEnd="7dp"
                     android:backgroundTint="#1A1423"
-                    android:text="Back"
+                    android:text="@string/i18n_back"
                     android:textAllCaps="false"
                     android:textColor="#D8D2DF" />
 
@@ -149,7 +149,7 @@
                     android:layout_height="44dp"
                     android:layout_marginEnd="7dp"
                     android:backgroundTint="#1A1423"
-                    android:text="Legs"
+                    android:text="@string/i18n_legs"
                     android:textAllCaps="false"
                     android:textColor="#D8D2DF" />
 
@@ -159,7 +159,7 @@
                     android:layout_height="44dp"
                     android:layout_marginEnd="7dp"
                     android:backgroundTint="#1A1423"
-                    android:text="Shoulders"
+                    android:text="@string/i18n_shoulders"
                     android:textAllCaps="false"
                     android:textColor="#D8D2DF" />
 
@@ -168,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="44dp"
                     android:backgroundTint="#1A1423"
-                    android:text="Arms"
+                    android:text="@string/i18n_arms"
                     android:textAllCaps="false"
                     android:textColor="#D8D2DF" />
 
@@ -195,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="Unable to load exercises"
+            android:text="@string/i18n_unable_to_load_exercises"
             android:textColor="#FF6B81"
             android:textSize="15sp"
             android:visibility="gone"

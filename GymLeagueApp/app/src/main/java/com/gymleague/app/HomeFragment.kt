@@ -82,13 +82,13 @@ class HomeFragment : Fragment() {
 
             result.onSuccess { user ->
                 Log.d(TAG, "Loaded stats for UserId: $userId")
-                tvLevel.text = "⚡ LVL ${user.level}"
+                tvLevel.text = getString(R.string.level_dynamic , user.level)
                 tvXp.text = user.xp.toString()
             }
 
             result.onFailure { error ->
                 Log.e(TAG, "Failed to load user stats: ${error.message}")
-                tvLevel.text = "⚡ LVL —"
+                tvLevel.text = getString(R.string.level_unknown)
                 tvXp.text = "—"
             }
         }
@@ -140,7 +140,7 @@ class HomeFragment : Fragment() {
         squadSection.removeAllViews()
 
         val emptyText = TextView(requireContext()).apply {
-            text = "You haven't joined a squad yet."
+            text = getString(R.string.home_no_squad)
             textSize = 13f
             setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_secondary_dark))
             background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_card_dark)
@@ -170,7 +170,7 @@ class HomeFragment : Fragment() {
         }
 
         val streakView = TextView(requireContext()).apply {
-            text = "🔥 Shared Streak: $sharedStreak days"
+            text = getString(R.string.home_shared_streak , sharedStreak)
             textSize = 13f
             setTextColor(ContextCompat.getColor(requireContext(), R.color.gym_gold))
             setPadding(0, 4, 0, 10)

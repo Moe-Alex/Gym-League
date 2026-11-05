@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">GymLeague</string>
+
+    <!-- Battle Arena: badges -->
+    <string name="battle_badge_open">KUVULIWE</string>
+    <string name="battle_badge_invited">ISIMEMO</string>
+    <string name="battle_badge_pending">KUSALINDIWE</string>
+    <string name="battle_badge_live">KUYAQHUBEKA</string>
+    <string name="battle_badge_won">UNQOBILE</string>
+    <string name="battle_badge_lost">UHLULIWE</string>
+    <string name="battle_badge_ended">KUPHELILE</string>
+    <string name="battle_badge_declined">KUNQATSHIWE</string>
+
+    <!-- Battle Arena: challenge cards -->
+    <string name="battle_btn_log_progress">REKHODA INQUBEKELA PHAMBILI (+1)</string>
+    <string name="battle_btn_accept">YAMUKELA INSELELE</string>
+    <string name="battle_btn_decline">YENQABA</string>
+    <string name="battle_label_you">Wena</string>
+    <string name="battle_label_opponent">Ophikisana nawe</string>
+    <string name="battle_versus">%1$s no-%2$s</string>
+    <string name="battle_open_to_all">Ivulekele wonke umuntu · ngu-%1$s</string>
+    <string name="battle_meta">+%1$d XP · Iphela %2$s</string>
+    <string name="battle_progress_count">%1$d/%2$d</string>
+    <string name="battle_waiting_opponent">Kulindwe umuntu ozokwamukela inselele yakho</string>
+    <string name="battle_waiting_named">Kulindwe u-%1$s ukuthi amukele</string>
+    <string name="battle_result_won">🏆 Unqobile! +%1$d XP</string>
+    <string name="battle_result_lost">U-%1$s unqobile kule mpi</string>
+    <string name="battle_result_ended">Le nselele iphele kungekho onqobile</string>
+    <string name="battle_result_declined">Le nselele yenqatshiwe</string>
+    <string name="battle_type_most_workouts">Ukujima okuningi</string>
+    <string name="battle_type_longest_streak">Uchungechunge olude kakhulu</string>
+    <string name="battle_type_most_xp">Ama-XP amaningi</string>
+    <string name="battle_type_most_reps">Ukuphindaphinda okuningi</string>
+
+    <!-- Battle Arena: messages -->
+    <string name="battle_toast_launched">Inselele isiqalile!</string>
+    <string name="battle_toast_sent">Inselele ithunyelwe ku-%1$s!</string>
+    <string name="battle_toast_accepted">Inselele yamukelwe. Umdlalo usuqalile!</string>
+    <string name="battle_toast_declined">Inselele yenqatshiwe.</string>
+    <string name="battle_toast_won">Unqobile! +%1$d XP</string>
+    <string name="battle_toast_load_failed">Ayikwazanga ukulayisha izinselele</string>
+    <string name="battle_toast_action_failed">Akuphumelelanga. Sicela uzame futhi.</string>
+
+    <!-- Battle Arena: new challenge form -->
+    <string name="battle_dialog_vs">Uphonsela u-%1$s inselele</string>
+    <string name="battle_launch">QALA INSELELE</string>
+    <string name="battle_launching">IYAQALISWA...</string>
+    <string name="battle_error_title">Faka isihloko</string>
+    <string name="battle_error_target">Faka umgomo ovumelekile</string>
+    <string name="battle_error_xp">Faka umklomelo we-XP osuka ku-1 kuya ku-500</string>
+    <string name="battle_end_date_hint">Thepha ukuze ukhethe usuku</string>
+    <string name="battle_error_date_empty">Khetha usuku lokuphela</string>
+    <string name="battle_error_date_format">Khetha usuku lokuphela oluvumelekile</string>
+    <string name="battle_error_date_past">Usuku lokuphela kufanele lube namuhla noma kamuva</string>
+    <string name="battle_error_session">Iseshini yomsebenzisi ayitholakali</string>
+
+    <!-- Muscle Group Volume -->
+    <string name="muscle_volume_title">Umthamo Wokuqeqesha Imisipha</string>
+    <string name="muscle_volume_tagline">Lapho umthamo wokuqeqesha kwakho uya khona.</string>
+    <string name="muscle_volume_total_label">Umthamo ophelele</string>
+    <string name="muscle_volume_top_label">Iqembu lemisipha elihamba phambili</string>
+    <string name="muscle_volume_row_detail">%1$s · %2$d%%</string>
+    <string name="muscle_volume_empty">Awukho umthamo okwamanje. Rekhoda ukujima ku-Train ukuze ubone ukuhlukaniswa kwamaqembu emisipha lapha.</string>
+    <string name="muscle_volume_error">Ayikwazanga ukulayisha umthamo wemisipha yakho</string>
+    <string name="muscle_volume_retry">ZAMA FUTHI</string>
+    <string name="muscle_volume_back">EMUVA</string>
+    <string name="nav_volume">Umthamo</string>
+    <string name="home_settings_description">Izilungiselelo</string>
+
+    <!-- Push notifications -->
+    <string name="notification_channel_name">Inkundla Yezinselele</string>
+    <string name="notification_channel_description">Izinselele, imidlalo eyamukelwe nemiphumela</string>
+
+    <!-- Offline mode -->
+    <string name="offline_banner_offline">Awuxhunyiwe ku-inthanethi. Kuboniswa idatha egciniwe.</string>
+    <plurals name="offline_banner_pending">
+        <item quantity="one">Awuxhunyiwe ku-inthanethi. Ukujima okungu-%d kulinde ukuvumelaniswa.</item>
+        <item quantity="other">Awuxhunyiwe ku-inthanethi. Ukujima okungu-%d kulinde ukuvumelaniswa.</item>
+    </plurals>
+    <plurals name="offline_banner_syncing">
+        <item quantity="one">Kuvumelaniswa ukujima okungu-%d…</item>
+        <item quantity="other">Kuvumelaniswa ukujima okungu-%d…</item>
+    </plurals>
+    <string name="workout_saved_offline">Ukujima kugcinwe efonini yakho. Kuzovumelaniswa uma usuxhumekile ku-inthanethi futhi.</string>
+
+    <string name="settings_title">IZILUNGISELELO</string>
+    <string name="settings_total_xp">⚡ Isamba se-XP</string>
+    <string name="settings_workouts_logged">🏋 Ukujima okurekhodiwe</string>
+    <string name="settings_notifications">🔔 Izaziso</string>
+    <string name="settings_enable_notifications">Vumela izaziso</string>
+    <string name="settings_appearance">🌓 Ukubukeka</string>
+    <string name="settings_device_mode">Sebenzisa izilungiselelo zedivayisi</string>
+    <string name="settings_light_mode">Imodi ekhanyayo</string>
+    <string name="settings_dark_mode">Imodi emnyama</string>
+    <string name="settings_language">🌐 Ulimi</string>
+    <string name="settings_save">Londoloza izilungiselelo</string>
+    <string name="settings_logout">⏻ Phuma</string>
+
+
+    <!-- Home Screen -->
+    <string name="home_welcome_back">Siyakwamukela futhi,</string>
+    <string name="home_athlete">Umsubathi</string>
+    <string name="home_your_squad">IQEMBU LAKHO</string>
+    <string name="home_view">Buka ›</string>
+
+
+    <!-- Whole-app localization additions -->
+    <string name="i18n_train_compete_level_up">ZIJIME. QHUDISANA. KHUPHUKA EZINGENI.</string>
+    <string name="i18n_welcome_back">Siyakwamukela futhi</string>
+    <string name="i18n_continue_with_google">Qhubeka nge-Google</string>
+    <string name="i18n_username">Igama lomsebenzisi</string>
+    <string name="i18n_email">I-imeyili</string>
+    <string name="i18n_lvl">⚡ IZINGA —</string>
+    <string name="i18n_home">Ikhaya</string>
+    <string name="i18n_train">Ukujima</string>
+    <string name="i18n_squad">Iqembu</string>
+    <string name="i18n_battle">Impi</string>
+    <string name="i18n_ranks">Amazinga</string>
+    <string name="i18n_battle_arena">Inkundla Yezinselelo</string>
+    <string name="i18n_create_and_conquer_challenges">Dala futhi unqobe izinselelo</string>
+    <string name="i18n_new_challenge">+  INSELELO ENTSHA</string>
+    <string name="i18n_unable_to_load_challenges">Ayikwazi ukulayisha izinselelo</string>
+    <string name="i18n_no_challenges_yet_start_one">Azikho izinselelo okwamanje. Qala eyodwa!</string>
+    <string name="i18n_create_and_conquer_a_challenge">Dala futhi unqobe inselelo.</string>
+    <string name="i18n_challenging_caleb">Uphonsela uCaleb inselelo</string>
+    <string name="i18n_title">ISIHLOKO</string>
+    <string name="i18n_e_g_7_day_showdown">isib. Inselelo yezinsuku eziyi-7</string>
+    <string name="i18n_description">INCAZELO</string>
+    <string name="i18n_most_workouts_wins">Ojima kaningi uyawina</string>
+    <string name="i18n_type">UHLOBO</string>
+    <string name="i18n_target">UMGOMO</string>
+    <string name="i18n_e_g_5">isib. 5</string>
+    <string name="i18n_xp_reward">UMKLOMELO WE-XP</string>
+    <string name="i18n_e_g_150">isib. 150</string>
+    <string name="i18n_end_date_yyyy_mm_dd">USUKU LOKUPHELA (YYYY-MM-DD)</string>
+    <string name="i18n_launch_challenge">QALA INSELELO</string>
+    <string name="i18n_cancel">KHANSELA</string>
+    <string name="i18n_7_day_showdown">Inselelo yezinsuku eziyi-7</string>
+    <string name="i18n_live">IYAQHUBEKA</string>
+    <string name="i18n_you_vs_caleb">Wena noCaleb</string>
+    <string name="i18n_most_workouts_in_a_week_wins">Ojima kaningi ngesonto uyawina</string>
+    <string name="i18n_you">Wena</string>
+    <string name="i18n_waiting_for_caleb_to_accept">Kulindwe uCaleb ukuthi amukele</string>
+    <string name="i18n_log_progress_1">REKHODA INQUBEKELA PHAMBILI (+1)</string>
+    <string name="i18n_decline">NQABA</string>
+    <string name="i18n_bench_press">Ukucindezela ebhentshini</string>
+    <string name="i18n_est_1rm_96_3_kg">I-1RM elinganisiwe: 96.3 kg</string>
+    <string name="i18n_best_set_82_5_kg_x_5_reps">Isethi engcono: 82.5 kg x 5 ukuphinda</string>
+    <string name="i18n_achieved_2026_09_20">Kufinyelelwe: 2026-09-20</string>
+    <string name="i18n_add_your_own_exercise">⚡ ENGEZA UKUZIVOCAVOCA KWAKHO</string>
+    <string name="i18n_create_a_custom_exercise_for_the_training_are">Dala ukuzivocavoca kwakho kwenkundla yokuqeqesha.</string>
+    <string name="i18n_exercise_name">IGAMA LOKUZIVOCAVOCA</string>
+    <string name="i18n_e_g_dumbbell_fly">isib. I-Dumbbell Fly</string>
+    <string name="i18n_muscle_group">IQEMBU LEMISIPHA</string>
+    <string name="i18n_describe_the_exercise">Chaza ukuzivocavoca...</string>
+    <string name="i18n_default_sets">AMASETHI AJWAYELEKILE</string>
+    <string name="i18n_e_g_3">isib. 3</string>
+    <string name="i18n_default_reps">UKUPHINDA OKUJWAYELEKILE</string>
+    <string name="i18n_e_g_10">isib. 10</string>
+    <string name="i18n_save_exercise">LONDOLOZA UKUZIVOCAVOCA</string>
+    <string name="i18n_log_workout">Rekhoda ukujima</string>
+    <string name="i18n_train_hard_earn_xp_level_up">Jima kanzima. Zuza i-XP. Khuphuka ezingeni.</string>
+    <string name="i18n_chest">Isifuba</string>
+    <string name="i18n_exercise_description">Incazelo yokuzivocavoca</string>
+    <string name="i18n_workout_details">IMINININGWANE YOKUJIMA</string>
+    <string name="i18n_workout_name">Igama lokujima</string>
+    <string name="i18n_e_g_monday_strength">isib. Amandla angoMsombuluko</string>
+    <string name="i18n_duration_minutes">Isikhathi (imizuzu)</string>
+    <string name="i18n_e_g_45">isib. 45</string>
+    <string name="i18n_workout_timer">ISIBALI-SIKHATHI SOKUJIMA</string>
+    <string name="i18n_set_your_workout_timer">Setha isibali-sikhathi sokujima</string>
+    <string name="i18n_enter_minutes">Faka imizuzu</string>
+    <string name="i18n_start">QALA</string>
+    <string name="i18n_reset">SETHA KABUSHA</string>
+    <string name="i18n_set_details">IMINININGWANE YESETHI</string>
+    <string name="i18n_sets">Amasethi</string>
+    <string name="i18n_reps">Ukuphinda</string>
+    <string name="i18n_weight_kg">Isisindo (kg)</string>
+    <string name="i18n_complete_workout">QEDA UKUJIMA  ⚡</string>
+    <string name="i18n_clear">SULA</string>
+    <string name="i18n_your_squad">Iqembu lakho</string>
+    <string name="i18n_train_together_streak_together_win_together">Jimani ndawonye, qhubekani ndawonye, ninqobe ndawonye</string>
+    <string name="i18n_shared_streak">UCHUNGECHUNGE OLUHLANGANYELWE</string>
+    <string name="i18n_shared_streak_0_days">🔥 Uchungechunge oluhlanganyelwe: izinsuku ezi-0</string>
+    <string name="i18n_keep_training_to_protect_your_squad_streak">Qhubekani nijima ukuze nivikele uchungechunge lweqembu!</string>
+    <string name="i18n_squad_members">AMALUNGU EQEMBU</string>
+    <string name="i18n_your_training_team">Iqembu lakho lokujima</string>
+    <string name="i18n_create_your_squad">DALA IQEMBU LAKHO</string>
+    <string name="i18n_enter_a_squad_name">Faka igama leqembu</string>
+    <string name="i18n_create_squad">DALA IQEMBU</string>
+    <string name="i18n_find_gymleague_users">THOLA ABASEBENZISI BE-GYMLEAGUE</string>
+    <string name="i18n_search_for_registered_users_to_add_to_your_sq">Sesha abasebenzisi ababhalisiwe ozobangeza eqenjini</string>
+    <string name="i18n_search_username">Sesha igama lomsebenzisi</string>
+    <string name="i18n_find_users">THOLA ABASEBENZISI</string>
+    <string name="i18n_invite_to_squad">MEMELA EQenjINI</string>
+    <string name="i18n_refresh_squad">↻  VUSELELA IQEMBU</string>
+    <string name="i18n_leave_squad">SHIYA IQEMBU</string>
+    <string name="i18n_personal_records">Amarekhodi omuntu siqu</string>
+    <string name="i18n_every_rep_tells_your_story">Ukuphinda ngakunye kuxoxa indaba yakho.</string>
+    <string name="i18n_total_prs">Isamba samarekhodi omuntu</string>
+    <string name="i18n_top_estimated_1rm">I-1RM ephezulu elinganisiwe</string>
+    <string name="i18n_unable_to_load_personal_records">Ayikwazi ukulayisha amarekhodi omuntu</string>
+    <string name="i18n_no_personal_records_yet_log_a_workout_in_trai">Awekho amarekhodi okwamanje. Rekhoda ukujima ukuze ubone isilinganiso sakho sokuphakamisa kanye.</string>
+    <string name="i18n_training_arena">Inkundla Yokuqeqesha</string>
+    <string name="i18n_pick_your_battle_and_earn_xp">Khetha inselelo yakho uzuze i-XP</string>
+    <string name="i18n_search_exercises">Sesha ukuzivocavoca...</string>
+    <string name="i18n_all">Konke</string>
+    <string name="i18n_back">Umhlane</string>
+    <string name="i18n_legs">Imilenze</string>
+    <string name="i18n_shoulders">Amahlombe</string>
+    <string name="i18n_arms">Izingalo</string>
+    <string name="i18n_unable_to_load_exercises">Ayikwazi ukulayisha ukuzivocavoca</string>
+    <string name="i18n_a_chest_exercise_performed_by_pressing_a_weig">Ukuzivocavoca kwesifuba ngokuphakamisa isisindo ulele phansi.</string>
+    <string name="i18n_tap_to_train">Thepha ukuze ujime  →</string>
+    <string name="i18n_delete_exercise">Susa ukuzivocavoca</string>
+    <!-- Kotlin UI messages -->
+    <string name="home_no_squad">Awukajoyini iqembu okwamanje.</string>
+    <string name="home_shared_streak">🔥 Uchungechunge oluhlanganyelwe: izinsuku ezingu-%1$d</string>
+    <string name="level_dynamic">⚡ IZINGA %1$d</string>
+    <string name="level_unknown">⚡ IZINGA —</string>
+    <string name="generic_user">Umsebenzisi we-GymLeague</string>
+    <string name="no_email">Ayikho i-imeyili etholakalayo</string>
+    <string name="settings_load_error">Ayikwazi ukulayisha izilungiselelo.</string>
+    <string name="settings_create_error">Ayikwazi ukudala izilungiselelo ezijwayelekile.</string>
+    <string name="session_missing">Iseshini yomsebenzisi ayitholakali.</string>
+    <string name="settings_loading">Izilungiselelo zisalayisha.</string>
+    <string name="settings_saved">Izilungiselelo zilondolozwe ngempumelelo.</string>
+    <string name="settings_save_error">Ayikwazi ukulondoloza izilungiselelo.</string>
+    <string name="login_google_failed">Ukungena nge-Google kwehlulekile. Zama futhi.</string>
+    <string name="login_google_process">Ayikwazi ukucubungula ukungena nge-Google.</string>
+    <string name="login_google_invalid">Imininingwane yokungena nge-Google ayivumelekile.</string>
+    <string name="login_firebase_user">Ayikwazi ukufinyelela umsebenzisi we-Firebase.</string>
+    <string name="login_auth_failed">Ukuqinisekiswa kwe-Firebase kwehlulekile.</string>
+    <string name="login_connect_failed">Ayikwazi ukuxhuma ku-GymLeague.</string>
+    <string name="login_create_failed">Ayikwazi ukudala i-akhawunti ye-GymLeague.</string>
+    <string name="workout_no_description">Ayikho incazelo etholakalayo</string>
+    <string name="workout_minutes_error">Faka imizuzu evumelekile</string>
+    <string name="workout_timer_reset">Isibali-sikhathi sisethwe kabusha</string>
+    <string name="workout_form_cleared">Ifomu lokujima lisuliwe</string>
+    <string name="workout_name_error">Faka igama lokujima</string>
+    <string name="workout_duration_error">Faka isikhathi esivumelekile</string>
+    <string name="workout_sets_error">Faka amasethi avumelekile</string>
+    <string name="workout_reps_error">Faka ukuphinda okuvumelekile</string>
+    <string name="workout_weight_error">Faka isisindo esivumelekile</string>
+    <string name="workout_session_error">Iseshini yomsebenzisi ayitholakali</string>
+    <string name="workout_saved_xp">Ukujima kulondoloziwe! +%1$d XP</string>
+    <string name="workout_time_up">Isikhathi siphelile! Lungela isethi elandelayo.</string>
+    <string name="squad_name_error">Qala ngokufaka igama leqembu</string>
+    <string name="squad_username_error">Qala ngokufaka igama lomsebenzisi</string>
+    <string name="squad_load_error">Ayikwazi ukulayisha idatha yeqembu. Thepha Vuselela ukuze uzame futhi.</string>
+    <string name="squad_not_member">Awukabi yingxenye yeqembu.</string>
+    <string name="squad_created">Iqembu lidaliwe!</string>
+    <string name="squad_required">Udinga iqembu kuqala</string>
+    <string name="squad_no_users">Abekho abasebenzisi be-GymLeague abafanayo abatholakele</string>
+    <string name="squad_leave_title">Shiya iqembu</string>
+    <string name="squad_left">Usulishiyile iqembu.</string>
+    <string name="exercise_delete_title">Susa ukuzivocavoca</string>
+    <string name="exercise_name_error">Faka igama lokuzivocavoca</string>
+</resources>

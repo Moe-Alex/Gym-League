@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="⚡ NEW CHALLENGE"
+            android:text="@string/i18n_new_challenge"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="20dp"
-            android:text="Create and conquer a challenge."
+            android:text="@string/i18n_create_and_conquer_a_challenge"
             android:textColor="#AFA8B8"
             android:textSize="13sp" />
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Challenging Caleb"
+            android:text="@string/i18n_challenging_caleb"
             android:textColor="#25D9F5"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TITLE"
+            android:text="@string/i18n_title"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -53,7 +53,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. 7-Day Showdown"
+            android:hint="@string/i18n_e_g_7_day_showdown"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:textColor="#FFFFFF"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="DESCRIPTION"
+            android:text="@string/i18n_description"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -75,7 +75,7 @@
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
             android:gravity="top"
-            android:hint="Most workouts wins"
+            android:hint="@string/i18n_most_workouts_wins"
             android:inputType="textMultiLine"
             android:padding="12dp"
             android:textColor="#FFFFFF"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TYPE"
+            android:text="@string/i18n_type"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TARGET"
+            android:text="@string/i18n_target"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -114,7 +114,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. 5"
+            android:hint="@string/i18n_e_g_5"
             android:inputType="number"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="XP REWARD"
+            android:text="@string/i18n_xp_reward"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -136,7 +136,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="6dp"
             android:backgroundTint="#8A2BE2"
-            android:hint="e.g. 150"
+            android:hint="@string/i18n_e_g_150"
             android:inputType="number"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -147,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="END DATE (YYYY-MM-DD)"
+            android:text="@string/i18n_end_date_yyyy_mm_dd"
             android:textColor="#B98CFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -175,7 +175,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="#8A2BE2"
-            android:text="LAUNCH CHALLENGE"
+            android:text="@string/i18n_launch_challenge"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -185,7 +185,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="#292231"
-            android:text="CANCEL"
+            android:text="@string/i18n_cancel"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 

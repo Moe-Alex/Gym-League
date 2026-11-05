@@ -27,7 +27,7 @@
                 android:layout_height="72dp"
                 android:background="@drawable/bg_avatar_circle"
                 android:gravity="center"
-                android:text="?"
+                android:text="@string/profile_initial_placeholder"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Username"
+                android:text="@string/i18n_username"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Email"
+                android:text="@string/i18n_email"
                 android:textColor="#D9FFFFFF"
                 android:textSize="13sp" />
 
@@ -59,7 +59,7 @@
                 android:background="@drawable/bg_level_pill"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="5dp"
-                android:text="⚡ LVL —"
+                android:text="@string/i18n_lvl"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚡ Total XP"
+                    android:text="@string/settings_total_xp"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="12sp" />
 
@@ -113,7 +113,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏋 Workouts Logged"
+                    android:text="@string/settings_workouts_logged"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:textSize="12sp" />
 
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
             android:layout_marginBottom="10dp"
-            android:text="SETTINGS"
+            android:text="@string/settings_title"
             android:textColor="@color/on_surface_dark"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🔔 Notifications"
+                android:text="@string/settings_notifications"
                 android:textColor="@color/on_surface_dark"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -164,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Enable notifications"
+                android:text="@string/settings_enable_notifications"
                 android:textColor="@color/on_surface_secondary_dark"
                 android:textSize="14sp"
                 android:checked="true" />
@@ -183,7 +183,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🌓 Appearance"
+                android:text="@string/settings_appearance"
                 android:textColor="@color/on_surface_dark"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -199,7 +199,7 @@
                     android:id="@+id/radioSystem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Use device setting"
+                    android:text="@string/settings_device_mode"
                     android:textColor="@color/on_surface_secondary_dark"
                     android:checked="true" />
 
@@ -207,14 +207,14 @@
                     android:id="@+id/radioLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Light mode"
+                    android:text="@string/settings_light_mode"
                     android:textColor="@color/on_surface_secondary_dark" />
 
                 <RadioButton
                     android:id="@+id/radioDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dark mode"
+                    android:text="@string/settings_dark_mode"
                     android:textColor="@color/on_surface_secondary_dark" />
 
             </RadioGroup>
@@ -233,7 +233,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🌐 Language"
+                android:text="@string/settings_language"
                 android:textColor="@color/on_surface_dark"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -270,7 +270,7 @@
             android:id="@+id/btnSaveSettings"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Save Settings"
+            android:text="@string/settings_save"
             android:textAllCaps="false"
             app:backgroundTint="@color/gym_purple"
             android:layout_marginBottom="12dp" />
@@ -280,7 +280,7 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="⏻  Log Out"
+            android:text="@string/settings_logout"
             android:textAllCaps="false"
             app:strokeColor="@color/gym_error"
             android:textColor="@color/gym_error"
