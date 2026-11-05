@@ -300,4 +300,23 @@
     <string name="squad_user_selected">%1$s ukhethiwe</string>
     <string name="squad_load_users_failed">Ayikwazanga ukulayisha abasebenzisi: %1$s</string>
     <string name="error_delete_exercise">Ayikwazi ukususa ukuzivocavoca</string>
+    <string name="settings_biometric_title">Ukuphepha kwe-bhayometriki</string>
+    <string name="settings_biometric_description">Sebenzisa isigxivizo somunwe noma ubuso bakho ukuvikela i-GymLeague lapho uhlelo luvulwa.</string>
+    <string name="settings_biometric_enable">Sebenzisa ukuvula nge-bhayometriki</string>
+
+    <string name="biometric_prompt_title">Vula i-GymLeague</string>
+    <string name="biometric_prompt_subtitle">Qinisekisa ubuwena ukuze uqhubeke</string>
+    <string name="biometric_cancel">Khansela</string>
+
+    <string name="biometric_enabled">Ukuvula nge-bhayometriki kuvuliwe.</string>
+    <string name="biometric_disabled">Ukuvula nge-bhayometriki kuvaliwe.</string>
+    <string name="biometric_not_available">Ukuqinisekisa nge-bhayometriki akutholakali kule divayisi.</string>
+    <string name="biometric_temporarily_unavailable">Ukuqinisekisa nge-bhayometriki akutholakali okwamanje.</string>
+    <string name="biometric_not_enrolled">Akukho sigxivizo somunwe noma ubuso obubhalisiwe kule divayisi.</string>
+    <string name="biometric_setup">Setha i-bhayometriki</string>
+    <string name="biometric_setup_message">Setha isigxivizo somunwe noma ubuso kuzilungiselelo zedivayisi ngaphambi kokuvula ukuqinisekisa nge-bhayometriki.</string>
+    <string name="biometric_auth_failed">Ukuqinisekisa nge-bhayometriki akubonwanga. Sicela uzame futhi.</string>
+    <string name="biometric_auth_cancelled">Ukuqinisekisa nge-bhayometriki kukhanseliwe.</string>
+    <string name="biometric_auth_error">Ukuqinisekisa nge-bhayometriki akukwazanga ukuqedwa.</string>
+
 </resources>

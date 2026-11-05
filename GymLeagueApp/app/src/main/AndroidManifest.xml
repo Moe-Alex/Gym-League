@@ -9,6 +9,9 @@
     <!-- Push notifications on Android 13 and above -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Required for Android biometric authentication -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
     <application
         android:name=".GymLeagueApplication"
         android:allowBackup="true"

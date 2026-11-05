@@ -1,9 +1,12 @@
 package com.gymleague.app
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ProgressBar
@@ -11,6 +14,12 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
@@ -23,9 +32,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
-import android.view.ViewGroup
 
 class SettingsFragment : Fragment(
     R.layout.fragment_settings
@@ -33,6 +39,7 @@ class SettingsFragment : Fragment(
 
     companion object {
         private const val TAG = "GymLeagueSettings"
+        private const val BIOMETRIC_TAG = "GymLeagueBiometric"
     }
 
     private lateinit var settingsRepository: SettingsRepository
@@ -51,6 +58,7 @@ class SettingsFragment : Fragment(
     private lateinit var tvProfileWorkoutCount: TextView
 
     private lateinit var switchNotifications: SwitchMaterial
+    private lateinit var switchBiometric: SwitchMaterial
 
     private lateinit var radioGroupAppearance: RadioGroup
     private lateinit var radioSystem: RadioButton
@@ -64,6 +72,13 @@ class SettingsFragment : Fragment(
     private lateinit var btnLogout: Button
 
     private var currentSettings: UserSettings? = null
+
+    /*
+     * Used when we change the biometric switch ourselves.
+     * Without this flag, setting isChecked in code would trigger
+     * the listener and accidentally open the biometric prompt.
+     */
+    private var suppressBiometricSwitchCallback = false
 
     private lateinit var fragmentScope: CoroutineScope
 
@@ -85,8 +100,11 @@ class SettingsFragment : Fragment(
         settingsRepository =
             SettingsRepository()
 
-        userRepository = UserRepository()
-        workoutRepository = WorkoutRepository()
+        userRepository =
+            UserRepository()
+
+        workoutRepository =
+            WorkoutRepository()
 
         sessionManager =
             SessionManager(
@@ -102,6 +120,8 @@ class SettingsFragment : Fragment(
 
         setupLanguageSpinner()
 
+        setupBiometricSwitch()
+
         btnSaveSettings.setOnClickListener {
             saveSettings()
         }
@@ -111,6 +131,7 @@ class SettingsFragment : Fragment(
         }
 
         loadSettings()
+
         loadProfileStats()
     }
 
@@ -133,14 +154,34 @@ class SettingsFragment : Fragment(
                 R.id.tvSettingsStatus
             )
 
-        tvAvatarInitial = view.findViewById(R.id.tvAvatarInitial)
-        tvProfileLevel = view.findViewById(R.id.tvProfileLevel)
-        tvProfileXp = view.findViewById(R.id.tvProfileXp)
-        tvProfileWorkoutCount = view.findViewById(R.id.tvProfileWorkoutCount)
+        tvAvatarInitial =
+            view.findViewById(
+                R.id.tvAvatarInitial
+            )
+
+        tvProfileLevel =
+            view.findViewById(
+                R.id.tvProfileLevel
+            )
+
+        tvProfileXp =
+            view.findViewById(
+                R.id.tvProfileXp
+            )
+
+        tvProfileWorkoutCount =
+            view.findViewById(
+                R.id.tvProfileWorkoutCount
+            )
 
         switchNotifications =
             view.findViewById(
                 R.id.switchNotifications
+            )
+
+        switchBiometric =
+            view.findViewById(
+                R.id.switchBiometric
             )
 
         radioGroupAppearance =
@@ -188,11 +229,15 @@ class SettingsFragment : Fragment(
 
         val username =
             sessionManager.getUsername()
-                ?: getString(R.string.generic_user)
+                ?: getString(
+                    R.string.generic_user
+                )
 
         val email =
             sessionManager.getEmail()
-                ?: getString(R.string.no_email)
+                ?: getString(
+                    R.string.no_email
+                )
 
         tvUsername.text =
             username
@@ -201,104 +246,590 @@ class SettingsFragment : Fragment(
             email
 
         tvAvatarInitial.text =
-            username.firstOrNull()?.uppercase() ?: "?"
+            username
+                .firstOrNull()
+                ?.uppercase()
+                ?: "?"
     }
 
     private fun loadProfileStats() {
 
-        val userId = sessionManager.getUserId()
+        val userId =
+            sessionManager.getUserId()
 
-        if (userId == -1) return
+        if (userId == -1) {
+            return
+        }
 
         fragmentScope.launch {
-            val result = userRepository.getUser(userId)
+
+            val result =
+                userRepository.getUser(
+                    userId
+                )
 
             result.onSuccess { user ->
-                tvProfileLevel.text = getString(R.string.level_dynamic, user.level)
-                tvProfileXp.text = user.xp.toString()
+
+                tvProfileLevel.text =
+                    getString(
+                        R.string.level_dynamic,
+                        user.level
+                    )
+
+                tvProfileXp.text =
+                    user.xp.toString()
             }
 
             result.onFailure { error ->
-                Log.e(TAG, "Failed to load profile stats: ${error.message}")
-                tvProfileLevel.text = getString(R.string.level_unknown)
-                tvProfileXp.text = "—"
+
+                Log.e(
+                    TAG,
+                    "Failed to load profile stats: ${error.message}"
+                )
+
+                tvProfileLevel.text =
+                    getString(
+                        R.string.level_unknown
+                    )
+
+                tvProfileXp.text =
+                    "—"
             }
         }
 
         fragmentScope.launch {
-            val result = workoutRepository.getWorkoutsForUser(userId)
+
+            val result =
+                workoutRepository
+                    .getWorkoutsForUser(
+                        userId
+                    )
 
             result.onSuccess { workouts ->
-                tvProfileWorkoutCount.text = workouts.size.toString()
+
+                tvProfileWorkoutCount.text =
+                    workouts.size.toString()
             }
 
             result.onFailure { error ->
-                Log.e(TAG, "Failed to load workout count: ${error.message}")
-                tvProfileWorkoutCount.text = "—"
+
+                Log.e(
+                    TAG,
+                    "Failed to load workout count: ${error.message}"
+                )
+
+                tvProfileWorkoutCount.text =
+                    "—"
             }
         }
     }
 
-
-
     private fun setupLanguageSpinner() {
-        val languages = listOf(
-            "English",
-            "Afrikaans",
-            "isiZulu"
-        )
 
-        val adapter = object : ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            languages
-        ) {
-            override fun getView(
-                position: Int,
-                convertView: View?,
-                parent: ViewGroup
-            ): View {
-                val view = super.getView(position, convertView, parent)
+        val languages =
+            listOf(
+                "English",
+                "Afrikaans",
+                "isiZulu"
+            )
 
-                val textView = view as TextView
-                textView.setTextColor(
-                    android.graphics.Color.WHITE
-                )
+        val adapter =
+            object : ArrayAdapter<String>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                languages
+            ) {
 
-                return view
+                override fun getView(
+                    position: Int,
+                    convertView: View?,
+                    parent: ViewGroup
+                ): View {
+
+                    val view =
+                        super.getView(
+                            position,
+                            convertView,
+                            parent
+                        )
+
+                    val textView =
+                        view as TextView
+
+                    textView.setTextColor(
+                        android.graphics.Color.WHITE
+                    )
+
+                    return view
+                }
+
+                override fun getDropDownView(
+                    position: Int,
+                    convertView: View?,
+                    parent: ViewGroup
+                ): View {
+
+                    val view =
+                        super.getDropDownView(
+                            position,
+                            convertView,
+                            parent
+                        )
+
+                    val textView =
+                        view as TextView
+
+                    textView.setTextColor(
+                        android.graphics.Color.WHITE
+                    )
+
+                    textView.setBackgroundColor(
+                        android.graphics.Color.rgb(
+                            38,
+                            35,
+                            65
+                        )
+                    )
+
+                    return view
+                }
             }
-
-            override fun getDropDownView(
-                position: Int,
-                convertView: View?,
-                parent: ViewGroup
-            ): View {
-                val view = super.getDropDownView(
-                    position,
-                    convertView,
-                    parent
-                )
-
-                val textView = view as TextView
-                textView.setTextColor(
-                    android.graphics.Color.WHITE
-                )
-                textView.setBackgroundColor(
-                    android.graphics.Color.rgb(38, 35, 65)
-                )
-
-                return view
-            }
-        }
 
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item
         )
 
-        spinnerLanguage.adapter = adapter
+        spinnerLanguage.adapter =
+            adapter
     }
 
+    /**
+     * Loads the locally saved biometric preference and listens for
+     * the user turning biometric unlock on or off.
+     *
+     * When enabling it, GymLeague requires one successful biometric
+     * authentication first. This prevents the app from enabling a lock
+     * that has never been confirmed to work on the device.
+     */
+    private fun setupBiometricSwitch() {
 
+        suppressBiometricSwitchCallback =
+            true
+
+        switchBiometric.isChecked =
+            sessionManager
+                .isBiometricEnabled()
+
+        suppressBiometricSwitchCallback =
+            false
+
+        switchBiometric
+            .setOnCheckedChangeListener { _, isChecked ->
+
+                if (
+                    suppressBiometricSwitchCallback
+                ) {
+                    return@setOnCheckedChangeListener
+                }
+
+                if (isChecked) {
+
+                    checkBiometricAvailabilityAndEnable()
+
+                } else {
+
+                    sessionManager
+                        .setBiometricEnabled(
+                            false
+                        )
+
+                    Log.d(
+                        BIOMETRIC_TAG,
+                        "Biometric unlock disabled by user"
+                    )
+
+                    showStatus(
+                        getString(
+                            R.string.biometric_disabled
+                        )
+                    )
+                }
+            }
+    }
+
+    /**
+     * Checks whether this phone can currently perform strong
+     * biometric authentication.
+     */
+    private fun checkBiometricAvailabilityAndEnable() {
+
+        val biometricManager =
+            BiometricManager.from(
+                requireContext()
+            )
+
+        when (
+            biometricManager.canAuthenticate(
+                BiometricManager
+                    .Authenticators
+                    .BIOMETRIC_STRONG
+            )
+        ) {
+
+            BiometricManager
+                .BIOMETRIC_SUCCESS -> {
+
+                Log.d(
+                    BIOMETRIC_TAG,
+                    "Biometric authentication available"
+                )
+
+                showEnableBiometricPrompt()
+            }
+
+            BiometricManager
+                .BIOMETRIC_ERROR_NO_HARDWARE -> {
+
+                Log.w(
+                    BIOMETRIC_TAG,
+                    "No biometric hardware available"
+                )
+
+                revertBiometricSwitch()
+
+                showStatus(
+                    getString(
+                        R.string.biometric_not_available
+                    )
+                )
+            }
+
+            BiometricManager
+                .BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+
+                Log.w(
+                    BIOMETRIC_TAG,
+                    "Biometric hardware temporarily unavailable"
+                )
+
+                revertBiometricSwitch()
+
+                showStatus(
+                    getString(
+                        R.string.biometric_temporarily_unavailable
+                    )
+                )
+            }
+
+            BiometricManager
+                .BIOMETRIC_ERROR_NONE_ENROLLED -> {
+
+                Log.w(
+                    BIOMETRIC_TAG,
+                    "No biometric credential enrolled"
+                )
+
+                revertBiometricSwitch()
+
+                showBiometricEnrollmentDialog()
+            }
+
+            else -> {
+
+                Log.w(
+                    BIOMETRIC_TAG,
+                    "Biometric authentication unavailable"
+                )
+
+                revertBiometricSwitch()
+
+                showStatus(
+                    getString(
+                        R.string.biometric_not_available
+                    )
+                )
+            }
+        }
+    }
+
+    /**
+     * Shows Android's real system biometric prompt.
+     *
+     * The biometric preference is saved only after authentication
+     * succeeds.
+     */
+    private fun showEnableBiometricPrompt() {
+
+        val executor =
+            ContextCompat.getMainExecutor(
+                requireContext()
+            )
+
+        val biometricPrompt =
+            BiometricPrompt(
+                this,
+                executor,
+                object :
+                    BiometricPrompt.AuthenticationCallback() {
+
+                    override fun onAuthenticationSucceeded(
+                        result: BiometricPrompt.AuthenticationResult
+                    ) {
+                        super.onAuthenticationSucceeded(
+                            result
+                        )
+
+                        sessionManager
+                            .setBiometricEnabled(
+                                true
+                            )
+
+                        setBiometricSwitchChecked(
+                            true
+                        )
+
+                        Log.d(
+                            BIOMETRIC_TAG,
+                            "Biometric authentication succeeded and unlock was enabled"
+                        )
+
+                        showStatus(
+                            getString(
+                                R.string.biometric_enabled
+                            )
+                        )
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+
+                        /*
+                         * Android keeps the prompt open after a normal
+                         * failed fingerprint/face attempt, allowing the
+                         * user to retry.
+                         */
+                        Log.w(
+                            BIOMETRIC_TAG,
+                            "Biometric authentication attempt failed"
+                        )
+
+                        showStatus(
+                            getString(
+                                R.string.biometric_auth_failed
+                            )
+                        )
+                    }
+
+                    override fun onAuthenticationError(
+                        errorCode: Int,
+                        errString: CharSequence
+                    ) {
+                        super.onAuthenticationError(
+                            errorCode,
+                            errString
+                        )
+
+                        sessionManager
+                            .setBiometricEnabled(
+                                false
+                            )
+
+                        revertBiometricSwitch()
+
+                        when (errorCode) {
+
+                            BiometricPrompt
+                                .ERROR_NEGATIVE_BUTTON,
+
+                            BiometricPrompt
+                                .ERROR_USER_CANCELED,
+
+                            BiometricPrompt
+                                .ERROR_CANCELED -> {
+
+                                Log.d(
+                                    BIOMETRIC_TAG,
+                                    "Biometric authentication cancelled"
+                                )
+
+                                showStatus(
+                                    getString(
+                                        R.string.biometric_auth_cancelled
+                                    )
+                                )
+                            }
+
+                            BiometricPrompt
+                                .ERROR_LOCKOUT,
+
+                            BiometricPrompt
+                                .ERROR_LOCKOUT_PERMANENT -> {
+
+                                Log.w(
+                                    BIOMETRIC_TAG,
+                                    "Biometric authentication locked out"
+                                )
+
+                                showStatus(
+                                    getString(
+                                        R.string.biometric_auth_error
+                                    )
+                                )
+                            }
+
+                            else -> {
+
+                                Log.e(
+                                    BIOMETRIC_TAG,
+                                    "Biometric error code: $errorCode"
+                                )
+
+                                showStatus(
+                                    getString(
+                                        R.string.biometric_auth_error
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            )
+
+        val promptInfo =
+            BiometricPrompt.PromptInfo
+                .Builder()
+                .setTitle(
+                    getString(
+                        R.string.biometric_prompt_title
+                    )
+                )
+                .setSubtitle(
+                    getString(
+                        R.string.biometric_prompt_subtitle
+                    )
+                )
+                .setAllowedAuthenticators(
+                    BiometricManager
+                        .Authenticators
+                        .BIOMETRIC_STRONG
+                )
+                .setNegativeButtonText(
+                    getString(
+                        R.string.biometric_cancel
+                    )
+                )
+                .build()
+
+        biometricPrompt.authenticate(
+            promptInfo
+        )
+    }
+
+    /**
+     * Gives the user a helpful route to Android's biometric
+     * enrollment settings instead of failing or crashing.
+     */
+    private fun showBiometricEnrollmentDialog() {
+
+        AlertDialog
+            .Builder(
+                requireContext()
+            )
+            .setTitle(
+                getString(
+                    R.string.biometric_setup
+                )
+            )
+            .setMessage(
+                getString(
+                    R.string.biometric_setup_message
+                )
+            )
+            .setPositiveButton(
+                getString(
+                    R.string.biometric_setup
+                )
+            ) { _, _ ->
+
+                openBiometricEnrollmentSettings()
+            }
+            .setNegativeButton(
+                getString(
+                    R.string.biometric_cancel
+                ),
+                null
+            )
+            .show()
+    }
+
+    private fun openBiometricEnrollmentSettings() {
+
+        try {
+
+            val intent =
+                if (
+                    Build.VERSION.SDK_INT >=
+                    Build.VERSION_CODES.R
+                ) {
+
+                    Intent(
+                        Settings.ACTION_BIOMETRIC_ENROLL
+                    ).apply {
+
+                        putExtra(
+                            Settings
+                                .EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                            BiometricManager
+                                .Authenticators
+                                .BIOMETRIC_STRONG
+                        )
+                    }
+
+                } else {
+
+                    Intent(
+                        Settings.ACTION_SECURITY_SETTINGS
+                    )
+                }
+
+            startActivity(intent)
+
+        } catch (e: Exception) {
+
+            Log.e(
+                BIOMETRIC_TAG,
+                "Unable to open biometric enrollment settings",
+                e
+            )
+
+            showStatus(
+                getString(
+                    R.string.biometric_not_enrolled
+                )
+            )
+        }
+    }
+
+    private fun revertBiometricSwitch() {
+
+        setBiometricSwitchChecked(
+            false
+        )
+    }
+
+    private fun setBiometricSwitchChecked(
+        checked: Boolean
+    ) {
+
+        suppressBiometricSwitchCallback =
+            true
+
+        switchBiometric.isChecked =
+            checked
+
+        suppressBiometricSwitchCallback =
+            false
+    }
 
     private fun loadSettings() {
 
@@ -341,7 +872,7 @@ class SettingsFragment : Fragment(
 
                         Log.d(
                             TAG,
-                            "Settings loaded for UserId: $userId"
+                            "Settings loaded successfully"
                         )
 
                         showLoading(false)
@@ -369,7 +900,9 @@ class SettingsFragment : Fragment(
                     )
 
                     showStatus(
-                        getString(R.string.settings_load_error)
+                        getString(
+                            R.string.settings_load_error
+                        )
                     )
                 }
         }
@@ -428,7 +961,9 @@ class SettingsFragment : Fragment(
                 )
 
                 showStatus(
-                    getString(R.string.settings_create_error)
+                    getString(
+                        R.string.settings_create_error
+                    )
                 )
             }
     }
@@ -445,15 +980,18 @@ class SettingsFragment : Fragment(
         ) {
 
             "light" -> {
-                radioLight.isChecked = true
+                radioLight.isChecked =
+                    true
             }
 
             "dark" -> {
-                radioDark.isChecked = true
+                radioDark.isChecked =
+                    true
             }
 
             else -> {
-                radioSystem.isChecked = true
+                radioSystem.isChecked =
+                    true
             }
         }
 
@@ -477,9 +1015,10 @@ class SettingsFragment : Fragment(
                     )
             ) {
 
-                spinnerLanguage.setSelection(
-                    index
-                )
+                spinnerLanguage
+                    .setSelection(
+                        index
+                    )
 
                 break
             }
@@ -494,7 +1033,9 @@ class SettingsFragment : Fragment(
         if (userId == -1) {
 
             showStatus(
-                getString(R.string.session_missing)
+                getString(
+                    R.string.session_missing
+                )
             )
 
             return
@@ -530,7 +1071,9 @@ class SettingsFragment : Fragment(
         if (existingSettings == null) {
 
             showStatus(
-                getString(R.string.settings_loading)
+                getString(
+                    R.string.settings_loading
+                )
             )
 
             return
@@ -566,7 +1109,9 @@ class SettingsFragment : Fragment(
                     showLoading(false)
 
                     showStatus(
-                        getString(R.string.settings_saved)
+                        getString(
+                            R.string.settings_saved
+                        )
                     )
 
                     Log.d(
@@ -581,7 +1126,6 @@ class SettingsFragment : Fragment(
                     applyLanguage(
                         language
                     )
-
                 }
                 .onFailure { error ->
 
@@ -594,34 +1138,57 @@ class SettingsFragment : Fragment(
                     )
 
                     showStatus(
-                        getString(R.string.settings_save_error)
+                        getString(
+                            R.string.settings_save_error
+                        )
                     )
                 }
         }
     }
 
+    private fun applyLanguage(
+        language: String
+    ) {
 
-    private fun applyLanguage(language: String) {
+        val languageCode =
+            when (language) {
 
-        val languageCode = when (language) {
-            "Afrikaans" -> "af"
-            "isiZulu" -> "zu"
-            else -> "en"
+                "Afrikaans" -> {
+                    "af"
+                }
+
+                "isiZulu" -> {
+                    "zu"
+                }
+
+                else -> {
+                    "en"
+                }
+            }
+
+        val currentCode =
+            AppCompatDelegate
+                .getApplicationLocales()
+                .toLanguageTags()
+
+        if (
+            currentCode != languageCode
+        ) {
+
+            AppCompatDelegate
+                .setApplicationLocales(
+                    LocaleListCompat
+                        .forLanguageTags(
+                            languageCode
+                        )
+                )
         }
 
-        val currentCode = AppCompatDelegate
-            .getApplicationLocales()
-            .toLanguageTags()
-
-        if (currentCode != languageCode) {
-            AppCompatDelegate.setApplicationLocales(
-                LocaleListCompat.forLanguageTags(languageCode)
-            )
-        }
-
-        Log.d(TAG, "Language changed to: $language")
+        Log.d(
+            TAG,
+            "Language changed to: $language"
+        )
     }
-
 
     private fun applyAppearance(
         appearanceMode: String
@@ -677,11 +1244,15 @@ class SettingsFragment : Fragment(
             "Logging user out"
         )
 
-        // Stop this phone receiving the user's push notifications
-        PushTokenManager.unregisterCurrentToken()
+        // Stop this phone receiving the user's push notifications.
+        PushTokenManager
+            .unregisterCurrentToken()
 
         firebaseAuth.signOut()
 
+        /*
+         * clearSession() also disables biometric unlock.
+         */
         sessionManager.clearSession()
 
         val intent =

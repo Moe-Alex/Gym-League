@@ -302,5 +302,27 @@
     <string name="squad_user_selected">%1$s gekies</string>
     <string name="squad_load_users_failed">Kon nie gebruikers laai nie: %1$s</string>
     <string name="error_delete_exercise">Kan nie oefening skrap nie</string>
+
+    <string name="settings_biometric_title">Biometriese sekuriteit</string>
+    <string name="settings_biometric_description">Gebruik jou vingerafdruk of gesig om GymLeague te beskerm wanneer die toepassing oopmaak.</string>
+    <string name="settings_biometric_enable">Gebruik biometriese ontsluiting</string>
+
+    <string name="biometric_prompt_title">Ontsluit GymLeague</string>
+    <string name="biometric_prompt_subtitle">Bevestig jou identiteit om voort te gaan</string>
+    <string name="biometric_cancel">Kanselleer</string>
+
+    <string name="biometric_enabled">Biometriese ontsluiting is geaktiveer.</string>
+    <string name="biometric_disabled">Biometriese ontsluiting is gedeaktiveer.</string>
+    <string name="biometric_not_available">Biometriese verifikasie is nie op hierdie toestel beskikbaar nie.</string>
+    <string name="biometric_temporarily_unavailable">Biometriese verifikasie is tydelik nie beskikbaar nie.</string>
+    <string name="biometric_not_enrolled">Geen vingerafdruk of gesig is op hierdie toestel geregistreer nie.</string>
+    <string name="biometric_setup">Stel biometrie op</string>
+    <string name="biometric_setup_message">Stel eers ’n vingerafdruk of gesig in jou toestelinstellings op voordat biometriese ontsluiting geaktiveer word.</string>
+    <string name="biometric_auth_failed">Biometriese verifikasie is nie herken nie. Probeer asseblief weer.</string>
+    <string name="biometric_auth_cancelled">Biometriese verifikasie is gekanselleer.</string>
+    <string name="biometric_auth_error">Biometriese verifikasie kon nie voltooi word nie.</string>
+
+
+
 </resources>
 

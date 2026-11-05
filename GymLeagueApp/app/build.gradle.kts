@@ -73,6 +73,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
+    // Android biometric authentication
+    implementation("androidx.biometric:biometric:1.1.0")
+
     implementation(
         "com.squareup.retrofit2:retrofit:2.11.0"
     )
