@@ -70,4 +70,16 @@
     <!-- Push notifications -->
     <string name="notification_channel_name">Battle Arena</string>
     <string name="notification_channel_description">Challenges, accepted battles and results</string>
+    
+    <!-- Offline mode -->
+    <string name="offline_banner_offline">You\'re offline. Showing saved data.</string>
+    <plurals name="offline_banner_pending">
+        <item quantity="one">You\'re offline. %d workout is waiting to sync.</item>
+        <item quantity="other">You\'re offline. %d workouts are waiting to sync.</item>
+    </plurals>
+    <plurals name="offline_banner_syncing">
+        <item quantity="one">Syncing %d workout…</item>
+        <item quantity="other">Syncing %d workouts…</item>
+    </plurals>
+    <string name="workout_saved_offline">Workout saved on your phone. It will sync when you\'re back online.</string>
 </resources>

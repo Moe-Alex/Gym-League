@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -118,7 +119,12 @@ dependencies {
     implementation(
         "com.google.android.libraries.identity.googleid:googleid:1.1.1"
     )
+    // Room (offline database). KSP, not kapt.
+    implementation("androidx.room:room-runtime:2.8.5")
+    ksp("androidx.room:room-compiler:2.8.5")
 
+    // WorkManager (background sync when the internet comes back)
+    implementation("androidx.work:work-runtime:2.11.2")
     testImplementation(libs.junit)
 
     androidTestImplementation(
