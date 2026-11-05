@@ -2,6 +2,8 @@ package com.gymleague.app.repository
 
 import com.gymleague.app.models.UserSettings
 import com.gymleague.app.network.RetrofitClient
+import com.gymleague.app.util.toApiResult
+import com.gymleague.app.util.toFailure
 
 class SettingsRepository {
 
@@ -19,23 +21,19 @@ class SettingsRepository {
                     userId
                 )
 
+            val body = response.body()
+
             when {
 
-                response.isSuccessful &&
-                        response.body() != null -> {
-
-                    Result.success(
-                        response.body()
-                    )
+                response.isSuccessful && body != null -> {
+                    Result.success(body)
                 }
 
                 response.code() == 404 -> {
-
                     Result.success(null)
                 }
 
                 else -> {
-
                     Result.failure(
                         Exception(
                             "Failed to load settings: ${response.code()}"
@@ -46,42 +44,17 @@ class SettingsRepository {
 
         } catch (e: Exception) {
 
-            Result.failure(e)
+            e.toFailure()
         }
     }
 
     suspend fun createSettings(
         settings: UserSettings
     ): Result<UserSettings> {
-
         return try {
-
-            val response =
-                apiService.createSettings(
-                    settings
-                )
-
-            if (
-                response.isSuccessful &&
-                response.body() != null
-            ) {
-
-                Result.success(
-                    response.body()!!
-                )
-
-            } else {
-
-                Result.failure(
-                    Exception(
-                        "Failed to create settings: ${response.code()}"
-                    )
-                )
-            }
-
+            apiService.createSettings(settings).toApiResult("Failed to create settings")
         } catch (e: Exception) {
-
-            Result.failure(e)
+            e.toFailure()
         }
     }
 
@@ -112,7 +85,7 @@ class SettingsRepository {
 
         } catch (e: Exception) {
 
-            Result.failure(e)
+            e.toFailure()
         }
     }
 }
