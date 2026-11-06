@@ -13,7 +13,7 @@ Built for **PROG7314 – Final POE (Part 3)**.
 | Erin Sarjoo | ST10450571 |
 | Keeran Perumel | ST10367702 |
 
-**Demo video:** <PASTE FINAL POE YOUTUBE LINK HERE>
+**Demo video:** [<PASTE FINAL POE YOUTUBE LINK HERE>](https://youtu.be/EnU0XXdKcec?si=UiCQWOQR3ChOE_pG)
 
 ---
 
