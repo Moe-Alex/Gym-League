@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "409825443729-7951pcaoj4ik2q0rvnrvjphvmojs38g3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymleague.app",
+            "certificate_hash": "152762f4d4dc6e2b31c91bf85c164b8566c3106e"
+          }
+        },
+        {
           "client_id": "409825443729-is96agdjgf251eeuig387lqmiu9qgg0f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
